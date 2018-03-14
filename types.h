@@ -1,25 +1,26 @@
 #ifndef TYPES_H
 #define TYPES_H
+
 #define ID_USUARIO 4
 #define NOMB_USUARIO 20
 #define LOCALIDAD 20
 #define USER 5
 #define LOGIN 8
 
-static const char * const Estado_U[] = {"Bloqueado","Activo"};
-static const char * const Perfil[] = {"Administrador","Usuario"};
+static const char * const Estado_U[] = {"bloqueado","activo"};
+static const char * const Perfil[] = {"administrador","usuario"};
 static const char * const Viaje[] = {"Ida","Vuelta"};
 static const char * const Estado_Vi[] = {"Cerrado","Abierto","Iniciado","Finalizado","Anulado"};
 static const char * const Estado_I[] = {"Cerrada","Abierta","Valida"};
 
 typedef struct{
-    int * Id_usuario;
+    int Id_usuario;
     char * Nomb_usario;
     char * Localidad;
-    int * Perfil_usuario;
+    int Perfil_usuario;
     char * User;
     char * Login;
-    int * Estado;
+    int Estado;
 }Usuarios;
 
 typedef struct{

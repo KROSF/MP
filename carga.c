@@ -1,17 +1,37 @@
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "carga.h"
 
-static void cargarUsuario(int *,Usuarios *);
-static void cargaVehiculos(int *,Usuarios *,Vehiculos *);
+/**
+ * Estado Usuario a entero
+ * @param c referencia a la cadena
+ * @return 1 si el estado es activo 0 bloqueado
+ */
+int estadoUsuario(char ** c);
+/**
+ * Perfil usuario a entero
+ * @param c referencia a la cadena
+ * @return 1 si el perfil es usuario 0 administrador
+ */
+int perfilUsuario(char ** c);
+//
+//
+int estadoUsuario(char** c){
+    return (strcmp(*c,"activo")== 0) ? 1 : 0;
+}
 
-void cargarUsuario(int * n,Usuarios * users)
+int perfilUsuario(char** c){
+    return (strcmp(*c,"usuario")== 0) ? 1 : 0;
+}
+
+void cargarUsuario(int * n,Usuarios ** users)
 {
     char *id,*nomb,*locld,*usr,*log,*perfil,*estado;
 
     FILE *file;
-    file = fopen("usuarios.txt", "r");
-    if (file == nullptr ) exit(1);
+    file = fopen("Usuarios.txt", "r");
+    if (file == NULL ) exit(1);
 
     while(!feof(file))
     {
@@ -25,7 +45,17 @@ void cargarUsuario(int * n,Usuarios * users)
 
         fscanf(file, "%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^\n]\n", id, nomb, locld, perfil ,usr,log,estado);
 
-        if (! * n ) users = (Usuarios *) malloc( (*n+1) * sizeof(Usuarios));
-        else users = (Usuarios *) realloc(users,(*n+1) * sizeof(Usuarios));
+        if (! * n ) *users = (Usuarios *) malloc( (*n+1) * sizeof(Usuarios));
+        else *users = (Usuarios *) realloc(*users,(*n+1) * sizeof(Usuarios));
+
+        (*users)[*n].Id_usuario=atoi(id);
+        (*users)[*n].Nomb_usario=nomb;
+        (*users)[*n].Localidad=locld;
+        (*users)[*n].Perfil_usuario=perfilUsuario(&perfil);
+        (*users)[*n].User=usr;
+        (*users)[*n].Login=log;
+        (*users)[*n].Estado=estadoUsuario(&estado);
+        (*n)++;
     }
+    fclose(file);
 }
