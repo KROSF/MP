@@ -1,0 +1,8 @@
+//
+// Created by omen on 14/03/2018.
+//
+
+#ifndef ESI_SHARE_ADMINISTRADOR_H
+#define ESI_SHARE_ADMINISTRADOR_H
+
+#endif //ESI_SHARE_ADMINISTRADOR_H
