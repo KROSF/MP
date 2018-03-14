@@ -4,5 +4,9 @@
 
 #ifndef ESI_SHARE_VIAJES_H
 #define ESI_SHARE_VIAJES_H
+#include "types.h"
+#include "carga.h"
+
+Viajes *viajes;
 
 #endif //ESI_SHARE_VIAJES_H
