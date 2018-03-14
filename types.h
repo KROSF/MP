@@ -1,5 +1,10 @@
 #ifndef TYPES_H
 #define TYPES_H
+#define ID_USUARIO 4
+#define NOMB_USUARIO 20
+#define LOCALIDAD 20
+#define USER 5
+#define LOGIN
 
 static const char * const Estado_U[] = {"Bloqueado","Activo"};
 static const char * const Perfil[] = {"Administrador","Usuario"};
