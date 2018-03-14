@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "carga.h"
 #include "types.h"
-int main(){
-    Usuarios * usuarios;
-    usuarios = (Usuarios * )malloc(2* sizeof(Usuarios));
-    int *ip = malloc(sizeof(int)); /* declare and allocate a new int pointer */
-    *ip =3;
-    usuarios[0].Estado=ip;
 
+int main(){
+    Usuarios *usuarios1 = NULL;
+    int num_user;
+    cargarUsuario(&num_user, &usuarios1);
+    printf("%s\n%s\n%s",usuarios1[0].Nomb_usario,usuarios1[1].Nomb_usario,usuarios1[2].Nomb_usario);
     return 0;
 }
 
