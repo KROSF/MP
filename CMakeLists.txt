@@ -3,4 +3,4 @@ project(ESI-SHARE)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ESI-SHARE main.c types.h)
+add_executable(ESI-SHARE main.c types.h usuario.c usuario.h)
