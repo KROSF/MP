@@ -10,9 +10,9 @@
 
 static const char * const Estado_U[] = {"bloqueado","activo"};
 static const char * const Perfil[] = {"administrador","usuario"};
-static const char * const Viaje[] = {"Ida","Vuelta"};
-static const char * const Estado_Vi[] = {"Cerrado","Abierto","Iniciado","Finalizado","Anulado"};
-static const char * const Estado_I[] = {"Cerrada","Abierta","Valida"};
+static const char * const Viaje[] = {"ida","vuelta"};
+static const char * const Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
+static const char * const Estado_I[] = {"cerrada","abierta","valida"};
 
 typedef struct{
     int * Id_usuario;
