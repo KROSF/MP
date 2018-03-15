@@ -14,5 +14,5 @@ int num_pasos;
 int num_incidencias;
 
 void cargarUsuario(int *,Usuarios **);
-void cargaVehiculos(int *,Usuarios **,Vehiculos **);
+void cargaVehiculos(int *,Usuarios **,Vehiculos **,int *);
 #endif
