@@ -3,7 +3,6 @@
 //
 
 #include <stdio.h>
-#include <w32api/adoctint.h>
 #include <stdlib.h>
 #include <string.h>
 #include "usuarios.h"
