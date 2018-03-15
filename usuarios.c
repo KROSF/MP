@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include <w32api/adoctint.h>
+#include <stdlib.h>
+#include <string.h>
 #include "usuarios.h"
 
 void users(Usuarios *usuarios, int num_usuarios){
@@ -79,7 +81,7 @@ void op2_usuarios(Usuarios *usuarios, int i){
 
     if(resp == 's'){
         for(i=0;i<num_usuarios;i++){
-            if(usuarios[i].Id_usuario == id_user){
+            if(*usuarios[i].Id_usuario == id_user){
                 usuarios[i].Id_usuario = usuarios[i+1].Id_usuario;
                 strcpy(usuarios[i].Nomb_usario, usuarios[i+1].Nomb_usario);
                 strcpy(usuarios[i].Localidad, usuarios[i+1].Localidad);
@@ -101,6 +103,6 @@ void op2_usuarios(Usuarios *usuarios, int i){
 void op4_usuarios(Usuarios *usuarios, int i){
 
     for(i=0;i<num_usuarios;i++){
-        printf("%d-%s-%s-%d-%s-%s-%d \n\n", usuarios[i].Id_usuario, usuarios[i].Nomb_usario, usuarios[i].Localidad, usuarios[i].Perfil_usuario, usuarios[i].User, usuarios[i].Login, usuarios[i].Estado);
+        printf("%d-%s-%s-%d-%s-%s-%d \n\n", *usuarios[i].Id_usuario, usuarios[i].Nomb_usario, usuarios[i].Localidad, usuarios[i].Perfil_usuario, usuarios[i].User, usuarios[i].Login, usuarios[i].Estado);
     }
 }

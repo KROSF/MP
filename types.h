@@ -37,10 +37,10 @@ typedef struct{
     char * F_inic;
     char * H_inic;
     char * H_fin;
-    int * Plazas_libre;
-    int * Viaje;
-    double * Importe;
-    int * Estado;
+    int Plazas_libre;
+    int Viaje;
+    double Importe;
+    int Estado;
 }Viajes;
 
 typedef struct{
