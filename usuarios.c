@@ -31,7 +31,13 @@ void users( ){
 
 op1_usuarios(Usuarios *usuarios, int i ){
 
-
+    puts("Id del nuevo usuario: ");
+    puts("Nombre del nuevo usuario: ");
+    puts("Localidad: ")
+    puts("Tipo de usuario(Administrador o usuario): ");
+    puts("User de inicio de sesión: ");
+    puts("Contrasña: ");
+    puts("Estado: ");
 }
 
 op4_usuarios(Usuarios *usuarios, int i){
