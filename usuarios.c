@@ -8,7 +8,7 @@
 #include "usuarios.h"
 #include "types.h"
 
-void users(Usuarios *usuarios, int num_usuarios){
+void users(Usuarios **usuarios, int num_usuarios){
 
     int i=0;
 
@@ -34,7 +34,7 @@ void users(Usuarios *usuarios, int num_usuarios){
     }
 }
 
-void op1_usuarios(Usuarios *usuarios, int i){
+void op1_usuarios(Usuarios **usuarios, int i){
 
 /*    char *id_usuf, *nombf, *locldf, *usrf, *logf, *perfilf,*estadof;
 
@@ -70,7 +70,7 @@ void op1_usuarios(Usuarios *usuarios, int i){
     scanf("%d", *usuarios[i].Estado);
 }
 
-void op2_usuarios(Usuarios *usuarios, int i){
+void op2_usuarios(Usuarios **usuarios, int i){
 
     int id_user=0;
     char resp;
@@ -102,7 +102,7 @@ void op2_usuarios(Usuarios *usuarios, int i){
     }
 }
 
-void op3_usuarios(Usuarios *usuarios, int i){
+void op3_usuarios(Usuarios **usuarios, int i){
 
     int id_user;
 
@@ -142,7 +142,7 @@ void op3_usuarios(Usuarios *usuarios, int i){
     }
 }
 
-void op4_usuarios(Usuarios *usuarios, int i){
+void op4_usuarios(Usuarios **usuarios, int i){
 
     for(i=0;i<num_usuarios;i++){
         printf("%d-%s-%s-%d-%s-%s-%d \n\n", *usuarios[i].Id_usuario, usuarios[i].Nomb_usario, usuarios[i].Localidad, usuarios[i].Perfil_usuario, usuarios[i].User, usuarios[i].Login, usuarios[i].Estado);
