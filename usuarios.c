@@ -17,19 +17,19 @@ void users(Usuarios **usuarios, int num_usuarios){
 
         case 1:             //Añadir nuevo usuario
             puts("Añadir nuevo usuario");
-            op1_usuarios(usuarios, i);
+            op1_usuarios(&usuarios, i);
             break;
         case 2:             //Borrar usuario
             puts("Eliminar un usuario");
-            op2_usuarios(usuarios, i);
+            op2_usuarios(&usuarios, i);
             break;
         case 3:             //Modificar usuario
             puts("Modificar usuario");
-            op3_usuarios(usuarios, i);
+            op3_usuarios(&usuarios, i);
             break;
         case 4:             //Listar usuarios
             puts("Listar usuarios");
-            op4_usuarios(usuarios, i);
+            op4_usuarios(&usuarios, i);
             break;
     }
 }
@@ -94,7 +94,7 @@ void op2_usuarios(Usuarios **usuarios, int i){
             }
         }
         num_usuarios--;
-        usuarios = (Usuarios*)realloc(usuarios, (num_usuarios+1)* sizeof(Usuarios*));
+        usuarios = (Usuarios*)realloc(usuarios, (num_usuarios+1)* sizeof*(Usuarios*));
         printf("\nSe ha eliminado el user correctamente\n");
     }else{
         printf("\nSe ha cancelado la eliminaci%cn del user\n", 162);
