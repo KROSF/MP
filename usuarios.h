@@ -7,6 +7,7 @@
 #include "types.h"
 #include "carga.h"
 
+void flush_in();
 void users(Usuarios *, int );
 
 void op1_usuarios(Usuarios *, int );
