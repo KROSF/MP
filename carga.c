@@ -65,7 +65,7 @@ void cargarUsuario(int * n,Usuarios ** users)
     fclose(file);
 }
 
-void cargaVehiculos(int * u,Usuarios ** users,Vehiculos ** vls,int * v)
+void cargarVehiculos(int * u,Usuarios ** users,Vehiculos ** vls,int * v)
 {
     FILE *file;
     char *mat,*idu,*nplzs,*des_veh;
@@ -95,4 +95,8 @@ void cargaVehiculos(int * u,Usuarios ** users,Vehiculos ** vls,int * v)
         free(nplzs);
     }
     fclose(file);
+}
+
+void cargarViajes(int * vh,Vehiculos ** veh,Viajes ** vjs,int * vi){
+
 }
