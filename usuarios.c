@@ -43,12 +43,11 @@ void users(Usuarios **usuarios, int num_usuarios){
 void op1_usuarios(Usuarios **usuarios, int i){
 
     int n;
-    char *id_usuf, *nombf, *locldf, *perf, *usrf, *logf,*estadof;
+    char *id_usuf, *nombf, *locldf, *usrf, *logf,*estadof;
 
     id_usuf = (char *) malloc( ( ID_USUARIO + 1 ) * sizeof(char));
     nombf = (char *) malloc((NOMB_USUARIO + 1)* sizeof(char));
     locldf = (char *)malloc((LOCALIDAD +1) * sizeof(char));
-    perf = (char *)malloc( 14 * sizeof(char));
     usrf = (char *)malloc((USER + 1) * sizeof(char));
     logf = (char *) malloc( (LOGIN + 1) * sizeof(char));
     estadof = (char *) malloc( 10 * sizeof(char));
@@ -77,13 +76,11 @@ void op1_usuarios(Usuarios **usuarios, int i){
     switch(n){
 
         case 1:
-            n=0
-            perf=Perfil[n];
+            (*usuarios)[i].Perfil_usuario=0;
             break;
 
         case 2:
-            n=1
-            perf=Perfil[n];
+            (*usuarios)[i].Perfil_usuario=1;
             break;
         default:
             puts("ERROR: La opcion introducida no es valida");
@@ -108,13 +105,11 @@ void op1_usuarios(Usuarios **usuarios, int i){
     switch(n){
 
         case 1:
-            n=0
-            estadof=Estado_U[n];
+            (*usuarios)[i].Estado=0;
             break;
 
         case 2:
-            n=1
-            estadof=Estado_U[n];
+            (*usuarios)[i].Estado=1;
             break;
         default:
             puts("ERROR: La opcion introducida no es valida");
@@ -164,7 +159,7 @@ void op3_usuarios(Usuarios **usuarios, int i){
         if(usuarios[i].Id_usuario == id_user){
             puts("Id del nuevo usuario: ");
             flush_in();
-            scanf("%d", *usuarios[i].Id_usuario);
+            scanf("%d", *usuarios[i]->Id_usuario);
 
             puts("Nombre del nuevo usuario: ");
             flush_in();
@@ -176,7 +171,7 @@ void op3_usuarios(Usuarios **usuarios, int i){
 
             puts("Tipo de usuario(Administrador o usuario): ");
             flush_in();
-            scanf("%d", *usuarios[i].Perfil_usuario);
+            scanf("%d", *usuarios[i]->Perfil_usuario);
 
             puts("User de inicio de sesión: ");
             flush_in();
@@ -188,7 +183,7 @@ void op3_usuarios(Usuarios **usuarios, int i){
 
             puts("Estado: ");
             flush_in();
-            scanf("%d", *usuarios[i].Estado);
+            scanf("%d", *usuarios[i]->Estado);
         }
     }
 }
@@ -196,6 +191,6 @@ void op3_usuarios(Usuarios **usuarios, int i){
 void op4_usuarios(Usuarios **usuarios, int i){
 
     for(i=0;i<num_usuarios;i++){
-        printf("%d-%s-%s-%d-%s-%s-%d \n\n", *usuarios[i].Id_usuario, usuarios[i].Nomb_usario, usuarios[i].Localidad, usuarios[i].Perfil_usuario, usuarios[i].User, usuarios[i].Login, usuarios[i].Estado);
+        printf("%d-%s-%s-%d-%s-%s-%d \n\n", *usuarios[i]->Id_usuario, *usuarios[i]->Nomb_usario, *usuarios[i]->Localidad, *usuarios[i]->Perfil_usuario, *usuarios[i]->User, *usuarios[i]->Login, *usuarios[i]->Estado);
     }
 }
