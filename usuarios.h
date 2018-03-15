@@ -11,6 +11,7 @@ void users(Usuarios *, int );
 
 void op1_usuarios(Usuarios *, int );
 void op2_usuarios(Usuarios *, int );
+void op3_usuarios(Usuarios *, int );
 void op4_usuarios(Usuarios *, int );
 
 #endif //ESI_SHARE_USUARIOS_H

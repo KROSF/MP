@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <w32api/adoctint.h>
 #include "usuarios.h"
+#include "types.h"
 
 void users(Usuarios *usuarios, int num_usuarios){
 
@@ -23,6 +24,7 @@ void users(Usuarios *usuarios, int num_usuarios){
             break;
         case 3:             //Modificar usuario
             puts("Modificar usuario");
+            op3_usuarios(usuarios, i);
             break;
         case 4:             //Listar usuarios
             puts("Listar usuarios");
@@ -33,7 +35,7 @@ void users(Usuarios *usuarios, int num_usuarios){
 
 void op1_usuarios(Usuarios *usuarios, int i){
 
-    char *id_usuf, *nombf, *locldf, *usrf, *logf, *perfilf,*estadof;
+/*    char *id_usuf, *nombf, *locldf, *usrf, *logf, *perfilf,*estadof;
 
     id_usuf = (char *) malloc( ( ID_USUARIO + 1 ) * sizeof(char));
     nombf = (char *) malloc((NOMB_USUARIO + 1)* sizeof(char));
@@ -42,28 +44,29 @@ void op1_usuarios(Usuarios *usuarios, int i){
     logf = (char *) malloc( (LOGIN + 1) * sizeof(char));
     perfilf = (char *) malloc( 14 * sizeof(char));
     estadof = (char *) malloc( 10 * sizeof(char));
+    */
 
     puts("Id del nuevo usuario: ");
     fflush(stdin);
-    fgets(id_usuf, 5, stdin);
+    scanf("%d", *usuarios[i].Id_usuario);
     puts("Nombre del nuevo usuario: ");
     fflush(stdin);
-    fgets(nombf, 21, stdin);
+    fgets(usuarios[i].Nomb_usario, 21, stdin);
     puts("Localidad: ");
     fflush(stdin);
-    fgets(locldf, 21, stdin);
+    fgets(usuarios[i].Localidad, 21, stdin);
     puts("Tipo de usuario(Administrador o usuario): ");
     fflush(stdin);
-    fgets(perfilf, 14 stdin);
+    scanf("%d", *usuarios[i].Perfil_usuario);
     puts("User de inicio de sesión: ");
     fflush(stdin);
-    fgets(usrf, 6, stdin);
+    fgets(usuarios[i].User, 6, stdin);
     puts("Contrasña: ");
     fflush(stdin);
-    fgets(logf, 9, stdin);
+    fgets(usuarios[i].Login, 9, stdin);
     puts("Estado: ");
     fflush(stdin);
-    fgets(estadof, 10 stdin);
+    scanf("%d", *usuarios[i].Estado);
 }
 
 void op2_usuarios(Usuarios *usuarios, int i){
@@ -95,6 +98,46 @@ void op2_usuarios(Usuarios *usuarios, int i){
     }else{
         printf("\nSe ha cancelado la eliminaci%cn del user\n", 162);
         exit(1);
+    }
+}
+
+void op3_usuarios(Usuarios *usuarios, int i){
+
+    int id_user;
+
+    puts("Qué usuario desea modificar? Introduce su User de sistema: ");
+    scanf("%d", &id_user);
+
+    for(i=0;i<num_usuarios;i++){
+        if(usuarios[i].Id_usuario == id_user){
+            puts("Id del nuevo usuario: ");
+            fflush(stdin);
+            scanf("%d", *usuarios[i].Id_usuario);
+
+            puts("Nombre del nuevo usuario: ");
+            fflush(stdin);
+            fgets(usuarios[i].Nomb_usario, 21, stdin);
+
+            puts("Localidad: ");
+            fflush(stdin);
+            fgets(usuarios[i].Localidad, 21, stdin);
+
+            puts("Tipo de usuario(Administrador o usuario): ");
+            fflush(stdin);
+            scanf("%d", *usuarios[i].Perfil_usuario);
+
+            puts("User de inicio de sesión: ");
+            fflush(stdin);
+            fgets(usuarios[i].User, 6, stdin);
+
+            puts("Contrasña: ");
+            fflush(stdin);
+            fgets(usuarios[i].Login, 9, stdin);
+
+            puts("Estado: ");
+            fflush(stdin);
+            scanf("%d", *usuarios[i].Estado);
+        }
     }
 }
 
