@@ -16,7 +16,7 @@ static const char * const Estado_I[] = {"cerrada","abierta","valida"};
 
 typedef struct{
     int * Id_usuario;
-    char * Nomb_usario;
+    char * Nomb_usuario;
     char * Localidad;
     int Perfil_usuario;
     char * User;

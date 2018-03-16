@@ -6,20 +6,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "usuarios.h"
-#include "types.h"
 
-void flush_in() {
+void flush_in() { // Función que sistituye el "fflush(stdin)"
     int ch;
 
     while( (ch = fgetc(stdin)) != EOF && ch != '\n' ){}
 }
 
-void users(Usuarios **usuarios, int num_usuarios){
+void USERS(Usuarios **usuarios, int num_usuarios){
 
-    int i=0;
+    int i = 0;
 
-
-    switch(){
+    switch (  ){
 
         case 1:             //Añadir nuevo usuario
             puts("Añadir nuevo usuario");
@@ -45,21 +43,21 @@ void op1_usuarios(Usuarios **usuarios, int i){
     int n;
     char *id_usuf, *nombf, *locldf, *usrf, *logf,*estadof;
 
-    id_usuf = (char *) malloc( ( ID_USUARIO + 1 ) * sizeof(char));
-    nombf = (char *) malloc((NOMB_USUARIO + 1)* sizeof(char));
-    locldf = (char *)malloc((LOCALIDAD +1) * sizeof(char));
-    usrf = (char *)malloc((USER + 1) * sizeof(char));
-    logf = (char *) malloc( (LOGIN + 1) * sizeof(char));
-    estadof = (char *) malloc( 10 * sizeof(char));
+    id_usuf = (char *) malloc((TAM04 + 1) * sizeof(char));
+    nombf = (char *) malloc((TAM20 + 1)* sizeof(char));
+    locldf = (char *)malloc((TAM20 +1) * sizeof(char));
+    usrf = (char *)malloc((TAM05 + 1) * sizeof(char));
+    logf = (char *) malloc((TAM08 + 1) * sizeof(char));
+    estadof = (char *) malloc(10 * sizeof(char));
 
 
     puts("Id del nuevo usuario: ");
     flush_in();
-    scanf("%d", *usuarios[i].Id_usuario);
+    scanf("%d", usuarios[i]->Id_usuario);
 
     puts("Nombre del nuevo usuario: ");
     flush_in();
-    scanf("%20s", usuarios[i]->Nomb_usario);
+    scanf("%20s", usuarios[i]->Nomb_usuario);
 
     puts("Localidad: ");
     flush_in();
@@ -129,14 +127,14 @@ void op2_usuarios(Usuarios **usuarios, int i){
 
     if(resp == 's'){
         for(i=0;i<num_usuarios;i++){
-            if(*usuarios[i].Id_usuario == id_user){
-                *usuarios[i].Id_usuario = *usuarios[i+1].Id_usuario;
-                strcpy(*usuarios[i].Nomb_usario, *usuarios[i+1].Nomb_usario);
-                strcpy(*usuarios[i].Localidad, *usuarios[i+1].Localidad);
-                *usuarios[i].Perfil_usuario = *usuarios[i+1].Perfil_usuario;
-                strcpy(*usuarios[i].User, *usuarios[i+1].User);
-                strcpy(*usuarios[i].Login, *usuarios[i+1].Login);
-                *usuarios[i].Estado = *usuarios[i+1].Estado;
+            if(usuarios[i]->Id_usuario == id_user){
+                usuarios[i]->Id_usuario = usuarios[i+1]->Id_usuario;
+                strcmp(usuarios[i]->Nomb_usuario, usuarios[i+1]->Nomb_usuario);
+                strcmp(usuarios[i]->Localidad, usuarios[i+1]->Localidad);
+                usuarios[i]->Perfil_usuario = usuarios[i+1]->Perfil_usuario;
+                strcmp(usuarios[i]->User, usuarios[i+1]->User);
+                strcmp(usuarios[i]->Login, usuarios[i+1]->Login);
+                usuarios[i]->Estado = usuarios[i+1]->Estado;
             }
         }
         num_usuarios--;
@@ -156,14 +154,14 @@ void op3_usuarios(Usuarios **usuarios, int i){
     scanf("%d", &id_user);
 
     for(i=0;i<num_usuarios;i++){
-        if(usuarios[i].Id_usuario == id_user){
+        if(*usuarios[i]->Id_usuario == id_user){
             puts("Id del nuevo usuario: ");
             flush_in();
-            scanf("%d", *usuarios[i]->Id_usuario);
+            scanf("%d", usuarios[i]->Id_usuario);
 
             puts("Nombre del nuevo usuario: ");
             flush_in();
-            scanf("%20s", usuarios[i]->Nomb_usario);
+            scanf("%20s", usuarios[i]->Nomb_usuario);
 
             puts("Localidad: ");
             flush_in();
@@ -171,7 +169,7 @@ void op3_usuarios(Usuarios **usuarios, int i){
 
             puts("Tipo de usuario(Administrador o usuario): ");
             flush_in();
-            scanf("%d", *usuarios[i]->Perfil_usuario);
+            scanf("%d", usuarios[i]->Perfil_usuario);
 
             puts("User de inicio de sesión: ");
             flush_in();
@@ -183,7 +181,7 @@ void op3_usuarios(Usuarios **usuarios, int i){
 
             puts("Estado: ");
             flush_in();
-            scanf("%d", *usuarios[i]->Estado);
+            scanf("%d", usuarios[i]->Estado);
         }
     }
 }
@@ -191,6 +189,6 @@ void op3_usuarios(Usuarios **usuarios, int i){
 void op4_usuarios(Usuarios **usuarios, int i){
 
     for(i=0;i<num_usuarios;i++){
-        printf("%d-%s-%s-%d-%s-%s-%d \n\n", *usuarios[i]->Id_usuario, *usuarios[i]->Nomb_usario, *usuarios[i]->Localidad, *usuarios[i]->Perfil_usuario, *usuarios[i]->User, *usuarios[i]->Login, *usuarios[i]->Estado);
+        printf("%d-%s-%s-%d-%s-%s-%d \n\n", *usuarios[i]->Id_usuario, *usuarios[i]->Nomb_usuario, *usuarios[i]->Localidad, *usuarios[i]->Perfil_usuario, *usuarios[i]->User, *usuarios[i]->Login, *usuarios[i]->Estado);
     }
 }

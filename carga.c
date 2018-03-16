@@ -97,6 +97,6 @@ void cargarVehiculos(int * u,Usuarios ** users,Vehiculos ** vls,int * v)
     fclose(file);
 }
 
-void cargarViajes(int * vh,Vehiculos ** veh,Viajes ** vjs,int * vi){
+void cargarViajes(int * vh,Usuarios ** veh,Viajes ** vjs,int * vi){
 
 }

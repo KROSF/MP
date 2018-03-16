@@ -13,7 +13,8 @@ int num_viajes;
 int num_pasos;
 int num_incidencias;
 
+
 void cargarUsuario(int *,Usuarios **);
 void cargarVehiculos(int *,Usuarios **,Vehiculos **,int *);
-void cargarViajes(int *,Vehiculos **,Viajes **,int *);
+void cargarViajes(int *,Usuarios **,Viajes **,int *);
 #endif
