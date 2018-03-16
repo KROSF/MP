@@ -1,20 +1,21 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define ID_USUARIO 4
-#define NOMB_USUARIO 20
-#define LOCALIDAD 20
-#define USER 5
-#define LOGIN 8
+#define TAM04 4
+#define TAM05 5
+#define TAM07 7
+#define TAM08 8
+#define TAM20 20
+#define TAM50 50
 
 static const char * const Estado_U[] = {"bloqueado","activo"};
 static const char * const Perfil[] = {"administrador","usuario"};
-static const char * const Viaje[] = {"Ida","Vuelta"};
-static const char * const Estado_Vi[] = {"Cerrado","Abierto","Iniciado","Finalizado","Anulado"};
-static const char * const Estado_I[] = {"Cerrada","Abierta","Valida"};
+static const char * const Viaje[] = {"ida","vuelta"};
+static const char * const Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
+static const char * const Estado_I[] = {"cerrada","abierta","valida"};
 
 typedef struct{
-    int Id_usuario;
+    int * Id_usuario;
     char * Nomb_usario;
     char * Localidad;
     int Perfil_usuario;
@@ -26,7 +27,7 @@ typedef struct{
 typedef struct{
     char * Id_mat;
     int * Id_usuario;
-    int * Num_plazas;
+    int Num_plazas;
     char * Desc_veh;
 }Vehiculos;
 
@@ -36,10 +37,10 @@ typedef struct{
     char * F_inic;
     char * H_inic;
     char * H_fin;
-    int * Plazas_libre;
-    int * Viaje;
-    double * Importe;
-    int * Estado;
+    int Plazas_libre;
+    int Viaje;
+    double Importe;
+    int Estado;
 }Viajes;
 
 typedef struct{
