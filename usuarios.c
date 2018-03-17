@@ -20,19 +20,19 @@ void USERS(Usuarios **usuarios, int num_usuarios){
     switch (  ){
 
         case 1:             //Añadir nuevo usuario
-            puts("Añadir nuevo usuario");
+            puts("Añadir nuevo usuario:");
             op1_usuarios(&usuarios, i);
             break;
         case 2:             //Borrar usuario
-            puts("Eliminar un usuario");
+            puts("Eliminar un usuario:");
             op2_usuarios(&usuarios, i);
             break;
         case 3:             //Modificar usuario
-            puts("Modificar usuario");
+            puts("Modificar usuario:");
             op3_usuarios(&usuarios, i);
             break;
         case 4:             //Listar usuarios
-            puts("Listar usuarios");
+            puts("Listar usuarios:");
             op4_usuarios(&usuarios, i);
             break;
     }
@@ -41,14 +41,14 @@ void USERS(Usuarios **usuarios, int num_usuarios){
 void op1_usuarios(Usuarios **usuarios, int i){
 
     int n;
-    char *id_usuf, *nombf, *locldf, *usrf, *logf,*estadof;
+/*    char *id_usuf, *nombf, *locldf, *usrf, *logf, *estadof;
 
     id_usuf = (char *) malloc((TAM04 + 1) * sizeof(char));
     nombf = (char *) malloc((TAM20 + 1)* sizeof(char));
     locldf = (char *)malloc((TAM20 +1) * sizeof(char));
     usrf = (char *)malloc((TAM05 + 1) * sizeof(char));
     logf = (char *) malloc((TAM08 + 1) * sizeof(char));
-    estadof = (char *) malloc(10 * sizeof(char));
+    estadof = (char *) malloc(10 * sizeof(char));*/
 
 
     puts("Id del nuevo usuario: ");

@@ -51,7 +51,7 @@ void cargarUsuario(int * n,Usuarios ** users)
         else *users = (Usuarios *) realloc(*users,(*n+1) * sizeof(Usuarios));
 
         (*users)[*n].Id_usuario=sid;
-        (*users)[*n].Nomb_usario=nomb;
+        (*users)[*n].Nomb_usuario=nomb;
         (*users)[*n].Localidad=locld;
         (*users)[*n].Perfil_usuario=perfilUsuario(&perfil);
         (*users)[*n].User=usr;
