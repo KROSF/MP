@@ -1,18 +1,11 @@
-#ifndef TYPES_H
-#define TYPES_H
-
-#define TAM04 4
-#define TAM05 5
-#define TAM07 7
-#define TAM08 8
-#define TAM20 20
-#define TAM50 50
+#ifndef TIPOS_H
+#define TIPOS_H
 
 static const char * const Estado_U[] = {"bloqueado","activo"};
 static const char * const Perfil[] = {"administrador","usuario"};
 static const char * const Viaje[] = {"ida","vuelta"};
 static const char * const Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
-static const char * const Estado_I[] = {"cerrada","abierta","valida"};
+static const char * const Estado_I[] = {"cerrada","abierta","validada"};
 
 typedef struct{
     int Id_usuario;
@@ -32,7 +25,7 @@ typedef struct{
 }Vehiculos;
 
 typedef struct{
-    int * Id_viaje;
+    int Id_viaje;
     char * Id_mat;
     char * F_inic;
     char * H_inic;
@@ -44,16 +37,16 @@ typedef struct{
 }Viajes;
 
 typedef struct{
-    int * Id_viaje;
+    int Id_viaje;
     char * Poblacion;
 }Pasos;
 
 typedef struct{
-    int * Id_viaje;
-    int * Id_us_registra;
-    int * Id_us_incidencia;
+    int Id_viaje;
+    int Id_us_registra;
+    int Id_us_incidencia;
     char * Desc_indicencia;
-    int * Est_incidencia;
+    int Est_incidencia;
 }Incidencias;
 
 #endif
