@@ -15,7 +15,7 @@ static const char * const Estado_Vi[] = {"cerrado","abierto","iniciado","finaliz
 static const char * const Estado_I[] = {"cerrada","abierta","valida"};
 
 typedef struct{
-    int * Id_usuario;
+    int Id_usuario;
     char * Nomb_usario;
     char * Localidad;
     int Perfil_usuario;
@@ -26,7 +26,7 @@ typedef struct{
 
 typedef struct{
     char * Id_mat;
-    int * Id_usuario;
+    int Id_usuario;
     int Num_plazas;
     char * Desc_veh;
 }Vehiculos;
