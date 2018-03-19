@@ -3,7 +3,5 @@ project(ESI-SHARE)
 
 set(CMAKE_CXX_STANDARD 11)
 
-
-add_executable(ESI-SHARE main.c tipos.h carga.c carga.h guardar.c guardar.h)
-
+add_executable(ESI-SHARE main.c tipos.h carga.c carga.h guardar.c guardar.h usuarios.c usuarios.h viajes.c viajes.h)
 

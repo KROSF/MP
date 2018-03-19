@@ -26,7 +26,7 @@ static char * Estado_I[] = {"cerrada","abierta","validada"};
 typedef struct{
     /*@{*/
     int Id_usuario; /**< Identificador unico de usuario */
-    char * Nomb_usuario; /**< Nombre real de usuario*/
+    char * Nomb_usario; /**< Nombre real de usuario*/
     char * Localidad; /**< Localidad del usuario */
     int Perfil_usuario; /**< Podra ser administrador = 0 , usuario = 1 */
     char * User; /**< Nombre de usuario */
