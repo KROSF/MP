@@ -1,11 +1,11 @@
 #ifndef TIPOS_H
 #define TIPOS_H
 
-static const char * const Estado_U[] = {"bloqueado","activo"};
-static const char * const Perfil[] = {"administrador","usuario"};
-static const char * const Viaje[] = {"ida","vuelta"};
-static const char * const Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
-static const char * const Estado_I[] = {"cerrada","abierta","validada"};
+static char * Estado_U[] = {"bloqueado","activo"};
+static char * Perfil[] = {"administrador","usuario"};
+static char * Viaje[] = {"vuelta","ida"};
+static char * Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
+static char * Estado_I[] = {"cerrada","abierta","validada"};
 
 typedef struct{
     int Id_usuario;
@@ -32,7 +32,7 @@ typedef struct{
     char * H_fin;
     int Plazas_libre;
     int Viaje;
-    double Importe;
+    float Importe;
     int Estado;
 }Viajes;
 
