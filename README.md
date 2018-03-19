@@ -1,3 +1,4 @@
+
 <h2 id="Estructuras">Estructuras</h2>
 <ul>
   <li><a
@@ -59,3 +60,4 @@
 |`int` |**Viaje**|
 |`float`| **Importe**|
 |`int` |**Estado**|
+
