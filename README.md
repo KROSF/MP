@@ -31,7 +31,7 @@
 | TIPO | NOMBRE  |
 |--:|---|
 |`int` |**Id_usuario**|
-|`char *` |**Nomb_usario**|
+|`char *` |**Nomb_usuario**|
 |`char *`| **Localidad**|
 |`int`| **Perfil_usuario**|
 |`char *` |**User**|

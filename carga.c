@@ -134,7 +134,7 @@ Usuarios *initUsuarios(int * n)
         else tmp = (Usuarios *) realloc(tmp,(*n+1) * sizeof(Usuarios));
 
         tmp[*n].Id_usuario=atoi(id);
-        tmp[*n].Nomb_usario=nomb;
+        tmp[*n].Nomb_usuario=nomb;
         tmp[*n].Localidad=locld;
         tmp[*n].Perfil_usuario=perfilUsuario(&perfil);
         tmp[*n].User=usr;
