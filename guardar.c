@@ -49,13 +49,13 @@ void saveUsuarios(int n ,Usuarios * usuarios)
     for (int i=0; i< n; ++i){
         fprintf(file,"%04d-%s-%s-%s-%s-%s-%s\n",
                 usuarios[i].Id_usuario,
-                usuarios[i].Nomb_usario,
+                usuarios[i].Nomb_usuario,
                 usuarios[i].Localidad,
                 Perfil[usuarios[i].Perfil_usuario],
                 usuarios[i].User,
                 usuarios[i].Login,
                 Estado_U[usuarios[i].Estado]);
-        free(usuarios[i].Nomb_usario);
+        free(usuarios[i].Nomb_usuario);
         free(usuarios[i].Login);
         free(usuarios[i].User);
         free(usuarios[i].Localidad);
