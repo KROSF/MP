@@ -74,7 +74,7 @@ void cargar(Usuarios ** usuarios,Vehiculos ** vehiculos,Viajes ** viajes,Pasos**
 int estadoIncidencia(char **c)
 {
     int a=0;
-    if(strcmp(*c,"cerrado") == 0) a=0;
+    if(strcmp(*c,"cerrada") == 0) a=0;
     if(strcmp(*c,"abierta")== 0) a=1;
     if(strcmp(*c,"validada")== 0) a=2;
     return a;
@@ -223,7 +223,7 @@ Viajes * initViajes(int * n)
         tmp[*n].H_fin=h_fin;
         tmp[*n].Plazas_libre=atoi(p_libres);
         tmp[*n].Viaje=idaVuelta(&viaje);
-        sscanf(importe, "%lf", &tmp[*n].Importe);
+        sscanf(importe, "%f", &tmp[*n].Importe);
         tmp[*n].Estado=estadoViaje(&estado);
         (*n)++;
         free(id_viaje);

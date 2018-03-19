@@ -3,7 +3,7 @@
 
 static char * Estado_U[] = {"bloqueado","activo"};
 static char * Perfil[] = {"administrador","usuario"};
-static char * Viaje[] = {"ida","vuelta"};
+static char * Viaje[] = {"vuelta","ida"};
 static char * Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
 static char * Estado_I[] = {"cerrada","abierta","validada"};
 
@@ -32,7 +32,7 @@ typedef struct{
     char * H_fin;
     int Plazas_libre;
     int Viaje;
-    double Importe;
+    float Importe;
     int Estado;
 }Viajes;
 
