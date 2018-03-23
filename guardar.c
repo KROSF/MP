@@ -45,8 +45,9 @@ void saveUsuarios(int n ,Usuarios * usuarios)
     file=fopen("Usuarios.txt","w+");
 
     if (file==NULL) exit(1);
-
-    for (int i=0; i< n; ++i){
+    
+    int i;
+    for (i = 0; i < n; ++i) {
         fprintf(file,"%04d-%s-%s-%s-%s-%s-%s\n",
                 usuarios[i].Id_usuario,
                 usuarios[i].Nomb_usario,
@@ -70,7 +71,8 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
     file=fopen("Vehiculos.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for (i = 0; i < n; ++i) {
         fprintf(file,"%s-%04d-%d-%s\n",
         vehiculos[i].Id_mat,
         vehiculos[i].Id_usuario,
@@ -90,7 +92,8 @@ void saveViajes(int n,Viajes* viajes)
     file=fopen("Viajes.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for (i = 0; i < n; ++i) {
         fprintf(file,"%06d-%s-%s-%s-%s-%d-%s-%.2f€-%s\n",
         viajes[i].Id_viaje,
         viajes[i].Id_mat,
@@ -116,7 +119,8 @@ void savePasos(int n,Pasos* pasos)
     file=fopen("Pasos.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for (i = 0; i < n; ++i) {
         fprintf(file,"%06d-%s\n",
         pasos[i].Id_viaje,
         pasos[i].Poblacion);
@@ -131,8 +135,8 @@ void saveIncidencias(int n,Incidencias* incidencias)
     FILE *file;
     file=fopen("Incidencias.txt","w+");
     if (file==NULL) exit(1);
-
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for (i = 0; i < n; ++i) {
         fprintf(file,"%06d-%04d-%04d-%s-%s\n",
         incidencias[i].Id_viaje,
         incidencias[i].Id_us_registra,
