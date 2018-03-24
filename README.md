@@ -23,7 +23,6 @@
 |`char*`|**Desc_indicencia**|
 |`int` |**Est_incidencia**|
 
-  
 <h3 id="Pasos">Pasos</h3>
 
 | TIPO | NOMBRE  |
@@ -71,4 +70,3 @@
 |`int` |**Estado**|
 
 </td></tr> </table>
-
