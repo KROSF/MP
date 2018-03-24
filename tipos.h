@@ -1,5 +1,17 @@
 #ifndef TIPOS_H
 #define TIPOS_H
+#define NPLAZS 2
+#define ID_USUARIO_O_IMPORTE 5
+#define USR_O_HORA 6
+#define ID_VIAJE_E_VIAJE 7
+#define ID_MAT 8
+#define LOGINPASS_ESTADO_I 9
+#define ESTADO_U 10
+#define FECHA_ESTADO_V 11
+#define PERFIL 14
+#define NOMB_O_LOCAL 21
+#define DES_VEH 51
+#define DES_INCI 101
 /**
  * Varible global para obtener el estado de un usuario
  */

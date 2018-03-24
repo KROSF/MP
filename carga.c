@@ -118,13 +118,13 @@ Usuarios *initUsuarios(int * n)
 
     while(!feof(file))
     {
-        id = (char *) malloc(5* sizeof(char));
-        nomb = (char *) malloc(21* sizeof(char));
-        locld = (char *)malloc(21 * sizeof(char));
-        usr = (char *)malloc(6 * sizeof(char));
-        log = (char *) malloc( 9 * sizeof(char));
-        perfil = (char *) malloc( 14 * sizeof(char));
-        estado = (char *) malloc( 10 * sizeof(char));
+        id = (char *) malloc( ID_USUARIO_O_IMPORTE * sizeof(char));
+        nomb = (char *) malloc( NOMB_O_LOCAL * sizeof(char));
+        locld = (char *)malloc( NOMB_O_LOCAL * sizeof(char));
+        usr = (char *)malloc( USR_O_HORA  * sizeof(char));
+        log = (char *) malloc( LOGINPASS_ESTADO_I * sizeof(char));
+        perfil = (char *) malloc( PERFIL * sizeof(char));
+        estado = (char *) malloc( ESTADO_U * sizeof(char));
 
         if( id == NULL || nomb == NULL || locld == NULL || usr == NULL ||
             log == NULL || perfil == NULL || estado == NULL) exit(1);
@@ -162,10 +162,10 @@ Vehiculos * initVehiculos(int * n)
 
     while(!feof(file))
     {
-        mat = (char *) malloc( 8 * sizeof(char));
-        idu = (char *) malloc( 5 * sizeof(char));
-        nplzs = (char *) malloc(2 * sizeof(char));
-        des_veh = (char *) malloc(51 * sizeof(char));
+        mat = (char *) malloc( ID_MAT * sizeof(char));
+        idu = (char *) malloc( ID_USUARIO_O_IMPORTE * sizeof(char));
+        nplzs = (char *) malloc( NPLAZS * sizeof(char));
+        des_veh = (char *) malloc( DES_VEH * sizeof(char));
 
         if(mat == NULL || idu == NULL || nplzs == NULL || des_veh == NULL) exit(1);
 
@@ -198,15 +198,15 @@ Viajes * initViajes(int * n)
 
     while (!feof(file))
     {
-        id_viaje=(char *)malloc(7* sizeof(char));
-        id_mat=(char *)malloc(8* sizeof(char));
-        f_inic=(char *)malloc(11* sizeof(char));
-        h_inic=(char *)malloc(6* sizeof(char));
-        h_fin=(char *)malloc(6* sizeof(char));
-        p_libres=(char *)malloc(2* sizeof(char));
-        viaje=(char *)malloc(7* sizeof(char));
-        importe=(char *)malloc(5* sizeof(char));
-        estado=(char *)malloc(11* sizeof(char));
+        id_viaje=(char *)malloc( ID_VIAJE_E_VIAJE* sizeof(char));
+        id_mat=(char *)malloc( ID_MAT * sizeof(char));
+        f_inic=(char *)malloc( FECHA_ESTADO_V * sizeof(char));
+        h_inic=(char *)malloc( USR_O_HORA * sizeof(char));
+        h_fin=(char *)malloc( USR_O_HORA * sizeof(char));
+        p_libres=(char *)malloc( NPLAZS * sizeof(char));
+        viaje=(char *)malloc( ID_VIAJE_E_VIAJE * sizeof(char));
+        importe=(char *)malloc( ID_USUARIO_O_IMPORTE * sizeof(char));
+        estado=(char *)malloc( FECHA_ESTADO_V * sizeof(char));
         if(id_viaje == NULL || id_mat == NULL || f_inic == NULL || h_inic == NULL ||
                 h_fin == NULL || p_libres == NULL || viaje == NULL || importe == NULL || estado == NULL) exit(1);
 
@@ -249,8 +249,8 @@ Pasos * initPasos(int * n)
 
     while(!feof(file))
     {
-        id_viaje = (char *)malloc(7 * sizeof(char));
-        poblacion = (char *)malloc(21 * sizeof(char));
+        id_viaje = (char *)malloc( ID_VIAJE_E_VIAJE * sizeof(char));
+        poblacion = (char *)malloc( NOMB_O_LOCAL * sizeof(char));
 
         if( id_viaje == NULL || poblacion == NULL ) exit(0);
 
@@ -281,11 +281,11 @@ Incidencias * initIncidencias(int *n)
 
     while(!feof(file))
     {
-        id_viaje = (char *)malloc(7 * sizeof(char));
-        id_us_registra = (char *)malloc(5 * sizeof(char));
-        id_us_incidencia = (char *)malloc(5 * sizeof(char));
-        desc_inicidencia = (char *)malloc(101* sizeof(char));
-        estado = (char *)malloc(9* sizeof(char));
+        id_viaje = (char *)malloc( ID_VIAJE_E_VIAJE * sizeof(char));
+        id_us_registra = (char *)malloc( ID_USUARIO_O_IMPORTE * sizeof(char));
+        id_us_incidencia = (char *)malloc( ID_USUARIO_O_IMPORTE * sizeof(char));
+        desc_inicidencia = (char *)malloc( DES_INCI * sizeof(char));
+        estado = (char *)malloc( LOGINPASS_ESTADO_I * sizeof(char));
 
         if( id_viaje == NULL || id_us_incidencia == NULL ||
             id_us_registra == NULL || desc_inicidencia == NULL ||
