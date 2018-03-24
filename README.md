@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/KROSF/MP.svg?branch=krosf)](https://travis-ci.org/KROSF/MP)
+[![Build Status](https://travis-ci.org/KROSF/MP.svg?branch=master)](https://travis-ci.org/KROSF/MP)
 <h2 id="Estructuras">Estructuras</h2>
 <ul>
   <li><a
@@ -8,6 +8,10 @@
   <li><a href="#Vehiculos">Vehiculos</a></li>
   <li><a href="#Viajes">Viajes</a></li>
 </ul>
+
+<table>
+<tr> <th colspan="2">Estructuras</th></tr>
+<tr><td>
 
 <h3 id="Inicidencias">Inicidencias</h3>
 
@@ -19,12 +23,14 @@
 |`char*`|**Desc_indicencia**|
 |`int` |**Est_incidencia**|
 
+  
 <h3 id="Pasos">Pasos</h3>
 
 | TIPO | NOMBRE  |
 |--:|---|
 |`int` |**Id_viaje**|
 |`char *` |**Poblacion**|
+
 
 <h3 id="Usuarios">Usuarios</h3>
 
@@ -38,6 +44,8 @@
 |`char *`| **Login**|
 |`int` |**Estado**|
 
+</td><td>
+
 <h3 id="Vehiculos">Vehiculos</h3>
 
 | TIPO | NOMBRE  |
@@ -46,6 +54,7 @@
 |`int` |**Id_usuario**|
 |`int` |**Num_plazas**|
 |`char *` |**Desc_veh**|
+
 
 <h3 id="Viajes">Viajes</h3>
 
@@ -60,4 +69,6 @@
 |`int` |**Viaje**|
 |`float`| **Importe**|
 |`int` |**Estado**|
+
+</td></tr> </table>
 
