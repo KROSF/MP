@@ -10,6 +10,10 @@
   <li><a href="#Viajes">Viajes</a></li>
 </ul>
 
+<table>
+<tr> <th colspan="2">Estructuras</th></tr>
+<tr><td>
+
 <h3 id="Inicidencias">Inicidencias</h3>
 
 | TIPO | NOMBRE  |
@@ -20,12 +24,14 @@
 |`char*`|**Desc_indicencia**|
 |`int` |**Est_incidencia**|
 
+  
 <h3 id="Pasos">Pasos</h3>
 
 | TIPO | NOMBRE  |
 |--:|---|
 |`int` |**Id_viaje**|
 |`char *` |**Poblacion**|
+
 
 <h3 id="Usuarios">Usuarios</h3>
 
@@ -39,6 +45,8 @@
 |`char *`| **Login**|
 |`int` |**Estado**|
 
+</td><td>
+
 <h3 id="Vehiculos">Vehiculos</h3>
 
 | TIPO | NOMBRE  |
@@ -47,6 +55,7 @@
 |`int` |**Id_usuario**|
 |`int` |**Num_plazas**|
 |`char *` |**Desc_veh**|
+
 
 <h3 id="Viajes">Viajes</h3>
 
@@ -61,4 +70,6 @@
 |`int` |**Viaje**|
 |`float`| **Importe**|
 |`int` |**Estado**|
+
+</td></tr> </table>
 
