@@ -24,7 +24,7 @@
 |`char*`|**Desc_indicencia**|
 |`int` |**Est_incidencia**|
 
-  
+
 <h3 id="Pasos">Pasos</h3>
 
 | TIPO | NOMBRE  |
@@ -38,7 +38,7 @@
 | TIPO | NOMBRE  |
 |--:|---|
 |`int` |**Id_usuario**|
-|`char *` |**Nomb_usario**|
+|`char *` |**Nomb_usuario**|
 |`char *`| **Localidad**|
 |`int`| **Perfil_usuario**|
 |`char *` |**User**|
@@ -72,4 +72,3 @@
 |`int` |**Estado**|
 
 </td></tr> </table>
-
