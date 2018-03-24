@@ -108,7 +108,7 @@ int perfilUsuario(char** c){
 Usuarios *initUsuarios(int * n)
 {
     FILE *file;
-    file = fopen("Usuarios.txt", "r");
+    file = fopen("ficheros/Usuarios.txt", "r");
     if (file == NULL ) exit(1);
 
     Usuarios *tmp=NULL;
@@ -152,7 +152,7 @@ Usuarios *initUsuarios(int * n)
 Vehiculos * initVehiculos(int * n)
 {
     FILE *file;
-    file = fopen("Vehiculos.txt", "r");
+    file = fopen("ficheros/Vehiculos.txt", "r");
     if (file == NULL ) exit(1);
 
     char *mat,*idu,*nplzs,*des_veh;
@@ -189,7 +189,7 @@ Vehiculos * initVehiculos(int * n)
 Viajes * initViajes(int * n)
 {
     FILE *file;
-    file = fopen("Viajes.txt", "r");
+    file = fopen("ficheros/Viajes.txt", "r");
     if (file == NULL ) exit(1);
 
     (*n)=0;
@@ -239,7 +239,7 @@ Viajes * initViajes(int * n)
 Pasos * initPasos(int * n)
 {
     FILE *file;
-    file = fopen("Pasos.txt", "r");
+    file = fopen("ficheros/Pasos.txt", "r");
     if (file == NULL ) exit(1);
 
     (*n)=0;
@@ -271,7 +271,7 @@ Pasos * initPasos(int * n)
 Incidencias * initIncidencias(int *n)
 {
     FILE *file;
-    file = fopen("Incidencias.txt", "r");
+    file = fopen("ficheros/Incidencias.txt", "r");
     if (file == NULL ) exit(1);
 
     (*n)=0;

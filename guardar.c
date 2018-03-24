@@ -42,11 +42,11 @@ void saveUsuarios(int n ,Usuarios * usuarios)
     FILE *file;
 
 
-    file=fopen("Usuarios.txt","w+");
+    file=fopen("ficheros/Usuarios.txt","w+");
 
     if (file==NULL) exit(1);
-
-    for (int i=0; i< n; ++i){
+    int i;
+    for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%04d-%s-%s-%s-%s-%s-%s\n",
                 usuarios[i].Id_usuario,
                 usuarios[i].Nomb_usuario,
@@ -67,10 +67,11 @@ void saveUsuarios(int n ,Usuarios * usuarios)
 void saveVehiculos(int n ,Vehiculos* vehiculos)
 {
     FILE *file;
-    file=fopen("Vehiculos.txt","w+");
+    file=fopen("ficheros/Vehiculos.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%s-%04d-%d-%s\n",
         vehiculos[i].Id_mat,
         vehiculos[i].Id_usuario,
@@ -87,10 +88,11 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
 void saveViajes(int n,Viajes* viajes)
 {
     FILE *file;
-    file=fopen("Viajes.txt","w+");
+    file=fopen("ficheros/Viajes.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%06d-%s-%s-%s-%s-%d-%s-%.2f€-%s\n",
         viajes[i].Id_viaje,
         viajes[i].Id_mat,
@@ -113,10 +115,11 @@ void saveViajes(int n,Viajes* viajes)
 void savePasos(int n,Pasos* pasos)
 {
     FILE *file;
-    file=fopen("Pasos.txt","w+");
+    file=fopen("ficheros/Pasos.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%06d-%s\n",
         pasos[i].Id_viaje,
         pasos[i].Poblacion);
@@ -129,10 +132,11 @@ void savePasos(int n,Pasos* pasos)
 void saveIncidencias(int n,Incidencias* incidencias)
 {
     FILE *file;
-    file=fopen("Incidencias.txt","w+");
+    file=fopen("ficheros/Incidencias.txt","w+");
     if (file==NULL) exit(1);
 
-    for (int i = 0; i < n; ++i) {
+    int i;
+    for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%06d-%04d-%04d-%s-%s\n",
         incidencias[i].Id_viaje,
         incidencias[i].Id_us_registra,
