@@ -45,6 +45,7 @@ void saveUsuarios(int n ,Usuarios * usuarios)
     file=fopen("ficheros/Usuarios.txt","w+");
 
     if (file==NULL) exit(1);
+
     int i;
     for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%04d-%s-%s-%s-%s-%s-%s\n",
@@ -72,6 +73,7 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
 
     int i;
     for ( i = 0 ; i < n; ++i ){
+
         fprintf(file,"%s-%04d-%d-%s\n",
         vehiculos[i].Id_mat,
         vehiculos[i].Id_usuario,
@@ -134,7 +136,6 @@ void saveIncidencias(int n,Incidencias* incidencias)
     FILE *file;
     file=fopen("ficheros/Incidencias.txt","w+");
     if (file==NULL) exit(1);
-
     int i;
     for ( i = 0 ; i < n; ++i ){
         fprintf(file,"%06d-%04d-%04d-%s-%s\n",

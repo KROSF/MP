@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/KROSF/MP.svg?branch=master)](https://travis-ci.org/KROSF/MP)
-
 <h2 id="Estructuras">Estructuras</h2>
 <ul>
   <li><a
@@ -23,7 +22,6 @@
 |`int` |**Id_us_incidencia**|
 |`char*`|**Desc_indicencia**|
 |`int` |**Est_incidencia**|
-
 
 <h3 id="Pasos">Pasos</h3>
 
