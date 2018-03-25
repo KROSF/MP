@@ -2,11 +2,11 @@
 #include "guardar.h"
 int main(){
 
-    Usuarios *usuarios;
-    Vehiculos *vehiculos;
-    Viajes *viajes;
-    Pasos *pasos;
-    Incidencias *incidencias;
+    Usuarios* usuarios;
+    Vehiculos* vehiculos;
+    Viajes* viajes;
+    Pasos* pasos;
+    Incidencias* incidencias;
 
     int vector[5];
 
@@ -20,4 +20,3 @@ int main(){
 
     return 0;
 }
-
