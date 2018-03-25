@@ -2,6 +2,7 @@
 #include "carga.h"
 #include "guardar.h"
 #include "acceso.h"
+#include "menu.h"
 int main(){
 
     Usuarios *usuarios;
@@ -14,14 +15,16 @@ int main(){
     int* accs;
 
     cargar(&usuarios,&vehiculos,&viajes,&pasos,&incidencias,vector);
-    
+
     accs = acceder(usuarios,vector[0]);
     if(accs[1] > -1 )
     {
-        if(accs[1] == 0) printf("Soy administrador\n");
-        else printf("Soy usuario\n");
+        if(accs[1] == 0) menuAdmin(&usuarios,vector,accs[0]);
+        else menuUser(&usuarios,vector,accs[0]);
     }
     else printf("No se puede determinar el tipo de usuario\n");
+
+
 
     guardar(&usuarios,&vehiculos,&viajes,&pasos,&incidencias,vector);
 
