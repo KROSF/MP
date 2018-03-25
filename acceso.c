@@ -2,19 +2,21 @@
 #include <stdlib.h>
 #include "string.h"
 #include "acceso.h"
+#include "utilidades.h"
 static int check_user(Usuarios* usuarios, int n);
 int check_user(Usuarios* usuarios,int n)
 {
     int logincount = 0, i;
     char user[6];
     char pass[9];
+    system("clear");
     while (logincount < 3) {
         printf("Usuario: ");
-        scanf("%5[^\n]",user);
+        scanf("%5s",user);
         flush_in();
 
         printf("Contraseña: ");
-        scanf("%8[^\n]",pass);
+        scanf("%8s",pass);
         flush_in();
         for( i = 0 ; i < n ; ++i )
         {
@@ -25,21 +27,20 @@ int check_user(Usuarios* usuarios,int n)
         system("clear");
         logincount++;
         printf("Usuario y/o Contraseña Incorrectos\n");
-        printf("Vuelta a intentarlo \n\n");
+        printf("Vuelta a intentarlo\n");
     }
     return -1;
 }
-void flush_in() {
-    int ch;
-    while( (ch = fgetc(stdin)) != EOF && ch != '\n' ){}
-}
-void acceder(Usuarios* usuarios,int n)
+
+int* acceder(Usuarios* usuarios,int n)
 {
-    int check = check_user(usuarios,n);
-    if( check > -1 )
+    static int check[2];
+    check[0] = check_user(usuarios,n);
+    check[1] = -1;
+    if( check[0] > -1 )
     {
-        if(usuarios[check].Perfil_usuario == 0) printf("soy administrador\n");
-        else printf("soy usuario\n");
+        if(usuarios[check[0]].Perfil_usuario == 0) check[1] = 0;
+        else check[1] = 1;
     }
     else
     {
@@ -47,4 +48,5 @@ void acceder(Usuarios* usuarios,int n)
         exit(1);
 
     }
+    return check;
 }

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "carga.h"
 #include "guardar.h"
 #include "acceso.h"
@@ -9,11 +10,18 @@ int main(){
     Pasos *pasos;
     Incidencias *incidencias;
 
-    int vector[5];
+    int vector[5];//Vector que contiene los contadores de las estructuras
+    int* accs;
 
     cargar(&usuarios,&vehiculos,&viajes,&pasos,&incidencias,vector);
-
-    acceder(usuarios,vector[0]);
+    
+    accs = acceder(usuarios,vector[0]);
+    if(accs[1] > -1 )
+    {
+        if(accs[1] == 0) printf("Soy administrador\n");
+        else printf("Soy usuario\n");
+    }
+    else printf("No se puede determinar el tipo de usuario\n");
 
     guardar(&usuarios,&vehiculos,&viajes,&pasos,&incidencias,vector);
 
