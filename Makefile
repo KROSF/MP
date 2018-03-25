@@ -5,7 +5,7 @@ all: main.out
 run: main.out
 	./$<
 
-main.out: main.o carga.o guardar.o
+main.out: main.o carga.o guardar.o acceso.o
 	$(CC) $^ -o $@
 
 main.o: main.c carga.h guardar.h
@@ -15,6 +15,9 @@ carga.o: carga.c carga.h tipos.h
 	$(CC) -c $< -o $@
 
 guardar.o: guardar.c guardar.h tipos.h
+	$(CC) -c $< -o $@
+
+acceso.o: acceso.c acceso.h tipos.h
 	$(CC) -c $< -o $@
 
 .PHONY: clean

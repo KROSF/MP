@@ -1,5 +1,6 @@
 #include "carga.h"
 #include "guardar.h"
+#include "acceso.h"
 int main(){
 
     Usuarios *usuarios;
@@ -12,12 +13,9 @@ int main(){
 
     cargar(&usuarios,&vehiculos,&viajes,&pasos,&incidencias,vector);
 
-
-
-
+    acceder(usuarios,vector[0]);
 
     guardar(&usuarios,&vehiculos,&viajes,&pasos,&incidencias,vector);
 
     return 0;
 }
-
