@@ -1,10 +1,13 @@
 CC = gcc
 CFLAGS  = -std=c99 -g
-
+KROSF = carga.c carga.h guardar.c guardar.h tipos.h utilidades.c utilidades.h
+JEDEX = menu.c menu.h acceso.c acceso.h
+MIKE = usuarios.c usuarios.h
 all: main.out
 
 run: main.out
 	./$<
+	make clean
 
 run_v: main.out
 	valgrind ./$<
@@ -30,7 +33,22 @@ utilidades.o: utilidades.c utilidades.h
 menu.o: menu.c menu.h tipos.h utilidades.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+jesus: delaHigueraCuestaJesus.tar.gz
+
+rodrigo: SanabriaFloresCarlosRodrigo.tar.gz
+
+project: esi-share.tar.gz
+
+delaHigueraCuestaJesus.tar.gz: $(JEDEX)
+	tar -cvf $@ $^
+
+SanabriaFloresCarlosRodrigo.tar.gz: $(KROSF)
+	tar -cvf $@ $^
+
+esi-share.tar.gz: $(KROSF) $(JEDEX) main.c ficheros
+	tar -cvf $@ $^
+
 .PHONY: clean
 
 clean:
-	rm -f *.o *.out
+	rm -f *.o *.out *.tar.gz
