@@ -15,7 +15,7 @@ run_v: main.out
 main.out: main.o carga.o guardar.o acceso.o utilidades.o menu.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-main.o: main.c carga.h guardar.h acceso.h menu.h
+main.o: main.c carga.h guardar.h acceso.h menu.h utilidades.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 carga.o: carga.c carga.h tipos.h
