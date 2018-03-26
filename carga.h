@@ -10,10 +10,10 @@
  * @param pIncidencias
  * @param pInt
  */
-void cargar(Usuarios ** pUsuarios,
-            Vehiculos **pVehiculos,
-            Viajes **pViajes,
-            Pasos **pPasos,
-            Incidencias**pIncidencias,
-            int * pInt);
+void cargar(Usuarios** pUsuarios,
+            Vehiculos** pVehiculos,
+            Viajes** pViajes,
+            Pasos** pPasos,
+            Incidencias** pIncidencias,
+            int* pInt);
 #endif
