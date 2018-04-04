@@ -26,7 +26,7 @@ int main(){
                usuarios[i].Login,
                Estado_U[usuarios[i].Estado]);
     }
-    eliminarUsuario(&usuarios,&vector[0],1);
+    //eliminarUsuario(&usuarios,&vector[0],1);
     for( int i = 0; i < vector[0]; i++ ){
         printf("%d-%s-%s-%s-%s-%s-%s\n",
                usuarios[i].Id_usuario,
