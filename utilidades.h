@@ -15,5 +15,5 @@ int buscarPasosIndex(Pasos* pasos,int n,int id_viaje);
 int buscarIncidenciasIndex(Incidencias* incidencias,int n ,int id_viaje);
 
 int validarFecha(char* cadena);
-int validarHora(char* cadena);
+int validarHora(char* cadena,int hoy);
 #endif
