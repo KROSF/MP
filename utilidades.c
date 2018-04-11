@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #include "utilidades.h"
@@ -47,7 +48,7 @@ int buscarVehiculosIndex(Vehiculos* vehiculos,int n,char* id_mat)
   int i;
   for(i = 0; i < n; ++i)
   {
-    if() return i;
+    if(strcmp(id_mat,vehiculos[i].Id_mat)==0) return i;
   }
   return -1;
 }
