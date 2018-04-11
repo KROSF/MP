@@ -47,9 +47,26 @@ int buscarVehiculosIndex(Vehiculos* vehiculos,int n,char* id_mat)
   int i;
   for(i = 0; i < n; ++i)
   {
-    if(strcmp(id_mat,vehiculos[i].Id_mat) == 0) return i;
+    if() return i;
   }
   return -1;
+}
+
+int* todoVehiculosUser(Vehiculos* vehiculos,int n,int id_usuario)
+{
+  int* vh = (int *) malloc(sizeof(int));
+  int i;
+  int j = 1;
+  for(i = 0;i < n;++i)
+  {
+    if(id_usuario == vehiculos[i].Id_usuario)
+    {
+        vh = (int *) realloc(vh,(j+1) * sizeof(int));
+        vh[j++] = i;
+    }
+  }
+  vh[0] = j;
+  return vh;
 }
 
 int buscarViajesIndex(Viajes* viajes,int n,int id_viaje)
