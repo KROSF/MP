@@ -53,20 +53,18 @@ int buscarVehiculosIndex(Vehiculos* vehiculos,int n,char* id_mat)
   return -1;
 }
 
-int* todoVehiculosUser(Vehiculos* vehiculos,int n,int id_usuario)
+int* todoVehiculosUser(Vehiculos* vehiculos,int n,int id_usuario,int* tam)
 {
-  int* vh = (int *) malloc(sizeof(int));
-  int i;
-  int j = 1;
-  for(i = 0;i < n;++i)
+  int* vh;
+  for(int i = 0;i < n;++i)
   {
     if(id_usuario == vehiculos[i].Id_usuario)
     {
-        vh = (int *) realloc(vh,(j+1) * sizeof(int));
-        vh[j++] = i;
+        if(! *tam )vh  = (int *) malloc((*tam+1)*sizeof(int));
+        else vh = (int *) realloc(vh,(*tam +1) * sizeof(int));
+        vh[(*tam)++] = i;
     }
   }
-  vh[0] = j;
   return vh;
 }
 
@@ -127,3 +125,6 @@ int validarHora(char* cadena,int hoy)
 
   return 0;
 }
+
+int generarIdViaje(Viajes* viajes,int n)
+{ return viajes[n].Id_viaje + 1; }

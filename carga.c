@@ -64,11 +64,11 @@ static int estadoViaje(char ** c);
 static int estadoIncidencia(char ** c);
 
 void cargar(Usuarios ** usuarios,Vehiculos ** vehiculos,Viajes ** viajes,Pasos** pasos,Incidencias** incidencias,int * tam){
-    *usuarios=initUsuarios(&tam[0]);
-    *vehiculos=initVehiculos(&tam[1]);
-    *viajes=initViajes(&tam[2]);
-    *pasos=initPasos(&tam[3]);
-    *incidencias=initIncidencias(&tam[4]);
+    *usuarios = initUsuarios(&tam[0]);
+    *vehiculos = initVehiculos(&tam[1]);
+    *viajes = initViajes(&tam[2]);
+    *pasos = initPasos(&tam[3]);
+    *incidencias = initIncidencias(&tam[4]);
 }
 
 int estadoIncidencia(char **c)
@@ -83,11 +83,11 @@ int estadoIncidencia(char **c)
 int estadoViaje(char **c)
 {
     int a=0;
-    if(strcmp(*c,"cerrado") == 0) a=0;
-    if(strcmp(*c,"abierto")== 0) a=1;
-    if(strcmp(*c,"iniciado")== 0) a=2;
-    if(strcmp(*c,"finalizado")== 0) a=3;
-    if(strcmp(*c,"anulado")== 0) a=4;
+    if(strcmp(*c,"cerrado") == 0) a = 0;
+    if(strcmp(*c,"abierto")== 0) a = 1;
+    if(strcmp(*c,"iniciado")== 0) a = 2;
+    if(strcmp(*c,"finalizado")== 0) a = 3;
+    if(strcmp(*c,"anulado")== 0) a = 4;
     return a;
 }
 

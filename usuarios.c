@@ -1,213 +1,145 @@
-//
-// Created by Miguel Cabral on 14/3/18.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "usuarios.h"
-#include "utilidades.h"
+/**
+ * Estado Usuario a entero
+ * @param c referencia a la cadena
+ * @return 1 si el estado es activo 0 bloqueado
+ */
+static int estadoUsuario(char ** c);
 
-void op1_usuarios(Usuarios *usuarios,int* i){
+int estadoUsuario(char** c)
+{ return (strcmp(*c,"activo")== 0) ? 1 : 0; }
 
-    int n;
-    char *nombf, *locldf, *usrf, *login;
+/**
+ * Perfil usuario a entero
+ * @param c referencia a la cadena
+ * @return 1 si el perfil es usuario 0 administrador
+ */
+static int perfilUsuarioAint(char ** c);
 
-    nombf = (char *) malloc(21 * sizeof(char));
-    locldf = (char *)malloc(21 * sizeof(char));
-    usrf = (char *)malloc(6 * sizeof(char));
-    login = (char *) malloc(9 * sizeof(char));
+int perfilUsuarioAint(char** c)
+{ return (strcmp(*c,"usuario")== 0) ? 1 : 0; }
 
-    usuarios = (Usuarios*)realloc(usuarios,(*i+1)*sizeof(Usuarios));
-    (*i)++;
+/* ficheros a estrucuturas */
 
-    puts("Id del nuevo usuario: ");
-    scanf("%d", &usuarios[*i].Id_usuario);
-    flush_in();
+Usuarios *initUsuarios(int * n){
+  FILE *file = fopen("ficheros/Usuarios.txt", "r");
+  if( file == NULL ) exit(1);
+  Usuarios *tmp=NULL;
+  (*n) = 0;
+  char *id,*nomb,*locld,*usr,*log,*perfil,*estado;
 
-    puts("Nombre del nuevo usuario: ");
-    scanf("%20s", nombf);
-    flush_in();
-    usuarios[*i].Nomb_usuario = nombf;
+  while(!feof(file))
+  {
+    id     = (char*) malloc(ID_USUARIO * sizeof(char));
+    nomb   = (char*) malloc(NOMB       * sizeof(char));
+    locld  = (char*) malloc(LOCAL      * sizeof(char));
+    usr    = (char*) malloc(USR        * sizeof(char));
+    log    = (char*) malloc(LOGINPASS  * sizeof(char));
+    perfil = (char*) malloc(PERFIL     * sizeof(char));
+    estado = (char*) malloc(ESTADO_U   * sizeof(char));
 
-    puts("Localidad: ");
-    scanf("%20s", locldf);
-    flush_in();
-    usuarios[*i].Localidad=locldf;
+    if( id == NULL || nomb == NULL || locld == NULL || usr == NULL ||
+            log == NULL || perfil == NULL || estado == NULL) exit(1);
 
-    do{
-        puts("Seleccione el perfil del usuario:");
-        puts("1) Administrador");
-        puts("2) Usuario");
-        scanf("%d",&n);
-        flush_in();
-    }while(n<1 || n>2);
+    fscanf(file, "%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^\n]\n",
+               id, nomb, locld, perfil ,usr,log,estado);
+    if ( !*n ) tmp = (Usuarios*) malloc((*n + 1)    * sizeof(Usuarios));
+    else       tmp = (Usuarios*) realloc(tmp,(*n+1) * sizeof(Usuarios));
 
-    switch(n){
-
-        case 1:
-            usuarios[*i].Perfil_usuario = 0;
-            break;
-
-        case 2:
-            usuarios[*i].Perfil_usuario = 1;
-            break;
-        default:
-            puts("ERROR: La opcion introducida no es valida");
-    }
-
-    puts("User de inicio de sesión: ");
-    scanf("%15s", usrf);
-    flush_in();
-    usuarios[*i].User = usrf;
-
-    puts("Contrasña: ");
-    scanf("%8s", login);
-    flush_in();
-    usuarios[*i].Login = login;
-
-    do{
-        puts("Seleccione el estado del usuario:");
-        puts("1) Bloqueado");
-        puts("2) Activo");
-        scanf("%d",&n);
-        flush_in();
-    }while(n<1 || n>2);
-
-    switch(n){
-
-        case 1:
-            usuarios[*i].Estado=0;
-            break;
-
-        case 2:
-            usuarios[*i].Estado=1;
-            break;
-
-        default:
-            puts("ERROR: La opcion introducida no es valida");
-    }
-
-    puts("***REALIZADO CON EXITO***");
+    tmp[*n].Id_usuario     = atoi(id);
+    tmp[*n].Nomb_usuario   = nomb;
+    tmp[*n].Localidad      = locld;
+    tmp[*n].Perfil_usuario = perfilUsuarioAint(&perfil);
+    tmp[*n].User           = usr;
+    tmp[*n].Login          = log;
+    tmp[*n].Estado         = estadoUsuario(&estado);
+    (*n)++;
+    free(id);
+    free(perfil);
+    free(estado);
+  }
+  fclose(file);
+  return tmp;
 }
 
-void op2_usuarios(Usuarios *usuarios, int *j){
+void saveUsuarios(int n ,Usuarios * usuarios)
+{
+    FILE* file = fopen("ficheros/Usuarios.txt","w+");
 
-    int index=0, id_user = 0, i;
-    char resp;
+    if (file==NULL) exit(1);
 
-    do{
-        if(index<0) puts("Id incorrecto, vuelva a intentarlo");
-        else puts("Qué usuario desea eliminar? Introduce su User de sistema: ");
-        scanf("%d", &id_user);
-        flush_in();
+    int i;
+    for ( i = 0 ; i < n; ++i ){
+        fprintf(file,"%04d-%s-%s-%s-%s-%s-%s\n",
+                usuarios[i].Id_usuario,
+                usuarios[i].Nomb_usuario,
+                usuarios[i].Localidad,
+                Perfil[usuarios[i].Perfil_usuario],
+                usuarios[i].User,
+                usuarios[i].Login,
+                Estado_U[usuarios[i].Estado]);
+        free(usuarios[i].Nomb_usuario);
+        free(usuarios[i].Login);
+        free(usuarios[i].User);
+        free(usuarios[i].Localidad);
+    }
+    fclose(file);
+    puts("Usuarios Guardados");
+}
 
-        index = buscarUsuarioIndex(usuarios, *j, id_user);
-    }while(index<0);
-
-    printf("Se va a eliminar el user %d. %cEstá seguro%c(s/n)", id_user, 168, 160);
-    scanf("%c", &resp);
-    flush_in();
-
-    if(resp == 's'){
-        eliminarUsuario(usuarios, j, index);
-        printf("\nSe ha eliminado el user correctamente\n");
-    }else{
-        printf("\nSe ha cancelado la eliminaci%cn del user\n", 162);
-        exit(1);
+void perfilUsuario(vUsuarios* v,int userIndex)
+{
+    char resp = 0;
+    printf("%d-%s-%s-%s-%s-%s-%s\n",
+               v->user[userIndex].Id_usuario,
+               v->user[userIndex].Nomb_usuario,
+               v->user[userIndex].Localidad,
+               Perfil[v->user[userIndex].Perfil_usuario],
+               v->user[userIndex].User,
+               v->user[userIndex].Login,
+              Estado_U[v->user[userIndex].Estado]);
+    printf("Desea modificar algun dato S/N\n");
+    scanf("%c\n",&resp);
+    if(resp == 's' || resp =='S')
+    {
+      puts(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña");
     }
 }
 
-void op3_usuarios(Usuarios *usuarios, int num_usuarios){
+void editarNombreUsuario(vUsuarios* v,int uIndex)
+{
 
-    int id_user, index=0, n=0;
-
-    do{
-        if(index<0) puts("Id incorrecto, vuelva a intentarlo");
-        else puts("Qué usuario desea eliminar? Introduce su User de sistema: ");
-        scanf("%d", &id_user);
-        flush_in();
-
-        index = buscarUsuarioIndex(usuarios, num_usuarios, id_user);
-    }while(index<0);
-
-    printf("Se va a modificar el id %d...", index);
-
-    puts("Id del nuevo usuario: ");
-    scanf("%d", &usuarios[index].Id_usuario);
-    flush_in();
-
-    puts("Nombre del nuevo usuario: ");
-    scanf("%20s", usuarios[index].Nomb_usuario);
-    flush_in();
-
-    puts("Localidad: ");
-    scanf("%20s", usuarios[index].Localidad);
-    flush_in();
-
-    do{
-        puts("Seleccione el perfil del usuario:");
-        puts("1) Administrador");
-        puts("2) Usuario");
-        scanf("%d",&n);
-        flush_in();
-    }while(n<1 || n>2);
-
-    switch(n){
-
-        case 1:
-            usuarios[index].Perfil_usuario = 0;
-            break;
-
-        case 2:
-            usuarios[index].Perfil_usuario = 1;
-            break;
-
-        default:
-            puts("ERROR: La opcion introducida no es valida");
-    }
-
-    puts("User de inicio de sesión: ");
-    scanf("%15s", usuarios[index].User);
-    flush_in();
-
-    puts("Contrasña: ");
-    scanf("%8s", usuarios[index].Login);
-    flush_in();
-
-    do{
-        puts("Seleccione el estado del usuario:");
-        puts("1) Bloqueado");
-        puts("2) Activo");
-        scanf("%d",&n);
-        flush_in();
-    }while(n<1 || n>2);
-
-    switch(n){
-
-        case 1:
-            usuarios[index].Estado=0;
-            break;
-
-        case 2:
-            usuarios[index].Estado=1;
-            break;
-
-        default:
-            puts("ERROR: La opcion introducida no es valida");
-    }
 }
 
-void op4_usuarios(Usuarios *usuarios, int num_usuarios){
+void editarLocalidadUsuario(vUsuarios* v,int uIndex)
+{
 
-    for( int i = 0; i < num_usuarios; i++ ){
-        printf("%d-%s-%s-%s-%s-%s-%s\n",
-               usuarios[i].Id_usuario,
-               usuarios[i].Nomb_usuario,
-               usuarios[i].Localidad,
-               Perfil[usuarios[i].Perfil_usuario],
-               usuarios[i].User,
-               usuarios[i].Login,
-               Estado_U[usuarios[i].Estado]);
-    }
+}
+void editarLoginUsuario(vUsuarios* v,int uIndex)
+{
+
+}
+void editarPassUsuario(vUsuarios* v,int uIndex)
+{
+
+}
+void eliminarUsuario(vUsuarios* v,int uIndex)
+{
+  Usuarios* tmp;
+  tmp = (Usuarios *) malloc((v->tam-1)*sizeof(Usuarios));
+  memcpy(tmp,v->user,(uIndex+1)*sizeof(Usuarios));
+  memcpy(tmp + uIndex,(v->user)+(uIndex+1),(v->tam-uIndex)*sizeof(Usuarios));
+  //memmove(&v->user[uIndex],&v->user[uIndex+1],(v->tam-uIndex-1)*sizeof(Usuarios));
+  for (int i = 0 ; i < v->tam; ++i ){
+    free(v->user[i].Nomb_usuario);
+    free(v->user[i].Login);
+    free(v->user[i].User);
+    free(v->user[i].Localidad);
+  }
+  free(v->user);
+  v->user=tmp;
+  --v->tam;
 }

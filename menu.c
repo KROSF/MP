@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "menu.h"
 
 void menuUser(Usuarios** usuarios,int * n,int id){
+    system("clear");
     int i=strlen((*usuarios)[id].Nomb_usuario),j,espacio,opc;
     if(i%2==0){
         printf("  ______________________\n");
@@ -70,7 +72,7 @@ void menuUser(Usuarios** usuarios,int * n,int id){
 
 
 void menuAdmin(Usuarios** usuarios,int * n,int id){
-
+    system("clear");
     int i=strlen((*usuarios)[id].Nomb_usuario),j,espacio,opc; // TAMAÑO TEXTO
     if(i%2==0){
         printf("  ______________________\n");
@@ -111,7 +113,7 @@ void menuAdmin(Usuarios** usuarios,int * n,int id){
     }
 
     do{
-        printf("Seleccione una opcion: ");
+        printf("\nSeleccione una opcion: ");
         scanf("%d",&opc);
         switch(opc) {
             case 1:
