@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "viajes.h"
+#include "utilidades.h"
 static const char * Viaje[] = {"vuelta","ida"};
 static const char * Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
 static int estadoViaje(char** c);
@@ -140,7 +141,7 @@ int generarIdViaje(vViajes* v)
     return v->viajes[v->tam_v-1].Id_viaje + 1;
 }
 
-int* pasosViajes(vViajes* v,int id_viaje,int * j)
+int* pasosViajes(vViajes* v,int id_viaje,int* j)
 {
     int* tmp = NULL;
     *j = 0;
@@ -195,4 +196,193 @@ void eliminarViajes(vViajes* v, int id_viaje)
         free(pasos);
     }
     else printf("No existe el viaje: %d\n",id_viaje);
+}
+
+void tipoViaje(vViajes* v, int vIndex)
+{
+    int tmp = 0;
+    do{
+        puts("0) Vuelta");
+        puts("1) Ida");
+        puts("Seleccione tipo de viaje: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+    }while(tmp < 0 && tmp > 1);
+    v->viajes[vIndex].Viaje = tmp;
+}
+
+void pedirPaso(vViajes* v,int vIndex)
+{
+    printf("Ingrese Poblacion: ");
+    scanf("%20[^\n]",v->pasos[vIndex].Poblacion);
+    flush_in();
+}
+
+void addPaso(vViajes* v,int id_viaje)
+{
+    v->pasos = (Pasos*) realloc(v->pasos,(v->tam_p+1)  * sizeof(Pasos));
+    v->pasos[v->tam_p].Poblacion = (char*) malloc(LOCAL* sizeof(char));
+    v->pasos[v->tam_p].Id_viaje = id_viaje;
+    pedirPaso(v,v->tam_p);
+    ++v->tam_p;
+}
+
+void preguntarImporte(vViajes* v,int vIndex)
+{
+    printf("Ingrese Importe Total: ");
+    scanf("%f[^\n]",&v->viajes[vIndex].Importe);
+    flush_in();
+}
+
+void preguntarFechaHora(vViajes* v,int vIndex)
+{
+    int fflag = 0, hflag = 0;
+    do{
+        printf("Fecha del viaje: ");
+        scanf("%10[^\n]", v->viajes[vIndex].F_inic);
+        flush_in();                             //
+        fflag = validarFecha(v->viajes[vIndex].F_inic);
+    }while(fflag < 0);
+
+    do {
+        puts("Hora de incio: ");
+        scanf("%5[^\n]", v->viajes[vIndex].H_inic);
+        flush_in();
+        hflag = validarHora(v->viajes[vIndex].H_inic, fflag);
+    }while(hflag == 0);
+
+    do {
+        puts("Hora de fin: ");
+        scanf("%5[^\n]", v->viajes[vIndex].H_fin);
+        flush_in();
+        hflag = validarHora(v->viajes[vIndex].H_fin,0);
+    }while(hflag == 0);
+}
+
+void publicarViaje(vViajes* v,vVehiculos* vve,char* mat)
+{
+    int flag = 0, index = buscarIndexVehiculo(vve,mat);
+    char resp = 0;
+    if(index > -1){
+        v->viajes = (Viajes *) realloc(v->viajes,(v->tam_v+1) * sizeof(Viajes));
+        v->viajes[v->tam_v].Id_mat = (char*) malloc(ID_MAT    * sizeof(char));
+        v->viajes[v->tam_v].F_inic = (char*) malloc(FECHA     * sizeof(char));
+        v->viajes[v->tam_v].H_inic = (char*) malloc(HORA      * sizeof(char));
+        v->viajes[v->tam_v].H_fin  = (char*) malloc(HORA      * sizeof(char));
+        v->viajes[v->tam_v].Id_viaje = generarIdViaje(v);
+        strcpy(v->viajes[v->tam_v].Id_mat,mat);
+        v->viajes[v->tam_v].Plazas_libre = vve->vehi[index].Num_plazas;
+        v->viajes[v->tam_v].Estado = 1;
+        tipoViaje(v,v->tam_v);
+        printf("Acontinuacion ingrese poblaciones por donde pasa (Max 10)\n");
+        do{
+            addPaso(v,v->viajes[v->tam_v].Id_viaje);
+            printf("Desea agregar otra poblacion S/N\n");
+            scanf("%1c[^\n]",&resp);
+            flush_in();
+            ++flag;
+        }while( flag < 10 && (resp == 's' || resp =='S'));
+        preguntarImporte(v,v->tam_v);
+        preguntarFechaHora(v,v->tam_v);
+        ++v->tam_v;
+    }
+}
+
+void modificarPlazas(vViajes* v,vVehiculos* vve,int index,int indexv)
+{
+    float tmp = 0;
+    do{
+        printf("Ingrese Plazas: ");
+        scanf("%f[^\n]",&tmp);
+        flush_in();
+    }while(tmp > vve->vehi[indexv].Num_plazas && tmp < 0.0);
+    v->viajes[index].Plazas_libre = tmp;
+}
+
+void modificarEstadoViaje(vViajes* v,int index)
+{
+    do{
+        printf(" 0) cerrado\n 1) abierto\n 2) iniciado\n 3) finalizado\n 4) anulado");
+        printf("Ingrese Estado: ");
+        scanf("%1d[^\n]",&v->viajes[index].Estado);
+        flush_in();
+    }while(v->viajes[index].Estado > 0 && v->viajes[index].Estado < 4);
+}
+
+void modificarPaso(vViajes* v,int id_viaje)
+{
+    int size_p = 0,resp = 0;
+    int* pasos = pasosViajes(v,id_viaje,&size_p);
+    for(int i = 0;i < size_p;++i)
+    {
+        printf(" %d. %s\n",i+1,v->pasos[pasos[i]].Poblacion);
+    }
+    printf("Que paso desea modificar: \n");
+    scanf("%d[^\n]",&resp);
+    flush_in();
+    --resp;
+    if(resp >= 0 && resp < size_p)
+    {
+        eliminarPaso(v,pasos[resp]);
+    }
+    free(pasos);
+}
+
+void modificarPasos(vViajes* v,int id_viaje)
+{
+    char resp = 0;
+    modificarPaso(v,id_viaje);
+    do{
+        printf("Desea modificar otro paso S/N\n");
+        scanf("%c[^\n]",&resp);
+        if(resp == 's' || resp == 'S') modificarPaso(v,id_viaje);
+    }while(resp != 's' || resp != 'S');
+}
+
+void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje)
+{
+    int tmp = 0, index = buscarIndexViajes(v,id_viaje);
+    int indexv = buscarIndexVehiculo(ve,v->viajes[index].Id_mat);
+    if(index > -1 && v->viajes[index].Estado == 1 &&
+        v->viajes[index].Plazas_libre == ve->vehi[indexv].Num_plazas )
+    {
+        printf(" 1. Fecha y Hora\n 2. Plazas\n 3. Tipo Viaje\n 4. Importe\n 5. Estado\n 6. Pasos\n");
+        printf("Seleccione una opcion: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+        switch (tmp) {
+            case 1:preguntarFechaHora(v,index);break;
+            case 2:modificarPlazas(v,ve,index,indexv);break;
+            case 3:tipoViaje(v,index);break;
+            case 4:preguntarImporte(v,index);break;
+            case 5:modificarEstadoViaje(v,index);break;
+            case 6:modificarPasos(v,id_viaje);break;
+            default:printf("Opcion no valida no se hace nada.\n");break;
+        }
+    }
+}
+
+void listarViajesAdmin(vViajes* v)
+{
+    for(int i = 0;i<v->tam_v;++i)
+    {
+        printf("%06d-%s-%s-%s-%s-%d-%s-%.2f€-%s\n",
+        v->viajes[i].Id_viaje,
+        v->viajes[i].Id_mat,
+        v->viajes[i].F_inic,
+        v->viajes[i].H_inic,
+        v->viajes[i].H_fin,
+        v->viajes[i].Plazas_libre,
+        Viaje[v->viajes[i].Viaje],
+        v->viajes[i].Importe,
+        Estado_Vi[v->viajes[i].Estado]);
+        int size_p = 0;
+        int* pasos = pasosViajes(v,v->viajes[i].Id_viaje,&size_p);
+        if(size_p) printf("Que pasa por:\n");
+        for(int j = 0;j < size_p;++j)
+        {
+            printf(" * %s.\n",v->pasos[pasos[j]].Poblacion);
+        }
+        free(pasos);
+    }
 }

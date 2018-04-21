@@ -8,7 +8,7 @@
 #define IMPORTE 5
 #define ESTADO_V 11
 #define LOCAL 21
-
+#include "vehiculos.h"
 typedef struct{
     /*@{*/
     int Id_viaje;/**< Identificador unico de viaje */
@@ -43,8 +43,19 @@ void saveViajes(int n,Viajes* viajes);
 Pasos* initPasos(int* n);
 void savePasos(int n,Pasos* pasos);
 int generarIdViaje(vViajes* v);
-void publicar(vViajes* v);
+int buscarIndexViajes(vViajes* v,int id_viaje);
+void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);
+void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);
+void modificarPasos(vViajes* v,int index);
+void mostrarPasos(vViajes* v, int index);
+void mostrarPaso(vViajes* v, int index);
 int* pasosViajes(vViajes* v,int id_viaje,int* j);
 void eliminarViaje(vViajes* v,int id_viaje);
 void eliminarViajes(vViajes* v,int id_viaje);
+void tipoViaje(vViajes* v, int vIndex);
+void addPasos(vViajes* v,int id_viaje);
+void pedirPaso(vViajes* v,int vIndex);
+void preguntarImporte(vViajes* v,int vIndex);
+void preguntarFechaHora(vViajes* v,int vIndex);
+void listarViajesAdmin(vViajes* v);
 #endif

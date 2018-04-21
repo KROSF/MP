@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "usuarios.h"
+#include "viajes.h"
 
-void menuUser(vUsuarios* v,int id){
+void menuUser(vUsuarios* v,vIncidencias* vi,vViajes* vv,vVehiculos* vve,int id){
     system("clear");
     int i=strlen(v->user[id].Nomb_usuario),j,espacio,opc;
     if(i%2==0){
@@ -71,7 +72,7 @@ void menuUser(vUsuarios* v,int id){
 }
 
 
-void menuAdmin(vUsuarios* v,int id){
+void menuAdmin(vUsuarios* v,vIncidencias* vi,vViajes* vv,vVehiculos* vve,int id){
     system("clear");
     int i=strlen(v->user[id].Nomb_usuario),j,espacio,opc; // TAMAÑO TEXTO
     if(i%2==0){
@@ -118,7 +119,7 @@ void menuAdmin(vUsuarios* v,int id){
         switch(opc) {
             case 1:
                 //usuariosadmin();
-                printf("usuariosadmin");
+                publicarViaje(vv,vve,"7886JJP");
                 break;
             case 2:
                 //vehiculosadmin();
@@ -126,7 +127,7 @@ void menuAdmin(vUsuarios* v,int id){
                 break;
             case 3:
                 //viajesadmin();
-                printf("viajesadmin");
+                listarViajesAdmin(vv);
                 break;
             case 4:
                 //incidenciasadmin();
