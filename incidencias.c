@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "incidencias.h"
+#include "utilidades.h"
 /**
  * Varible global para obtener el estado de una incidencia
  */
@@ -41,7 +42,7 @@ Incidencias* initIncidencias(int* n)
         tmp[*n].Id_viaje         = atoi(id_viaje);
         tmp[*n].Id_us_registra   = atoi(id_us_registra);
         tmp[*n].Id_us_incidencia = atoi(id_us_incidencia);
-        tmp[*n].Desc_indicencia  = desc_inicidencia;
+        tmp[*n].Desc_incidencia  = desc_inicidencia;
         tmp[*n].Est_incidencia   = estadoIncidencia(&estado);
 
         free(id_viaje);
@@ -65,9 +66,9 @@ void saveIncidencias(int n,Incidencias* incidencias)
         incidencias[i].Id_viaje,
         incidencias[i].Id_us_registra,
         incidencias[i].Id_us_incidencia,
-        incidencias[i].Desc_indicencia,
+        incidencias[i].Desc_incidencia,
         Estado_I[incidencias[i].Est_incidencia]);
-        free(incidencias[i].Desc_indicencia);
+        free(incidencias[i].Desc_incidencia);
     }
     puts("Incidencias Guardadas");
 }
@@ -81,4 +82,25 @@ int inicidenciasUsuario(vIncidencias* v,int userId)
             ++tmp;
     }
     return tmp;
+}
+
+int idRegistar(vIncidencias* v,vViajes* vv,int id_viaje,int iIndex)
+{
+    int index = buscarIndexViajes(vv,id_viaje);
+    if(index > -1)
+    {
+        printf("Ingrese id_usuario que registra la incidencia: ");
+        scanf("%4d[^\n]",&v->inci[iIndex].Id_us_registra);
+        flush_in();
+        return 1;
+    }
+    else return 0;
+}
+
+void crearIncidencias(vIncidencias* v,vViajes vv, int id_viaje)
+{
+    v->inci = (Incidencias*)realloc(v->inci,(v->tam+1)       * sizeof(Incidencias));
+    v->inci[v->tam].Desc_incidencia = (char *)malloc(DES_INCI * sizeof(char));
+    v->inci[v->tam].Est_incidencia = 1;
+    v->inci[v->tam].Id_viaje = id_viaje;
 }

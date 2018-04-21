@@ -28,8 +28,7 @@ int validarHora(char* cadena,int hoy)
   if(sscanf(cadena,"%2d:%2d",&h,&m)!=2) return 0;
   if(h >= 0 && h < 24 && m >= 0 && m < 60){
 	if(hoy == 1 && (h > t2->tm_hour || (h == t2->tm_hour && m > t2->tm_min))) return 1;
-	else return 1;
-  }
-
+	if(hoy == 0) return 1;
+}
   return 0;
 }
