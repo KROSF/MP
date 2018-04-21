@@ -1,14 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
 #include "utilidades.h"
 void flush_in() {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 }
 
-void eliminarUsuario(Usuarios* usuarios,int* n,int index)
+/*void eliminarUsuario(Usuarios* usuarios,int* n,int index)
 {
   memmove(&usuarios[index], &usuarios[index+1], (*n-index-1)*sizeof(Usuarios));
   (*n)--;
@@ -127,4 +124,4 @@ int validarHora(char* cadena,int hoy)
 }
 
 int generarIdViaje(Viajes* viajes,int n)
-{ return viajes[n].Id_viaje + 1; }
+{ return viajes[n].Id_viaje + 1; }*/

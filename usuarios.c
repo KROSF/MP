@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "usuarios.h"
+#include "utilidades.h"
+static const char* Estado_U[] = {"bloqueado","activo"};
+/**
+ * Varible global para obtener el perfil de un usuario
+ */
+static const char * Perfil[] = {"administrador","usuario"};
 /**
  * Estado Usuario a entero
  * @param c referencia a la cadena
@@ -92,7 +98,7 @@ void saveUsuarios(int n ,Usuarios * usuarios)
 
 void perfilUsuario(vUsuarios* v,int userIndex)
 {
-    char resp = 0;
+    char resp = 0;int tmp = 0;
     printf("%d-%s-%s-%s-%s-%s-%s\n",
                v->user[userIndex].Id_usuario,
                v->user[userIndex].Nomb_usuario,
@@ -102,44 +108,161 @@ void perfilUsuario(vUsuarios* v,int userIndex)
                v->user[userIndex].Login,
               Estado_U[v->user[userIndex].Estado]);
     printf("Desea modificar algun dato S/N\n");
-    scanf("%c\n",&resp);
+    scanf("%1c[^\n]",&resp);
+    flush_in();
     if(resp == 's' || resp =='S')
     {
-      puts(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña");
+      printf(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña\n");
+      printf("seleccione una opcion: ");
+      scanf("%1d[^\n]",&tmp);
+      flush_in();
+      switch (tmp) {
+          case 1:
+          nombreUsuario(v,userIndex);
+          break;
+          case 2:
+          localidadUsuario(v,userIndex);
+          break;
+          case 3:
+          loginUsuario(v,userIndex);
+          break;
+          case 4:
+          passUsuario(v,userIndex);
+          break;
+          default:
+          printf("Opcion no valida no se hace nada.\n");
+          break;
+      }
     }
 }
 
-void editarNombreUsuario(vUsuarios* v,int uIndex)
+void nombreUsuario(vUsuarios* v,int uIndex)
 {
-
+    printf("Ingrese nombre: ");
+    scanf("%20[^\n]",v->user[uIndex].Nomb_usuario);
+    flush_in();
 }
 
-void editarLocalidadUsuario(vUsuarios* v,int uIndex)
+void localidadUsuario(vUsuarios* v,int uIndex)
 {
-
+    printf("Ingrese localidad: ");
+    scanf("%20[^\n]",v->user[uIndex].Localidad);
+    flush_in();
 }
-void editarLoginUsuario(vUsuarios* v,int uIndex)
+void passUsuario(vUsuarios* v,int uIndex)
 {
-
+    printf("Ingrese contraseña: ");
+    scanf("%8[^\n]",v->user[uIndex].Login);
+    flush_in();
 }
-void editarPassUsuario(vUsuarios* v,int uIndex)
+void loginUsuario(vUsuarios* v,int uIndex)
 {
-
+    printf("Ingrese nombre de usuario: ");
+    scanf("%5[^\n]",v->user[uIndex].User);
+    flush_in();
 }
-void eliminarUsuario(vUsuarios* v,int uIndex)
+void bajaUsuario(vUsuarios* v,int uIndex)
 {
-  Usuarios* tmp;
-  tmp = (Usuarios *) malloc((v->tam-1)*sizeof(Usuarios));
-  memcpy(tmp,v->user,(uIndex+1)*sizeof(Usuarios));
-  memcpy(tmp + uIndex,(v->user)+(uIndex+1),(v->tam-uIndex)*sizeof(Usuarios));
-  //memmove(&v->user[uIndex],&v->user[uIndex+1],(v->tam-uIndex-1)*sizeof(Usuarios));
-  for (int i = 0 ; i < v->tam; ++i ){
-    free(v->user[i].Nomb_usuario);
-    free(v->user[i].Login);
-    free(v->user[i].User);
-    free(v->user[i].Localidad);
-  }
-  free(v->user);
-  v->user=tmp;
+  free(v->user[uIndex].Nomb_usuario);
+  free(v->user[uIndex].Localidad);
+  free(v->user[uIndex].User);
+  free(v->user[uIndex].Login);
+  memmove(&v->user[uIndex],&v->user[uIndex+1],(v->tam-uIndex-1)*sizeof(Usuarios));
   --v->tam;
+}
+
+int buscarIndexUsuario(vUsuarios* v,int userId)
+{
+    for(int i = 0; i < v->tam ; ++i)
+    {
+      if(userId == v->user[i].Id_usuario) return i;
+    }
+    return -1;
+}
+
+int generarIdUsuario(vUsuarios* v)
+{
+    return v->user[v->tam-1].Id_usuario + 1;
+}
+
+void modificarPerfilUsuario(vUsuarios* v,int userId)
+{
+    int tmp = 0;
+    do{
+        puts("Seleccione el perfil: ");
+        puts("0) Administrador");
+        puts("1) Usuario");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+    }while(tmp < 0 || tmp > 1);
+    v->user[userId].Perfil_usuario = tmp;
+}
+
+void modificarEstadoUsuario(vUsuarios* v,int userId)
+{
+    int tmp = 0;
+    do{
+        puts("Seleccione estado: ");
+        puts("0) Bloqueado");
+        puts("1) Activo");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+    }while(tmp < 0 || tmp > 1);
+    v->user[userId].Perfil_usuario = tmp;
+}
+
+void altaUsuario(vUsuarios* v)
+{
+    v->user = (Usuarios*) realloc(v->user,(v->tam+1) * sizeof(Usuarios));
+    v->user[v->tam].Nomb_usuario   = (char*) malloc(NOMB      * sizeof(char));
+    v->user[v->tam].Localidad      = (char*) malloc(LOCAL     * sizeof(char));
+    v->user[v->tam].User           = (char*) malloc(USR       * sizeof(char));
+    v->user[v->tam].Login          = (char*) malloc(LOGINPASS * sizeof(char));
+    v->user[v->tam].Perfil_usuario = 1;
+    v->user[v->tam].Estado         = 1;
+    v->user[v->tam].Id_usuario     = generarIdUsuario(v);
+    nombreUsuario(v,v->tam);
+    localidadUsuario(v,v->tam);
+    loginUsuario(v,v->tam);
+    passUsuario(v,v->tam);
+    ++v->tam;
+}
+
+void modificarUsuario(vUsuarios* v,int userId)
+{
+    int tmp = 0,index = buscarIndexUsuario(v,userId);
+    if(index > -1)
+    {
+        printf(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña\n");
+        printf(" 5. Perfil\n 6. Estado");
+        printf("seleccione una opcion: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+        switch (tmp) {
+            case 1:nombreUsuario(v,userId);break;
+            case 2:localidadUsuario(v,userId);break;
+            case 3:loginUsuario(v,userId);break;
+            case 4:passUsuario(v,userId);break;
+            case 5:modificarPerfilUsuario(v,userId);break;
+            case 6:modificarEstadoUsuario(v,userId);break;
+            default:printf("Opcion no valida no se hace nada.\n");break;
+        }
+    }
+    else printf("El usuario buscado no existe");
+}
+
+void listarUsuarios(vUsuarios* u,vIncidencias* vi)
+{
+    for(int i = 0;i< u->tam;++i)
+    {
+        printf("%d-%s-%s-%s-%s-%s-%s ",
+                 u->user[i].Id_usuario,
+                 u->user[i].Nomb_usuario,
+                 u->user[i].Localidad,
+                 Perfil[u->user[i].Perfil_usuario],
+                 u->user[i].User,
+                 u->user[i].Login,
+                Estado_U[u->user[i].Estado]);
+        printf("Nº incidencias: %d\n",inicidenciasUsuario(vi,u->user[i].Id_usuario));
+    }
 }

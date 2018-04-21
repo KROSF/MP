@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "menu.h"
 
-void menuUser(Usuarios** usuarios,int * n,int id){
+void menuUser(vUsuarios* v,int id){
     system("clear");
-    int i=strlen((*usuarios)[id].Nomb_usuario),j,espacio,opc;
+    int i=strlen(v->user[id].Nomb_usuario),j,espacio,opc;
     if(i%2==0){
         printf("  ______________________\n");
         printf(" |                      |\n |");
@@ -19,7 +19,7 @@ void menuUser(Usuarios** usuarios,int * n,int id){
     for(j=0;j<espacio;j++){
         printf(" ");
     }
-    printf("%s",(*usuarios)[id].Nomb_usuario);
+    printf("%s",v->user[id].Nomb_usuario);
     for(j=0;j<espacio;j++){
         printf(" ");
     }
@@ -71,9 +71,9 @@ void menuUser(Usuarios** usuarios,int * n,int id){
 }
 
 
-void menuAdmin(Usuarios** usuarios,int * n,int id){
+void menuAdmin(vUsuarios* v,int id){
     system("clear");
-    int i=strlen((*usuarios)[id].Nomb_usuario),j,espacio,opc; // TAMAÑO TEXTO
+    int i=strlen(v->user[id].Nomb_usuario),j,espacio,opc; // TAMAÑO TEXTO
     if(i%2==0){
         printf("  ______________________\n");
         printf(" |                      |\n |");
@@ -87,7 +87,7 @@ void menuAdmin(Usuarios** usuarios,int * n,int id){
     for(j=0;j<espacio;j++){
         printf(" ");
     }
-    printf("%s",(*usuarios)[id].Nomb_usuario);
+    printf("%s",v->user[id].Nomb_usuario);
     for(j=0;j<espacio;j++){
         printf(" ");
     }

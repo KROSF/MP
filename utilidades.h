@@ -1,8 +1,8 @@
 #ifndef  UTILIDADES_H
 #define UTILIDADES_H
-#include "tipos.h"
 void flush_in();
-void eliminarUsuario(Usuarios* usuarios,int* ,int index);
+
+/*//void eliminarUsuario(Usuarios* usuarios,int* ,int index);
 void eliminarVehiculos(Vehiculos* vehiculos,int* n,int index);
 void eliminarViajes(Viajes* viajes,int* n,int index);
 void eliminarPasos(Pasos* pasos,int* n,int index);
@@ -15,5 +15,5 @@ int buscarPasosIndex(Pasos* pasos,int n,int id_viaje);
 int buscarIncidenciasIndex(Incidencias* incidencias,int n ,int id_viaje);
 
 int validarFecha(char* cadena);
-int validarHora(char* cadena,int hoy);
+int validarHora(char* cadena,int hoy);*/
 #endif

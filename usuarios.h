@@ -1,6 +1,5 @@
 #ifndef USUARIOS_H
 #define USUARIOS_H
-
 #define ID_USUARIO 5
 #define USR 6
 #define LOGINPASS 9
@@ -8,11 +7,7 @@
 #define PERFIL 14
 #define NOMB 21
 #define LOCAL 21
-static const char* Estado_U[] = {"bloqueado","activo"};
-/**
- * Varible global para obtener el perfil de un usuario
- */
-static const char * Perfil[] = {"administrador","usuario"};
+#include "incidencias.h"
 typedef struct{
     /*@{*/
     int Id_usuario; /**< Identificador unico de usuario */
@@ -29,13 +24,21 @@ typedef struct{
   int tam;
 }vUsuarios;
 Usuarios* initUsuarios(int * n);
-void saveUsuarios(int n ,Usuarios* usuarios);
+void listarUsuarios(vUsuarios* u,vIncidencias* i);
+int generarIdUsuario(vUsuarios* v);
+int buscarIndexUsuario(vUsuarios* v,int userId);
+void altaUsuario(vUsuarios* v);
+void bajaUsuario(vUsuarios* v,int uIndex);
+void localidadUsuario(vUsuarios* v,int uIndex);
+void loginUsuario(vUsuarios* v,int uIndex);
+void nombreUsuario(vUsuarios* v,int uIndex);
+void passUsuario(vUsuarios* v,int uIndex);
 void perfilUsuario(vUsuarios* v,int userId);
-void editarNombreUsuario(vUsuarios* v,int uIndex);
-void editarLocalidadUsuario(vUsuarios* v,int uIndex);
-void editarLoginUsuario(vUsuarios* v,int uIndex);
-void editarPassUsuario(vUsuarios* v,int uIndex);
-void eliminarUsuario(vUsuarios* v,int uIndex);
+void saveUsuarios(int n ,Usuarios* usuarios);
+void modificarUsuario(vUsuarios* v,int userId);
+void modificarPerfilUsuario(vUsuarios* v,int userId);
+void modificarEstadoUsuario(vUsuarios* v,int userId);
+
 
 
 
