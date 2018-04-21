@@ -42,4 +42,9 @@ Viajes* initViajes(int* n);
 void saveViajes(int n,Viajes* viajes);
 Pasos* initPasos(int* n);
 void savePasos(int n,Pasos* pasos);
+int generarIdViaje(vViajes* v);
+void publicar(vViajes* v);
+int* pasosViajes(vViajes* v,int id_viaje,int* j);
+void eliminarViaje(vViajes* v,int id_viaje);
+void eliminarViajes(vViajes* v,int id_viaje);
 #endif

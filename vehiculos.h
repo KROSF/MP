@@ -18,4 +18,10 @@ typedef struct{
 }vVehiculos;
 Vehiculos* initVehiculos(int* n);
 void saveVehiculos(int n ,Vehiculos* vehiculos);
+void altaVehiculos(vVehiculos* v,int id);
+void bajaVehiculos(vVehiculos* v,char* mat);
+int buscarIndexVehiculo(vVehiculos* v,char* mat);
+void eliminarVehiculo(vVehiculos* v,int vIndex);
+void modificarVehiculo(vVehiculos* v,char* mat);
+void listarVehiculos(vVehiculos* v);
 #endif

@@ -1,7 +1,9 @@
 #ifndef  UTILIDADES_H
 #define UTILIDADES_H
 void flush_in();
-
+int esMinuscula(char c);
+int aMayuscula(char c);
+void stringAmayuscula(char* cad);
 /*//void eliminarUsuario(Usuarios* usuarios,int* ,int index);
 void eliminarVehiculos(Vehiculos* vehiculos,int* n,int index);
 void eliminarViajes(Viajes* viajes,int* n,int index);

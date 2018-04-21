@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "usuarios.h"
 
 void menuUser(vUsuarios* v,int id){
     system("clear");
@@ -49,8 +50,7 @@ void menuUser(vUsuarios* v,int id){
         flush_in();
     switch(opc) {
         case 1:
-            //perfiluser();
-            printf("Perfil");
+            perfilUsuario(v,id);
             break;
         case 2:
             //vehiculosuser();

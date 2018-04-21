@@ -4,6 +4,17 @@ void flush_in() {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 }
+int esMinuscula(char c) { return (c >= 'a' && c <= 'z') ? 1 : 0 ;}
+
+int aMayuscula(char c) { return c - 32;}
+
+void stringAmayuscula(char* cad)
+{
+    for(int index = 0; cad[index] != '\0'; ++index){
+        if(esMinuscula(cad[index]))
+            cad[index] = aMayuscula(cad[index]);
+    }
+}
 
 /*void eliminarUsuario(Usuarios* usuarios,int* n,int index)
 {

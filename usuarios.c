@@ -112,27 +112,17 @@ void perfilUsuario(vUsuarios* v,int userIndex)
     flush_in();
     if(resp == 's' || resp =='S')
     {
-      printf(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña\n");
-      printf("seleccione una opcion: ");
-      scanf("%1d[^\n]",&tmp);
-      flush_in();
-      switch (tmp) {
-          case 1:
-          nombreUsuario(v,userIndex);
-          break;
-          case 2:
-          localidadUsuario(v,userIndex);
-          break;
-          case 3:
-          loginUsuario(v,userIndex);
-          break;
-          case 4:
-          passUsuario(v,userIndex);
-          break;
-          default:
-          printf("Opcion no valida no se hace nada.\n");
-          break;
-      }
+        printf(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña\n");
+        printf("seleccione una opcion: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+        switch (tmp) {
+            case 1:nombreUsuario(v,userIndex);break;
+            case 2:localidadUsuario(v,userIndex);break;
+            case 3:loginUsuario(v,userIndex);break;
+            case 4:passUsuario(v,userIndex);break;
+            default:printf("Opcion no valida no se hace nada.\n");break;
+        }
     }
 }
 

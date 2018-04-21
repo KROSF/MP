@@ -38,18 +38,4 @@ void saveUsuarios(int n ,Usuarios* usuarios);
 void modificarUsuario(vUsuarios* v,int userId);
 void modificarPerfilUsuario(vUsuarios* v,int userId);
 void modificarEstadoUsuario(vUsuarios* v,int userId);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif

@@ -134,3 +134,65 @@ void savePasos(int n,Pasos* pasos)
     fclose(file);
     puts("Pasos Guardados");
 }
+
+int generarIdViaje(vViajes* v)
+{
+    return v->viajes[v->tam_v-1].Id_viaje + 1;
+}
+
+int* pasosViajes(vViajes* v,int id_viaje,int * j)
+{
+    int* tmp = NULL;
+    *j = 0;
+    for(int i = 0; i < v->tam_p;++i){
+        if(id_viaje == v->pasos[i].Id_viaje)
+        {
+            tmp = (int *) realloc(tmp,(*j+1) * sizeof(int));
+            tmp[(*j)++] = i;
+        }
+    }
+    return tmp;
+}
+
+int buscarIndexViajes(vViajes* v,int id_viaje)
+{
+    for(int i = 0; i < v->tam_v ; ++i)
+    {
+      if(id_viaje == v->viajes[i].Id_viaje) return i;
+    }
+    return -1;
+}
+
+void eliminarViaje(vViajes* v,int vIndex)
+{
+    free(v->viajes[vIndex].Id_mat);
+    free(v->viajes[vIndex].F_inic);
+    free(v->viajes[vIndex].H_inic);
+    free(v->viajes[vIndex].H_fin);
+    memmove(&v->viajes[vIndex],&v->viajes[vIndex+1],(v->tam_v-vIndex-1)*sizeof(Viajes));
+    --v->tam_v;
+}
+
+void eliminarPaso(vViajes* v,int vIndex)
+{
+    free(v->pasos[vIndex].Poblacion);
+    memmove(&v->pasos[vIndex],&v->pasos[vIndex+1],(v->tam_p-vIndex-1)*sizeof(Pasos));
+    --v->tam_p;
+}
+
+void eliminarViajes(vViajes* v, int id_viaje)
+{
+    int index = buscarIndexViajes(v,id_viaje);
+    if(index > -1)
+    {
+        eliminarViaje(v,index);
+        int size_p = 0;
+        int* pasos = pasosViajes(v,id_viaje,&size_p);
+        for(int i = 0;i< size_p;++i)
+        {
+            eliminarPaso(v,pasos[i]);
+        }
+        free(pasos);
+    }
+    else printf("No existe el viaje: %d\n",id_viaje);
+}

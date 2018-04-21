@@ -3,12 +3,11 @@
 #include "acceso.h"
 #include "menu.h"
 int main(){
-
-  vUsuarios user;
-  vIncidencias inci;
-  vViajes viaje;
-  vVehiculos vehi;
-  init(&user,&inci,&viaje,&vehi);
+    vUsuarios user;
+    vIncidencias inci;
+    vViajes viaje;
+    vVehiculos vehi;
+    init(&user,&inci,&viaje,&vehi);
     int *accs = acceder(&user);
     if(accs[1] > -1 )
     {
@@ -16,6 +15,6 @@ int main(){
         else menuUser(&user,accs[0]);
     }
     else printf("No se puede determinar el tipo de usuario\n");
-  save(&user,&inci,&viaje,&vehi);
-  return 0;
+    save(&user,&inci,&viaje,&vehi);
+    return 0;
 }
