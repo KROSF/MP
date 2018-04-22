@@ -152,9 +152,9 @@ int* pasosViajes(vViajes* v,int id_viaje,int* j)
     for(int i = 0; i < v->tam_p;++i){
         if(id_viaje == v->pasos[i].Id_viaje)
         {
-            tmp = (int *) realloc(tmp,(*j+1) * sizeof(int));
-            tmp[*j] = i;
-            ++*j;
+            tmp = (int *) realloc(tmp,((*j)+1) * sizeof(int));
+            tmp[(*j)] = i;
+            (*j)++;
         }
     }
     return tmp;
@@ -196,7 +196,7 @@ void eliminarViajes(vViajes* v, int id_viaje)
         int* pasos = pasosViajes(v,id_viaje,&size_p);
         for(int i = 0;i< size_p;++i)
         {
-            eliminarPaso(v,pasos[i]);
+            eliminarPaso(v,pasos[i]-i);
         }
         free(pasos);
     }
@@ -341,29 +341,31 @@ void modificarPasos(vViajes* v,int id_viaje)
         printf("Desea modificar otro paso S/N\n");
         scanf("%c[^\n]",&resp);
         if(resp == 's' || resp == 'S') modificarPaso(v,id_viaje);
-    }while(resp != 's' || resp != 'S');
+    }while(resp == 's' || resp == 'S');
 }
 
 void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje)
 {
     int tmp = 0, index = buscarIndexViajes(v,id_viaje);
+    if(index > -1){
     int indexv = buscarIndexVehiculo(ve,v->viajes[index].Id_mat);
-    if(index > -1 && v->viajes[index].Estado == 1 &&
-        v->viajes[index].Plazas_libre == ve->vehi[indexv].Num_plazas )
-    {
-        printf(" 1. Fecha y Hora\n 2. Plazas\n 3. Tipo Viaje\n 4. Importe\n 5. Estado\n 6. Pasos\n");
-        printf("Seleccione una opcion: ");
-        scanf("%1d[^\n]",&tmp);
-        flush_in();
-        switch (tmp) {
-            case 1:preguntarFechaHora(v,index);break;
-            case 2:modificarPlazas(v,ve,index,indexv);break;
-            case 3:tipoViaje(v,index);break;
-            case 4:preguntarImporte(v,index);break;
-            case 5:modificarEstadoViaje(v,index);break;
-            case 6:modificarPasos(v,id_viaje);break;
-            default:printf("Opcion no valida no se hace nada.\n");break;
-        }
+        if(v->viajes[index].Estado == 1 &&
+            v->viajes[index].Plazas_libre == ve->vehi[indexv].Num_plazas )
+            {
+                printf(" 1. Fecha y Hora\n 2. Plazas\n 3. Tipo Viaje\n 4. Importe\n 5. Estado\n 6. Pasos\n");
+                printf("Seleccione una opcion: ");
+                scanf("%1d[^\n]",&tmp);
+                flush_in();
+                switch (tmp) {
+                    case 1:preguntarFechaHora(v,index);break;
+                    case 2:modificarPlazas(v,ve,index,indexv);break;
+                    case 3:tipoViaje(v,index);break;
+                    case 4:preguntarImporte(v,index);break;
+                    case 5:modificarEstadoViaje(v,index);break;
+                    case 6:modificarPasos(v,id_viaje);break;
+                    default:printf("Opcion no valida no se hace nada.\n");break;
+                }
+            }
     }
 }
 

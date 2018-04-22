@@ -236,11 +236,11 @@ void adminViajes(vViajes* v, vVehiculos* vve){
                 break;
             case 2:
             //pedir id_viaje admin
-                eliminarViajes(v,3);
+                eliminarViajes(v,4);
                 break;
             case 3:
             //pedir id viaje admin
-                modificarViaje(v,vve,5);
+                modificarViaje(v,vve,4);
                 break;
             case 4:
                 listarViajesAdmin(v);

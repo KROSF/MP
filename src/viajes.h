@@ -28,7 +28,7 @@ typedef struct{
 typedef struct{
     /*@{*/
     int Id_viaje;/**< Indentificador del viaje que hace esta ruta */
-    char * Poblacion;/**< Poblacion en la que se recoge o deja a un usuario */
+    char* Poblacion;/**< Poblacion en la que se recoge o deja a un usuario */
     /*@}*/
 }Pasos;
 typedef struct{
