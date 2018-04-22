@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS  = -std=c11 -g
-SRC = main.c acceso.c cargar.c menu.c utilidades.c incidencias.c usuarios.c vehiculos.c viajes.c
+SRC = $(addprefix src/, main.c acceso.c cargar.c menu.c utilidades.c incidencias.c usuarios.c vehiculos.c viajes.c)
 OBJS := $(SRC:.c=.o)
 EXE = esi-share
 
@@ -14,11 +14,11 @@ run_v: $(EXE)
 
 $(EXE): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
+	@rm -f $(OBJS)
 
 $(OBJS): $(SRC)
 
 .PHONY: clean
 
 clean:
-	rm -f *.o $(EXE)
-# DO NOT DELETE
+	rm -f $(EXE)
