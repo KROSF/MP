@@ -8,6 +8,8 @@
  */
 static const char * Estado_I[] = {"cerrada","abierta","validada"};
 static int estadoIncidencia(char ** c);
+static void idRegistar(vIncidencias* v,int iIndex);//static
+static int* listaIncidencias(vIncidencias* v,int id_viaje,int* j);//static
 int estadoIncidencia(char **c)
 {
     if(strcmp(*c,"cerrada") == 0) return 0;
@@ -73,7 +75,7 @@ void saveIncidencias(int n,Incidencias* incidencias)
     puts("Incidencias Guardadas");
 }
 
-int inicidenciasUsuario(vIncidencias* v,int userId)
+int incidenciasUsuario(vIncidencias* v,int userId)
 {
     int tmp = 0;
     for(int i = 0;i < v->tam; ++i)

@@ -38,24 +38,13 @@ typedef struct{
     int tam_v;
 }vViajes;
 
-Viajes* initViajes(int* n);
-void saveViajes(int n,Viajes* viajes);
-Pasos* initPasos(int* n);
-void savePasos(int n,Pasos* pasos);
-int generarIdViaje(vViajes* v);
-int buscarIndexViajes(vViajes* v,int id_viaje);
-void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);
-void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);
-void modificarPasos(vViajes* v,int index);
-void mostrarPasos(vViajes* v, int index);
-void mostrarPaso(vViajes* v, int index);
-int* pasosViajes(vViajes* v,int id_viaje,int* j);
-void eliminarViaje(vViajes* v,int id_viaje);
-void eliminarViajes(vViajes* v,int id_viaje);
-void tipoViaje(vViajes* v, int vIndex);
-void addPasos(vViajes* v,int id_viaje);
-void pedirPaso(vViajes* v,int vIndex);
-void preguntarImporte(vViajes* v,int vIndex);
-void preguntarFechaHora(vViajes* v,int vIndex);
-void listarViajesAdmin(vViajes* v);
+Viajes* initViajes(int* n);//non-static modulo cargar
+void saveViajes(int n,Viajes* viajes);//non-static cargar
+Pasos* initPasos(int* n);//non-static cargar
+void savePasos(int n,Pasos* pasos);//non-static cargar
+int buscarIndexViajes(vViajes* v,int id_viaje);//non-static public
+void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
+void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
+void eliminarViajes(vViajes* v,int id_viaje);//non-static admin
+void listarViajesAdmin(vViajes* v);//non-static admin
 #endif

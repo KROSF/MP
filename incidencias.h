@@ -18,13 +18,11 @@ typedef struct{
     Incidencias* inci;
     int tam;
 }vIncidencias;
-int inicidenciasUsuario(vIncidencias* v,int userId);
-Incidencias* initIncidencias(int *n);
-void saveIncidencias(int n,Incidencias* incidencias);
-void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje);
-void idRegistar(vIncidencias* v,int iIndex);
-int* listaIncidencias(vIncidencias* v,int id_viaje,int* j);
-void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);
-void modificarIncidencias(vIncidencias* v,int id_viaje);
+Incidencias* initIncidencias(int *n);//non-static
+void saveIncidencias(int n,Incidencias* incidencias);//non-static
+void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje);//non-static admin
+void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);//non-static admin
+void modificarIncidencias(vIncidencias* v,int id_viaje);//non-static admin
+int incidenciasUsuario(vIncidencias* v,int userId);//non-static
 
 #endif

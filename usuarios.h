@@ -23,19 +23,12 @@ typedef struct{
   Usuarios* user;
   int tam;
 }vUsuarios;
-Usuarios* initUsuarios(int * n);
-void listarUsuarios(vUsuarios* u,vIncidencias* i);
-int generarIdUsuario(vUsuarios* v);
-int buscarIndexUsuario(vUsuarios* v,int userId);
-void altaUsuario(vUsuarios* v);
-void bajaUsuario(vUsuarios* v,int uIndex);
-void localidadUsuario(vUsuarios* v,int uIndex);
-void loginUsuario(vUsuarios* v,int uIndex);
-void nombreUsuario(vUsuarios* v,int uIndex);
-void passUsuario(vUsuarios* v,int uIndex);
-void perfilUsuario(vUsuarios* v,int userId);
-void saveUsuarios(int n ,Usuarios* usuarios);
-void modificarUsuario(vUsuarios* v,int userId);
-void modificarPerfilUsuario(vUsuarios* v,int userId);
-void modificarEstadoUsuario(vUsuarios* v,int userId);
+Usuarios* initUsuarios(int * n);//non-static
+void listarUsuarios(vUsuarios* u,vIncidencias* i);//non-static
+int buscarIndexUsuario(vUsuarios* v,int userId);//non-static
+void altaUsuario(vUsuarios* v);// non-static
+void bajaUsuario(vUsuarios* v,int uIndex);// non-static
+void saveUsuarios(int n ,Usuarios* usuarios);//non-static
+void modificarUsuario(vUsuarios* v,int userId);// non-static
+void perfilUsuario(vUsuarios* v,int userId);//non-static Usuarios no Admin
 #endif

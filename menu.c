@@ -121,20 +121,36 @@ void menuAdmin(vUsuarios* v,vIncidencias* vi,vViajes* vv,vVehiculos* vve,int id)
         CLEAN;
         switch(opc) {
             case 1:
-                //usuariosadmin();
-                publicarViaje(vv,vve,"7886JJP");
+                /* hacer funcion de menu que llame a las siguientes funciones
+                * altaUsuario(vUsuarios* v);
+                * bajaUsuario(vUsuarios* v,int uIndex);
+                * modificarUsuario(vUsuarios* v,int userId);
+                * listarUsuarios(vUsuarios* u,vIncidencias* i);
+                */
                 break;
             case 2:
-                //vehiculosadmin();
-                printf("vehiculosadmin");
+            /* hacer funcion de menu que llame a las siguientes funciones
+             * altaVehiculos(vVehiculos* v,int id);//non-static admin
+             * bajaVehiculos(vVehiculos* v,char* mat);//non-static admin
+             * eliminarVehiculo(vVehiculos* v,int vIndex);//non-static admin
+             * modificarVehiculo(vVehiculos* v,char* mat);//non-static admin
+             * listarVehiculos(vVehiculos* v);//non-static admin
+            */
                 break;
             case 3:
-                //viajesadmin();
-                listarViajesAdmin(vv);
+            /* hacer funcion de menu que llame a las siguientes funciones
+            * publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
+            * modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
+            * eliminarViajes(vViajes* v,int id_viaje);//non-static admin
+            * listarViajesAdmin(vViajes* v);//non-static admin
+            */
                 break;
             case 4:
-                //incidenciasadmin();
-                printf("incidenciasadmin");
+            /* hacer funcion de menu que llame a las siguientes funciones
+            * crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje);//non-static admin
+            * eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);//non-static admin
+            * modificarIncidencias(vIncidencias* v,int id_viaje);//non-static admin
+            */
                 break;
             default:
                 printf("Opcion incorrecta.\n");

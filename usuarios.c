@@ -15,6 +15,14 @@ static const char * Perfil[] = {"administrador","usuario"};
  */
 static int estadoUsuario(char ** c);
 
+static void modificarPerfilUsuario(vUsuarios* v,int userId);
+static void modificarEstadoUsuario(vUsuarios* v,int userId);
+static void localidadUsuario(vUsuarios* v,int uIndex);
+static void loginUsuario(vUsuarios* v,int uIndex);
+static void nombreUsuario(vUsuarios* v,int uIndex);
+static void passUsuario(vUsuarios* v,int uIndex);
+static int generarIdUsuario(vUsuarios* v);
+
 int estadoUsuario(char** c)
 { return (strcmp(*c,"activo")== 0) ? 1 : 0; }
 
@@ -253,6 +261,6 @@ void listarUsuarios(vUsuarios* u,vIncidencias* vi)
                  u->user[i].User,
                  u->user[i].Login,
                 Estado_U[u->user[i].Estado]);
-        printf("Nº incidencias: %d\n",inicidenciasUsuario(vi,u->user[i].Id_usuario));
+        printf("Nº incidencias: %d\n",incidenciasUsuario(vi,u->user[i].Id_usuario));
     }
 }

@@ -6,6 +6,15 @@
 static const char * Viaje[] = {"vuelta","ida"};
 static const char * Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
 static int estadoViaje(char** c);
+static void modificarPasos(vViajes* v,int index);
+static int* pasosViajes(vViajes* v,int id_viaje,int* j);
+static void eliminarViaje(vViajes* v,int id_viaje);
+static void tipoViaje(vViajes* v, int vIndex);
+static void addPaso(vViajes* v,int id_viaje);
+static void pedirPaso(vViajes* v,int vIndex);
+static void preguntarImporte(vViajes* v,int vIndex);
+static void preguntarFechaHora(vViajes* v,int vIndex);
+int generarIdViaje(vViajes* v);
 int estadoViaje(char** c)
 {
     if(strcmp(*c,"cerrado")    == 0) return 0;
