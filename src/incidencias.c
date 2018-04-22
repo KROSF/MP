@@ -38,20 +38,17 @@ Incidencias* initIncidencias(int* n)
         fscanf(file,"%[^-]-%[^-]-%[^-]-%[^-]-%[^\n]\n",
         id_viaje,id_us_registra,id_us_incidencia,desc_inicidencia,estado);
 
-        if (! * n ) tmp = (Incidencias *) malloc( (*n+1) * sizeof(Incidencias));
-        else tmp = (Incidencias *) realloc(tmp,(*n+1) * sizeof(Incidencias));
+        tmp = (Incidencias *) realloc(tmp,(*n+1) * sizeof(Incidencias));
 
         tmp[*n].Id_viaje         = atoi(id_viaje);
         tmp[*n].Id_us_registra   = atoi(id_us_registra);
         tmp[*n].Id_us_incidencia = atoi(id_us_incidencia);
         tmp[*n].Desc_incidencia  = desc_inicidencia;
         tmp[*n].Est_incidencia   = estadoIncidencia(&estado);
-
         free(id_viaje);
         free(id_us_incidencia);
         free(id_us_registra);
         free(estado);
-
         (*n)++;
     }
     fclose(file);
@@ -72,6 +69,7 @@ void saveIncidencias(int n,Incidencias* incidencias)
         Estado_I[incidencias[i].Est_incidencia]);
         free(incidencias[i].Desc_incidencia);
     }
+    fclose(file);
     puts("Incidencias Guardadas");
 }
 
@@ -167,7 +165,50 @@ void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje)
     }
 }
 
+void modificarEstadoIncidencia(vIncidencias* v, int iIndex)
+{
+    int tmp = 0;
+    do{
+        puts("0) Cerrada");
+        puts("1) Abierta");
+        puts("2) Validada");
+        printf("Seleccione estado: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+    }while(tmp < 0 && tmp > 2);
+    v->inci[iIndex].Est_incidencia = tmp;
+}
+
 void modificarIncidencias(vIncidencias* v,int id_viaje)
 {
+        int size_l = 0, i, resp = 0;
+        int* l_inci = listaIncidencias(v,id_viaje,&size_l);
+        for(i = 0;i < size_l;++i)
+        {
+            printf(" %d. denunciante: %d * denunciado: %d\n",i+1,
+            v->inci[l_inci[i]].Id_us_registra,v->inci[l_inci[i]].Id_us_incidencia);
+        }
+        printf("Que incidencia desea modificar: \n");
+        scanf("%d[^\n]",&resp);
+        flush_in();
+        --resp;
+        if(resp >= 0 && resp < size_l)
+        {
+            descripcionIncidencia(v,l_inci[resp]);
+            modificarEstadoIncidencia(v,l_inci[resp]);
+        }
+        free(l_inci);
+}
 
+void listarIncidencias(vIncidencias* v)
+{
+    for(int i = 0;i<v->tam;++i)
+    {
+        printf("%d-%d-%d-%s-%d",
+        v->inci[i].Id_viaje,
+        v->inci[i].Id_us_registra,
+        v->inci[i].Id_us_incidencia,
+        v->inci[i].Desc_incidencia,
+        v->inci[i].Est_incidencia);
+    }
 }

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "vehiculos.h"
 #include "utilidades.h"
+static void eliminarVehiculo(vVehiculos* v,int vIndex);
 Vehiculos* initVehiculos(int * n)
 {
     FILE* file = fopen("ficheros/Vehiculos.txt", "r");
@@ -20,8 +21,7 @@ Vehiculos* initVehiculos(int * n)
         if(mat == NULL || idu == NULL || nplzs == NULL || des_veh == NULL) exit(1);
         fscanf(file, "%[^-]-%[^-]-%[^-]-%[^\n]\n", mat, idu, nplzs,des_veh);
 
-        if (! * n ) tmp = (Vehiculos *) malloc( (*n+1) * sizeof(Vehiculos));
-        else tmp = (Vehiculos *) realloc(tmp,(*n+1) * sizeof(Vehiculos));
+        tmp = (Vehiculos *) realloc(tmp,(*n+1) * sizeof(Vehiculos));
 
         tmp[*n].Id_usuario = atoi(idu);
         tmp[*n].Id_mat     = mat;
@@ -52,6 +52,7 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
     puts("Vehiculos Guardados");
 }
 
+static void matricula(vVehiculos* v,int vIndex);
 void matricula(vVehiculos* v,int vIndex)
 {
     int tmp = 0;
@@ -63,13 +64,15 @@ void matricula(vVehiculos* v,int vIndex)
     }while( sscanf(v->vehi[vIndex].Id_mat,"%4d%3s",&tmp,tmpc) != 2);
 }
 
+static void descripcion(vVehiculos* v,int vIndex);
 void descripcion(vVehiculos* v,int vIndex)
 {
     printf("Ingrese descripcion: ");
-    scanf("%50[^\n]",v->vehi[vIndex].Id_mat);
+    scanf("%50[^\n]",v->vehi[vIndex].Desc_veh);
     flush_in();
 }
 
+static void num_plazas(vVehiculos* v,int vIndex);
 void num_plazas(vVehiculos* v,int vIndex)
 {
     printf("Ingrese numero de plazas: ");
@@ -137,7 +140,7 @@ void listarVehiculos(vVehiculos* v)
 {
     for(int i = 0; i < v->tam;++i)
     {
-        printf("%s-%d-%d-%s",
+        printf("%s-%d-%d-%s\n",
             v->vehi[i].Id_mat,
             v->vehi[i].Id_usuario,
             v->vehi[i].Num_plazas,
@@ -149,3 +152,5 @@ void listarVehiculosViajes(char* mat)
 {
     //listar viajes realizados por cada vehiculo
 }
+
+//void listarVehiculosUser(vVehiculos* v,vUsuarios* u,int uIndex){}

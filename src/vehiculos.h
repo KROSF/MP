@@ -21,7 +21,6 @@ void saveVehiculos(int n ,Vehiculos* vehiculos);//non-static
 int buscarIndexVehiculo(vVehiculos* v,char* mat);//non-static
 void altaVehiculos(vVehiculos* v,int id);//non-static admin
 void bajaVehiculos(vVehiculos* v,char* mat);//non-static admin
-void eliminarVehiculo(vVehiculos* v,int vIndex);//non-static admin
 void modificarVehiculo(vVehiculos* v,char* mat);//non-static admin
 void listarVehiculos(vVehiculos* v);//non-static admin
 #endif

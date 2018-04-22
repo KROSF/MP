@@ -5,6 +5,7 @@
 #define ESTADO_I 9
 #define ID_USUARIO 5
 #include "viajes.h"
+#include "vehiculos.h"
 typedef struct{
     /*@{*/
     int Id_viaje;/**< Identificador del viaje sobre el cual hay una incidendia*/
@@ -24,5 +25,6 @@ void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje);/
 void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);//non-static admin
 void modificarIncidencias(vIncidencias* v,int id_viaje);//non-static admin
 int incidenciasUsuario(vIncidencias* v,int userId);//non-static
+void listarIncidencias(vIncidencias* v);
 
 #endif

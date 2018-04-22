@@ -60,8 +60,7 @@ Usuarios *initUsuarios(int * n){
 
     fscanf(file, "%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^\n]\n",
                id, nomb, locld, perfil ,usr,log,estado);
-    if ( !*n ) tmp = (Usuarios*) malloc((*n + 1)    * sizeof(Usuarios));
-    else       tmp = (Usuarios*) realloc(tmp,(*n+1) * sizeof(Usuarios));
+    tmp = (Usuarios*) realloc(tmp,(*n+1) * sizeof(Usuarios));
 
     tmp[*n].Id_usuario     = atoi(id);
     tmp[*n].Nomb_usuario   = nomb;
@@ -159,6 +158,7 @@ void loginUsuario(vUsuarios* v,int uIndex)
     scanf("%5[^\n]",v->user[uIndex].User);
     flush_in();
 }
+//mal implimentada antes preguntar id
 void bajaUsuario(vUsuarios* v,int uIndex)
 {
   free(v->user[uIndex].Nomb_usuario);
@@ -232,17 +232,17 @@ void modificarUsuario(vUsuarios* v,int userId)
     if(index > -1)
     {
         printf(" 1. Nombre\n 2. Localidad\n 3. Login\n 4. Contraseña\n");
-        printf(" 5. Perfil\n 6. Estado");
-        printf("seleccione una opcion: ");
+        printf(" 5. Perfil\n 6. Estado\n");
+        printf("Seleccione una opcion: ");
         scanf("%1d[^\n]",&tmp);
         flush_in();
         switch (tmp) {
-            case 1:nombreUsuario(v,userId);break;
-            case 2:localidadUsuario(v,userId);break;
-            case 3:loginUsuario(v,userId);break;
-            case 4:passUsuario(v,userId);break;
-            case 5:modificarPerfilUsuario(v,userId);break;
-            case 6:modificarEstadoUsuario(v,userId);break;
+            case 1:nombreUsuario(v,index);break;
+            case 2:localidadUsuario(v,index);break;
+            case 3:loginUsuario(v,index);break;
+            case 4:passUsuario(v,index);break;
+            case 5:modificarPerfilUsuario(v,index);break;
+            case 6:modificarEstadoUsuario(v,index);break;
             default:printf("Opcion no valida no se hace nada.\n");break;
         }
     }
@@ -263,4 +263,9 @@ void listarUsuarios(vUsuarios* u,vIncidencias* vi)
                 Estado_U[u->user[i].Estado]);
         printf("Nº incidencias: %d\n",incidenciasUsuario(vi,u->user[i].Id_usuario));
     }
+}
+
+void listarVehiculosUser(vVehiculos* v,vUsuarios* u,int uIndex)
+{
+
 }

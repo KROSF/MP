@@ -14,7 +14,7 @@ static void addPaso(vViajes* v,int id_viaje);
 static void pedirPaso(vViajes* v,int vIndex);
 static void preguntarImporte(vViajes* v,int vIndex);
 static void preguntarFechaHora(vViajes* v,int vIndex);
-int generarIdViaje(vViajes* v);
+static int generarIdViaje(vViajes* v);
 int estadoViaje(char** c)
 {
     if(strcmp(*c,"cerrado")    == 0) return 0;
@@ -54,9 +54,7 @@ Viajes* initViajes(int * n)
         fscanf(file,"%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^€]€-%[^\n]\n",
                id_viaje,id_mat,f_inic,h_inic,h_fin,p_libres,viaje,importe,estado);
 
-        if (! *n ) tmp = (Viajes *) malloc( (*n+1) * sizeof(Viajes));
-        else tmp = (Viajes *) realloc(tmp,(*n+1) * sizeof(Viajes));
-
+        tmp = (Viajes *) realloc(tmp,(*n+1) * sizeof(Viajes));
         tmp[*n].Id_viaje     = atoi(id_viaje);
         tmp[*n].Id_mat       = id_mat;
         tmp[*n].F_inic       = f_inic;
@@ -70,8 +68,8 @@ Viajes* initViajes(int * n)
         free(id_viaje);
         free(p_libres);
         free(viaje);
-        free(importe);
         free(estado);
+        free(importe);
     }
     fclose(file);
     return tmp;
@@ -93,10 +91,7 @@ Pasos* initPasos(int * n)
         if( id_viaje == NULL || poblacion == NULL ) exit(0);
 
         fscanf(file,"%[^-]-%[^\n]\n",id_viaje,poblacion);
-
-        if (! *n ) tmp = (Pasos *) malloc( (*n+1) * sizeof(Pasos));
-        else tmp = (Pasos *) realloc(tmp,(*n+1) * sizeof(Pasos));
-
+        tmp = (Pasos*) realloc(tmp,((*n)+1) * sizeof(Pasos));
         tmp[*n].Id_viaje  = atoi(id_viaje);
         tmp[*n].Poblacion = poblacion;
         (*n)++;
@@ -158,7 +153,8 @@ int* pasosViajes(vViajes* v,int id_viaje,int* j)
         if(id_viaje == v->pasos[i].Id_viaje)
         {
             tmp = (int *) realloc(tmp,(*j+1) * sizeof(int));
-            tmp[(*j)++] = i;
+            tmp[*j] = i;
+            ++*j;
         }
     }
     return tmp;

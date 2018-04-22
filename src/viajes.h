@@ -5,7 +5,7 @@
 #define FECHA 11
 #define HORA 6
 #define NPLAZS 2
-#define IMPORTE 5
+#define IMPORTE 11
 #define ESTADO_V 11
 #define LOCAL 21
 #include "vehiculos.h"
