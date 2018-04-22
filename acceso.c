@@ -9,7 +9,7 @@ int check_user(vUsuarios* v)
     int logincount = 0, i;
     char user[6];
     char pass[9];
-    system("clear");
+    CLEAN;
     while (logincount < 3) {
         printf("Usuario: ");
         scanf("%5s",user);
@@ -24,7 +24,7 @@ int check_user(vUsuarios* v)
                 strcmp(v->user[i].Login,pass) == 0)
                 return i;
         }
-        system("clear");
+        CLEAN;
         logincount++;
         printf("Usuario y/o Contraseña Incorrectos\n");
         printf("Vuelta a intentarlo\n");

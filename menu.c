@@ -49,6 +49,7 @@ void menuUser(vUsuarios* v,vIncidencias* vi,vViajes* vv,vVehiculos* vve,int id){
         printf("\nSeleccione una opcion: ");
         scanf("%d",&opc);
         flush_in();
+        CLEAN;
     switch(opc) {
         case 1:
             perfilUsuario(v,id);
@@ -116,6 +117,8 @@ void menuAdmin(vUsuarios* v,vIncidencias* vi,vViajes* vv,vVehiculos* vve,int id)
     do{
         printf("\nSeleccione una opcion: ");
         scanf("%d",&opc);
+        flush_in();
+        CLEAN;
         switch(opc) {
             case 1:
                 //usuariosadmin();

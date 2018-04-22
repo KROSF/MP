@@ -21,7 +21,10 @@ typedef struct{
 int inicidenciasUsuario(vIncidencias* v,int userId);
 Incidencias* initIncidencias(int *n);
 void saveIncidencias(int n,Incidencias* incidencias);
-void crearIncidencias(vIncidencias* v,vViajes vv, int id_viaje);
-int idRegistar(vIncidencias* v,vViajes* vv,int id_viaje,int index);
+void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje);
+void idRegistar(vIncidencias* v,int iIndex);
+int* listaIncidencias(vIncidencias* v,int id_viaje,int* j);
+void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);
+void modificarIncidencias(vIncidencias* v,int id_viaje);
 
 #endif

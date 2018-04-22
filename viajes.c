@@ -323,7 +323,7 @@ void modificarPaso(vViajes* v,int id_viaje)
     --resp;
     if(resp >= 0 && resp < size_p)
     {
-        eliminarPaso(v,pasos[resp]);
+        pedirPaso(v,pasos[resp]);
     }
     free(pasos);
 }
