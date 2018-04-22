@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS  = -std=c11 -g
+CFLAGS  = -std=c11 -g -Wall
 SRC = $(addprefix src/, main.c acceso.c cargar.c menu.c utilidades.c incidencias.c usuarios.c vehiculos.c viajes.c)
 OBJS := $(SRC:.c=.o)
 EXE = esi-share
