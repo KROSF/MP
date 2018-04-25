@@ -1,3 +1,10 @@
+/**
+* @file main.c
+* @author Carlos Rodrigo Sanabria Flores
+* @date 25 Apr 2018
+* @copyright 2018 Carlos Rodrigo Sanabria Flores
+* @brief <brief>
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "cargar.h"

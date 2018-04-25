@@ -1,3 +1,10 @@
+/**
+* @file viajes.h
+* @author Carlos Rodrigo Sanabria Flores
+* @date 25 Apr 2018
+* @copyright 2018 Carlos Rodrigo Sanabria Flores
+* @brief <brief>
+*/
 #ifndef VIAJES_H
 #define VIAJES_H
 #define ID_VIAJE 7
@@ -37,16 +44,81 @@ typedef struct{
     int tam_p;
     int tam_v;
 }vViajes;
-
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 Viajes* initViajes(int* n);//non-static modulo cargar
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void saveViajes(int n,Viajes* viajes);//non-static cargar
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 Pasos* initPasos(int* n);//non-static cargar
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void savePasos(int n,Pasos* pasos);//non-static cargar
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 int buscarIndexViajes(vViajes* v,int id_viaje);//non-static public
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void eliminarViajes(vViajes* v,int id_viaje);//non-static admin
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void listarViajesAdmin(vViajes* v);//non-static admin
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 int* listaViajesAbiertos(vViajes* v,int* t);
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
 void actualizarViajes(vViajes* v);
 #endif

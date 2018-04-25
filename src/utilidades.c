@@ -5,6 +5,11 @@ void flush_in() {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 }
+
+void system_pause(){
+  printf("Presione 'Enter' para continuar: ... ");
+  while ( getchar() != '\n');
+}
 int validarFecha(char* cadena)
 {
     static const int DiaMes[]={0,31,28,31,30,31,30,31,31,30,31,30,31};

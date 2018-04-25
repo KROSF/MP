@@ -1,3 +1,10 @@
+/**
+* @file viajes.c
+* @author Carlos Rodrigo Sanabria Flores
+* @date 25 Apr 2018
+* @copyright 2018 Carlos Rodrigo Sanabria Flores
+* @brief <brief>
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -372,6 +379,7 @@ void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje)
 
 void listarViajesAdmin(vViajes* v)
 {
+    CLEAN;
     for(int i = 0;i<v->tam_v;++i)
     {
         printf("%06d-%s-%s-%s-%s-%d-%s-%.2f€-%s\n",
@@ -393,6 +401,7 @@ void listarViajesAdmin(vViajes* v)
         }
         free(pasos);
     }
+    system_pause();
 }
 
 void listarViajesAbiertos(vViajes* v)

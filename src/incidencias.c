@@ -204,11 +204,12 @@ void listarIncidencias(vIncidencias* v)
 {
     for(int i = 0;i<v->tam;++i)
     {
-        printf("%d-%d-%d-%s-%d",
+        printf("%d-%d-%d-%s-%d\n",
         v->inci[i].Id_viaje,
         v->inci[i].Id_us_registra,
         v->inci[i].Id_us_incidencia,
         v->inci[i].Desc_incidencia,
         v->inci[i].Est_incidencia);
     }
+    getchar();
 }
