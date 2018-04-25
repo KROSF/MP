@@ -3,6 +3,8 @@
 #include <string.h>
 #include "usuarios.h"
 #include "utilidades.h"
+#include "vehiculos.h"
+
 static const char* Estado_U[] = {"bloqueado","activo"};
 /**
  * Varible global para obtener el perfil de un usuario
@@ -22,6 +24,7 @@ static void loginUsuario(vUsuarios* v,int uIndex);
 static void nombreUsuario(vUsuarios* v,int uIndex);
 static void passUsuario(vUsuarios* v,int uIndex);
 static int generarIdUsuario(vUsuarios* v);
+static void bajaUsuario(vUsuarios* v,int uIndex);
 
 int estadoUsuario(char** c)
 { return (strcmp(*c,"activo")== 0) ? 1 : 0; }
@@ -267,5 +270,37 @@ void listarUsuarios(vUsuarios* u,vIncidencias* vi)
 
 void listarVehiculosUser(vVehiculos* v,vUsuarios* u,int uIndex)
 {
+    int taman = 0;
+    int* i_veh = listarVehiculosViajes(v,u->user[uIndex].Id_usuario, &taman);
 
+    if(taman!=0){
+        printf("Vehiculos disponibles: ");
+        for(int i=0; i < taman; i++){
+            printf("%s, %s\n", v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
+        }
+    }else{
+        printf("No se han encontrado vehiculos disponibles para el user %s\n", u->user[uIndex].Nomb_usuario);
+    }
+    free(i_veh);
+}
+
+void preguntarIdBaja(vUsuarios* v)
+{
+    int tmp, tmp2;
+    printf("Introduzca el id del usuario a eliminar: ");
+    scanf("%d", &tmp);
+    flush_in();
+    tmp2=buscarIndexUsuario(v,tmp);
+    if(tmp2 > -1) bajaUsuario(v,tmp2);
+    else printf("No existe el usuario introducido\n");
+}
+
+
+int preguntarIdModificar(){
+
+    int tmp;
+    printf("Introduzca el id del usuario a modificar: ");
+    scanf("%d", &tmp);
+    flush_in();
+    return tmp;
 }

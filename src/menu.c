@@ -157,11 +157,11 @@ void adminUsuarios(vUsuarios* v,vIncidencias* i){
         case 2:
             //ppreguntar id a elimar a admin
             //aun falta enmascarar
-            bajaUsuario(v,4);
+            preguntarIdBaja(v);
             break;
         case 3:
         //ppreguntar id admin y pasar index
-            modificarUsuario(v,1);
+            modificarUsuario(v,preguntarIdModificar());
             break;
         case 4:
             listarUsuarios(v,i);//funciona perfe

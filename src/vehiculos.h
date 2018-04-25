@@ -23,4 +23,5 @@ void altaVehiculos(vVehiculos* v,int id);//non-static admin
 void bajaVehiculos(vVehiculos* v,char* mat);//non-static admin
 void modificarVehiculo(vVehiculos* v,char* mat);//non-static admin
 void listarVehiculos(vVehiculos* v);//non-static admin
+int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j);//Non-static
 #endif

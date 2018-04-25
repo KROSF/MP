@@ -4,6 +4,9 @@
 #include "vehiculos.h"
 #include "utilidades.h"
 static void eliminarVehiculo(vVehiculos* v,int vIndex);
+static void matricula(vVehiculos* v,int vIndex);
+static void descripcion(vVehiculos* v,int vIndex);
+static void num_plazas(vVehiculos* v,int vIndex);
 Vehiculos* initVehiculos(int * n)
 {
     FILE* file = fopen("ficheros/Vehiculos.txt", "r");
@@ -52,7 +55,6 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
     puts("Vehiculos Guardados");
 }
 
-static void matricula(vVehiculos* v,int vIndex);
 void matricula(vVehiculos* v,int vIndex)
 {
     int tmp = 0;
@@ -64,7 +66,6 @@ void matricula(vVehiculos* v,int vIndex)
     }while( sscanf(v->vehi[vIndex].Id_mat,"%4d%3s",&tmp,tmpc) != 2);
 }
 
-static void descripcion(vVehiculos* v,int vIndex);
 void descripcion(vVehiculos* v,int vIndex)
 {
     printf("Ingrese descripcion: ");
@@ -72,7 +73,6 @@ void descripcion(vVehiculos* v,int vIndex)
     flush_in();
 }
 
-static void num_plazas(vVehiculos* v,int vIndex);
 void num_plazas(vVehiculos* v,int vIndex)
 {
     printf("Ingrese numero de plazas: ");
@@ -148,9 +148,17 @@ void listarVehiculos(vVehiculos* v)
     }
 }
 
-void listarVehiculosViajes(char* mat)
+int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j)
 {
-    //listar viajes realizados por cada vehiculo
+  int* tmp = NULL;
+  *j = 0;
+  for(int i = 0; i < v->tam;++i){
+      if(id_user == v->vehi[i].Id_usuario)
+      {
+          tmp = (int *) realloc(tmp,((*j)+1) * sizeof(int));
+          tmp[(*j)] = i;
+          (*j)++;
+      }
+  }
+  return tmp;
 }
-
-//void listarVehiculosUser(vVehiculos* v,vUsuarios* u,int uIndex){}
