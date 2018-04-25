@@ -7,7 +7,7 @@ void flush_in() {
 }
 
 void system_pause(){
-  printf("Presione 'Enter' para continuar: ... ");
+  printf("Presione "ANSI_COLOR_RED"'Enter'"ANSI_COLOR_RESET" para continuar: ... ");
   while ( getchar() != '\n');
 }
 int validarFecha(char* cadena)
