@@ -32,3 +32,13 @@ int validarHora(char* cadena,int hoy)
 }
   return 0;
 }
+
+int fechaMenor(int d, int m, int a){
+  time_t sys = time(NULL);
+  struct tm hoy=*localtime(&sys);
+  if (a < hoy.tm_year+1900) return 1;
+  else if ( a > hoy.tm_year+1900) return 0;
+  if (m < hoy.tm_mon+1)return 1;
+  else if (m > hoy.tm_mon+1)return 0;
+  return d < hoy.tm_mday;
+}

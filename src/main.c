@@ -9,6 +9,7 @@ int main(){
     vViajes viaje;
     vVehiculos vehi;
     init(&user,&inci,&viaje,&vehi);
+    actualizarViajes(&viaje);
     int *accs = acceder(&user);
     if(accs[1] > -1 )
     {

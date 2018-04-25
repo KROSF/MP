@@ -47,4 +47,6 @@ void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
 void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
 void eliminarViajes(vViajes* v,int id_viaje);//non-static admin
 void listarViajesAdmin(vViajes* v);//non-static admin
+int* listaViajesAbiertos(vViajes* v,int* t);
+void actualizarViajes(vViajes* v);
 #endif

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "viajes.h"
 #include "utilidades.h"
 static const char * Viaje[] = {"vuelta","ida"};
@@ -392,4 +393,90 @@ void listarViajesAdmin(vViajes* v)
         }
         free(pasos);
     }
+}
+
+void listarViajesAbiertos(vViajes* v)
+{
+  printf("Viajes Abiertos: \n");
+  int l_size = 0;
+  int* l_viajes = listaViajesAbiertos(v,&l_size);
+  for(int i = 0; i < l_size; ++i)
+  {
+      printf("%06d-%s-%s-%s-%s-%d-%s-%.2f€\n",
+        v->viajes[l_viajes[i]].Id_viaje,
+        v->viajes[l_viajes[i]].Id_mat,
+        v->viajes[l_viajes[i]].F_inic,
+        v->viajes[l_viajes[i]].H_inic,
+        v->viajes[l_viajes[i]].H_fin,
+        v->viajes[l_viajes[i]].Plazas_libre,
+        Viaje[v->viajes[l_viajes[i]].Viaje],
+        v->viajes[l_viajes[i]].Importe);
+  }
+  free(l_viajes);
+}
+
+int* listaViajesAbiertos(vViajes* v,int* j)
+{
+  int* tmp = NULL;
+  *j = 0;
+  for(int i = 0; i < v->tam_v;++i){
+      if(v->viajes[i].Estado == 1)
+      {
+          tmp = (int *) realloc(tmp,((*j)+1) * sizeof(int));
+          tmp[(*j)] = i;
+          (*j)++;
+      }
+  }
+  return tmp;
+}
+
+void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)
+{
+  int l_vehi_size = 0,i = 0;
+  int* l_vehi = listarVehiculosViajes(ve,userId,&l_vehi_size);
+  if(l_vehi_size){
+    for(i = 0;i< l_vehi_size;++i)
+    {
+      printf("%d) Matricula: %s Descripcion: %s ",i+1,
+      ve->vehi[l_vehi[i]].Id_mat,
+      ve->vehi[l_vehi[i]].Desc_veh);
+    }
+    int opc = 0;
+    do{
+    printf("Con que vehiculo desea realizar el viaje: ");
+    scanf("%d",&opc);
+    --opc;
+    }while(opc < 0 && opc > l_vehi_size-1);
+    publicarViaje(v,ve,ve->vehi[l_vehi[opc]].Id_mat);
+  }
+  free(l_vehi);
+}
+
+void incorporarseViaje()
+{
+
+}
+
+void actualizarViajes(vViajes* v)
+{
+  time_t hoy = time(NULL);
+  struct tm t1,t2,t3=*localtime(&hoy);
+  memset(&t1, 0, sizeof(struct tm));
+  memset(&t2, 0, sizeof(struct tm));
+  for(int i = 0; i < v->tam_v;++i )
+  {
+    if(v->viajes[i].Estado == 1)
+    { //1 = abierto
+      sscanf(v->viajes[i].H_fin,"%d:%d",&t1.tm_hour,&t1.tm_min);
+      sscanf(v->viajes[i].F_inic,"%d/%d/%d",&t2.tm_mday,&t2.tm_mon,&t2.tm_year);
+      t1.tm_hour+=1;
+      mktime(&t1);
+      mktime(&t2);
+      if(fechaMenor(t2.tm_mday,t2.tm_mon,t2.tm_year)) { v->viajes[i].Estado = 0; }
+      else if((t2.tm_mday==t3.tm_mday)&&(t2.tm_mon == t3.tm_mon+1)&&(t2.tm_year == t3.tm_year+1900))
+            { if(((t1.tm_hour*60) + t1.tm_min) < ((t3.tm_hour*60)+t3.tm_min))
+                { v->viajes[i].Estado = 0;}
+            }
+    }
+  }
 }

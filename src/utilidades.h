@@ -10,4 +10,5 @@
 void flush_in();
 int validarFecha(char* cadena);
 int validarHora(char* cadena,int hoy);
+int fechaMenor(int d, int m, int a);
 #endif
