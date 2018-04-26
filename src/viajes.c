@@ -481,10 +481,10 @@ void actualizarViajes(vViajes* v)
       t1.tm_hour+=1;
       mktime(&t1);
       mktime(&t2);
-      if(fechaMenor(t2.tm_mday,t2.tm_mon,t2.tm_year)) { v->viajes[i].Estado = 0; }
+      if(fechaMenor(t2.tm_mday,t2.tm_mon,t2.tm_year)) { v->viajes[i].Estado = 3; }
       else if((t2.tm_mday==t3.tm_mday)&&(t2.tm_mon == t3.tm_mon+1)&&(t2.tm_year == t3.tm_year+1900))
             { if(((t1.tm_hour*60) + t1.tm_min) < ((t3.tm_hour*60)+t3.tm_min))
-                { v->viajes[i].Estado = 0;}
+                { v->viajes[i].Estado = 3;}
             }
     }
   }
