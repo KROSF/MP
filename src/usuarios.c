@@ -308,13 +308,13 @@ int preguntarIdModificar(){
 void editarViajesUsuario(vViajes* v,vUsuarios* u,vVehiculos* ve,int uIndex)
 {
   char resp = 0;
-  printf("Desea editar algun viaje\n");
+  printf("Desea editar algun viaje: ");
   scanf("%c",&resp);
   flush_in();
   if(resp == 's' || resp == 'S')
   {
     int id_edit = 0;
-    printf("Ingrese id_viaje a modificar");
+    printf("Ingrese id_viaje a modificar: ");
     scanf("%d",&id_edit);
     flush_in();
     int iFindV = buscarIndexViajes(v,id_edit);
