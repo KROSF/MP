@@ -10,25 +10,24 @@ FCT_BGN()
    /* Optionally, define a scope for you data. */
    {
       vViajes test;
-      time_t sys = time(NULL);
-      struct tm hoy=*localtime(&sys);
+      time_t sys;
+      struct tm hoy;
+      char buffer [11];
       FCT_FIXTURE_SUITE_BGN(Actualizar Vehiculos)
       {
             FCT_SETUP_BGN()
             {
-               /* Initialize your data before a test is executed. */
 
                test.viajes = initViajes(&test.tam_v);
                test.pasos  = initPasos(&test.tam_p);
+               sys = time(NULL);
+               hoy=*localtime(&sys);
 
             }
             FCT_SETUP_END();
 
             FCT_TEARDOWN_BGN()
             {
-               /* Clean up your data after a test is executed. */
-               //free(data);
-               //data = NULL;
                saveViajes(test.tam_v,test.viajes);
                savePasos (test.tam_p,test.pasos);
                free(test.viajes);
@@ -36,28 +35,58 @@ FCT_BGN()
             }
             FCT_TEARDOWN_END();
 
-            FCT_TEST_BGN(Cargar_Viajes_Pasos)
+            FCT_TEST_BGN(Estructura_Viajes)
             {
                fct_chk( test.viajes != NULL );
+               fct_chk_eq_int(test.tam_v,5);
+            }
+            FCT_TEST_END();
+            FCT_TEST_BGN(Estructura_Pasos)
+            {
+               fct_chk( test.pasos != NULL );
+               fct_chk_eq_int(test.tam_p,5);
+
             }
             FCT_TEST_END();
 
-            FCT_TEST_BGN(Funcion_Fecha_Menor_Y_Menor)
+            FCT_TEST_BGN(Fecha_Menor)
             {
-               fct_chk(fechaMenor(hoy.tm_mday-1,hoy.tm_mon+1,hoy.tm_year+1900) == 1);
+               fct_chk_eq_int(fechaMenor(hoy.tm_mday-1,hoy.tm_mon+1,hoy.tm_year+1900),1);
             }
             FCT_TEST_END();
 
-            FCT_TEST_BGN(Funcion_Fecha_Menor_E_Igual)
+            FCT_TEST_BGN(Fecha_Igual)
             {
 
-               fct_chk(fechaMenor(hoy.tm_mday,hoy.tm_mon+1,hoy.tm_year+1900) == 0);
+               fct_chk_eq_int(fechaMenor(hoy.tm_mday,hoy.tm_mon+1,hoy.tm_year+1900), 0);
             }
             FCT_TEST_END();
 
-            FCT_TEST_BGN(Funcion_Fecha_Menor_Y_Mayor)
+            FCT_TEST_BGN(Fecha_Mayor)
             {
-               fct_chk(fechaMenor(hoy.tm_mday+1,hoy.tm_mon+1,hoy.tm_year+1900) == 0);
+               fct_chk_eq_int(fechaMenor(hoy.tm_mday+1,hoy.tm_mon+1,hoy.tm_year+1900),0);
+            }
+            FCT_TEST_END();
+            FCT_TEST_BGN(Validar_Fecha_Ayer)
+            {
+               hoy.tm_mday--;
+               mktime(&hoy);
+               strftime(buffer,11,"%d/%m/%Y",&hoy);
+               fct_chk_eq_int(validarFecha(buffer),-1);
+            }
+            FCT_TEST_END();
+            FCT_TEST_BGN(Validar_Fecha_Hoy)
+            {
+               strftime(buffer,11,"%d/%m/%Y",&hoy);
+               fct_chk_eq_int(validarFecha(buffer),1);
+            }
+            FCT_TEST_END();
+            FCT_TEST_BGN(Validar_Fecha_Mañana)
+            {
+               hoy.tm_mday++;
+               mktime(&hoy);
+               strftime(buffer,11,"%d/%m/%Y",&hoy);
+               fct_chk_eq_int(validarFecha(buffer),0);
             }
             FCT_TEST_END();
 

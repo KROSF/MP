@@ -121,7 +121,6 @@ void saveViajes(int n,Viajes* viajes)
         free(viajes[i].H_fin);
     }
     fclose(file);
-    puts("Viajes Guardados");
 }
 
 void savePasos(int n,Pasos* pasos)
@@ -136,7 +135,6 @@ void savePasos(int n,Pasos* pasos)
         free(pasos[i].Poblacion);
     }
     fclose(file);
-    puts("Pasos Guardados");
 }
 
 void actualizarViajes(vViajes* v)

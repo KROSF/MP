@@ -423,7 +423,7 @@ void listarViajesAbiertos(vViajes* v)
   }
   free(l_viajes);
 }
-
+z
 int* listaViajesAbiertos(vViajes* v,int* j)
 {
   int* tmp = NULL;
