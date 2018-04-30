@@ -9,21 +9,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "viajes.h"
+#define utilidades_IMPORT
 #include "utilidades.h"
+#undef utilidades_IMPORT
+#define viajes_IMPORT
+#include "viajes.h"
+#undef viajes_IMPORT
 static const char * Viaje[] = {"vuelta","ida"};
 static const char * Estado_Vi[] = {"cerrado","abierto","iniciado","finalizado","anulado"};
-static int estadoViaje(char** c);
-static void modificarPasos(vViajes* v,int index);
-static int* pasosViajes(vViajes* v,int id_viaje,int* j);
-static void eliminarViaje(vViajes* v,int id_viaje);
-static void tipoViaje(vViajes* v, int vIndex);
-static void addPaso(vViajes* v,int id_viaje);
-static void pedirPaso(vViajes* v,int vIndex);
-static void preguntarImporte(vViajes* v,int vIndex);
-static void preguntarFechaHora(vViajes* v,int vIndex);
-static int generarIdViaje(vViajes* v);
-int estadoViaje(char** c)
+
+//funciones privadas
+static int estadoViaje(char** c)
 {
     if(strcmp(*c,"cerrado")    == 0) return 0;
     if(strcmp(*c,"abierto")    == 0) return 1;
@@ -32,9 +28,129 @@ int estadoViaje(char** c)
     return 4;
 }
 
-static int idaVuelta (char** c);
-int idaVuelta (char** c)
+static int idaVuelta (char** c)
 { return (strcmp(*c,"ida")== 0) ? 1 : 0;}
+
+static int generarIdViaje(vViajes* v)
+{
+    return v->viajes[v->tam_v-1].Id_viaje + 1;
+}
+
+static int* pasosViajes(vViajes* v,int id_viaje,int* j)
+{
+    int* tmp = NULL;
+    *j = 0;
+    for(int i = 0; i < v->tam_p;++i){
+        if(id_viaje == v->pasos[i].Id_viaje)
+        {
+            tmp = (int *) realloc(tmp,((*j)+1) * sizeof(int));
+            tmp[(*j)] = i;
+            (*j)++;
+        }
+    }
+    return tmp;
+}
+
+static void eliminarViaje(vViajes* v,int vIndex)
+{
+    free(v->viajes[vIndex].Id_mat);
+    free(v->viajes[vIndex].F_inic);
+    free(v->viajes[vIndex].H_inic);
+    free(v->viajes[vIndex].H_fin);
+    memmove(&v->viajes[vIndex],&v->viajes[vIndex+1],(v->tam_v-vIndex-1)*sizeof(Viajes));
+    --v->tam_v;
+}
+
+static void tipoViaje(vViajes* v, int vIndex)
+{
+    int tmp = 0;
+    do{
+        puts("0) Vuelta");
+        puts("1) Ida");
+        puts("Seleccione tipo de viaje: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+    }while(tmp < 0 && tmp > 1);
+    v->viajes[vIndex].Viaje = tmp;
+}
+
+static void pedirPaso(vViajes* v,int vIndex)
+{
+    printf("Ingrese Poblacion: ");
+    scanf("%20[^\n]",v->pasos[vIndex].Poblacion);
+    flush_in();
+}
+
+static void addPaso(vViajes* v,int id_viaje)
+{
+    v->pasos = (Pasos*) realloc(v->pasos,(v->tam_p+1)  * sizeof(Pasos));
+    v->pasos[v->tam_p].Poblacion = (char*) malloc(LOCAL* sizeof(char));
+    v->pasos[v->tam_p].Id_viaje = id_viaje;
+    pedirPaso(v,v->tam_p);
+    ++v->tam_p;
+}
+
+static void preguntarImporte(vViajes* v,int vIndex)
+{
+    printf("Ingrese Importe Total: ");
+    scanf("%f[^\n]",&v->viajes[vIndex].Importe);
+    flush_in();
+}
+
+static void preguntarFechaHora(vViajes* v,int vIndex)
+{
+    int fflag = 0, hflag = 0;
+    do{
+        printf("Fecha del viaje: ");
+        scanf("%10[^\n]", v->viajes[vIndex].F_inic);
+        flush_in();                             //
+        fflag = validarFecha(v->viajes[vIndex].F_inic);
+    }while(fflag < 0);
+
+    do {
+        puts("Hora de incio: ");
+        scanf("%5[^\n]", v->viajes[vIndex].H_inic);
+        flush_in();
+        hflag = validarHora(v->viajes[vIndex].H_inic, fflag);
+    }while(hflag == 0);
+
+    do {
+        puts("Hora de fin: ");
+        scanf("%5[^\n]", v->viajes[vIndex].H_fin);
+        flush_in();
+        hflag = validarHora(v->viajes[vIndex].H_fin,0);
+    }while(hflag == 0);
+}
+
+static void modificarPaso(vViajes* v,int id_viaje)
+{
+    int size_p = 0,resp = 0;
+    int* pasos = pasosViajes(v,id_viaje,&size_p);
+    for(int i = 0;i < size_p;++i)
+    {
+        printf(" %d. %s\n",i+1,v->pasos[pasos[i]].Poblacion);
+    }
+    printf("Que paso desea modificar: \n");
+    scanf("%d[^\n]",&resp);
+    flush_in();
+    --resp;
+    if(resp >= 0 && resp < size_p)
+    {
+        pedirPaso(v,pasos[resp]);
+    }
+    free(pasos);
+}
+
+static void modificarPasos(vViajes* v,int id_viaje)
+{
+    char resp = 0;
+    modificarPaso(v,id_viaje);
+    do{
+        printf("Desea modificar otro paso S/N\n");
+        scanf("%c[^\n]",&resp);
+        if(resp == 's' || resp == 'S') modificarPaso(v,id_viaje);
+    }while(resp == 's' || resp == 'S');
+}
 
 Viajes* initViajes(int * n)
 {
@@ -148,25 +264,6 @@ void savePasos(int n,Pasos* pasos)
     puts("Pasos Guardados");
 }
 
-int generarIdViaje(vViajes* v)
-{
-    return v->viajes[v->tam_v-1].Id_viaje + 1;
-}
-
-int* pasosViajes(vViajes* v,int id_viaje,int* j)
-{
-    int* tmp = NULL;
-    *j = 0;
-    for(int i = 0; i < v->tam_p;++i){
-        if(id_viaje == v->pasos[i].Id_viaje)
-        {
-            tmp = (int *) realloc(tmp,((*j)+1) * sizeof(int));
-            tmp[(*j)] = i;
-            (*j)++;
-        }
-    }
-    return tmp;
-}
 
 int buscarIndexViajes(vViajes* v,int id_viaje)
 {
@@ -177,15 +274,6 @@ int buscarIndexViajes(vViajes* v,int id_viaje)
     return -1;
 }
 
-void eliminarViaje(vViajes* v,int vIndex)
-{
-    free(v->viajes[vIndex].Id_mat);
-    free(v->viajes[vIndex].F_inic);
-    free(v->viajes[vIndex].H_inic);
-    free(v->viajes[vIndex].H_fin);
-    memmove(&v->viajes[vIndex],&v->viajes[vIndex+1],(v->tam_v-vIndex-1)*sizeof(Viajes));
-    --v->tam_v;
-}
 
 void eliminarPaso(vViajes* v,int vIndex)
 {
@@ -211,66 +299,7 @@ void eliminarViajes(vViajes* v, int id_viaje)
     else printf("No existe el viaje: %d\n",id_viaje);
 }
 
-void tipoViaje(vViajes* v, int vIndex)
-{
-    int tmp = 0;
-    do{
-        puts("0) Vuelta");
-        puts("1) Ida");
-        puts("Seleccione tipo de viaje: ");
-        scanf("%1d[^\n]",&tmp);
-        flush_in();
-    }while(tmp < 0 && tmp > 1);
-    v->viajes[vIndex].Viaje = tmp;
-}
 
-void pedirPaso(vViajes* v,int vIndex)
-{
-    printf("Ingrese Poblacion: ");
-    scanf("%20[^\n]",v->pasos[vIndex].Poblacion);
-    flush_in();
-}
-
-void addPaso(vViajes* v,int id_viaje)
-{
-    v->pasos = (Pasos*) realloc(v->pasos,(v->tam_p+1)  * sizeof(Pasos));
-    v->pasos[v->tam_p].Poblacion = (char*) malloc(LOCAL* sizeof(char));
-    v->pasos[v->tam_p].Id_viaje = id_viaje;
-    pedirPaso(v,v->tam_p);
-    ++v->tam_p;
-}
-
-void preguntarImporte(vViajes* v,int vIndex)
-{
-    printf("Ingrese Importe Total: ");
-    scanf("%f[^\n]",&v->viajes[vIndex].Importe);
-    flush_in();
-}
-
-void preguntarFechaHora(vViajes* v,int vIndex)
-{
-    int fflag = 0, hflag = 0;
-    do{
-        printf("Fecha del viaje: ");
-        scanf("%10[^\n]", v->viajes[vIndex].F_inic);
-        flush_in();                             //
-        fflag = validarFecha(v->viajes[vIndex].F_inic);
-    }while(fflag < 0);
-
-    do {
-        puts("Hora de incio: ");
-        scanf("%5[^\n]", v->viajes[vIndex].H_inic);
-        flush_in();
-        hflag = validarHora(v->viajes[vIndex].H_inic, fflag);
-    }while(hflag == 0);
-
-    do {
-        puts("Hora de fin: ");
-        scanf("%5[^\n]", v->viajes[vIndex].H_fin);
-        flush_in();
-        hflag = validarHora(v->viajes[vIndex].H_fin,0);
-    }while(hflag == 0);
-}
 
 void publicarViaje(vViajes* v,vVehiculos* vve,char* mat)
 {
@@ -320,36 +349,6 @@ void modificarEstadoViaje(vViajes* v,int index)
         scanf("%1d[^\n]",&v->viajes[index].Estado);
         flush_in();
     }while(v->viajes[index].Estado > 0 && v->viajes[index].Estado < 4);
-}
-
-void modificarPaso(vViajes* v,int id_viaje)
-{
-    int size_p = 0,resp = 0;
-    int* pasos = pasosViajes(v,id_viaje,&size_p);
-    for(int i = 0;i < size_p;++i)
-    {
-        printf(" %d. %s\n",i+1,v->pasos[pasos[i]].Poblacion);
-    }
-    printf("Que paso desea modificar: \n");
-    scanf("%d[^\n]",&resp);
-    flush_in();
-    --resp;
-    if(resp >= 0 && resp < size_p)
-    {
-        pedirPaso(v,pasos[resp]);
-    }
-    free(pasos);
-}
-
-void modificarPasos(vViajes* v,int id_viaje)
-{
-    char resp = 0;
-    modificarPaso(v,id_viaje);
-    do{
-        printf("Desea modificar otro paso S/N\n");
-        scanf("%c[^\n]",&resp);
-        if(resp == 's' || resp == 'S') modificarPaso(v,id_viaje);
-    }while(resp == 's' || resp == 'S');
 }
 
 void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje)
@@ -460,7 +459,36 @@ void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)
   free(l_vehi);
 }
 
-void incorporarseViaje()
+void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)
+{
+  char resp = 0;
+  printf("Desea editar algun viaje: ");
+  scanf("%c",&resp);
+  flush_in();
+  if(resp == 's' || resp == 'S')
+  {
+    int id_edit = 0;
+    printf("Ingrese id_viaje a modificar: ");
+    scanf("%d",&id_edit);
+    flush_in();
+    int iFindV = buscarIndexViajes(v,id_edit);
+    if(iFindV > -1)
+    {
+      int l_size = 0;
+      int* l_viajes = listarVehiculosViajes(ve,userId,&l_size);
+      for(int k = 0; k < l_size;++k)
+      {
+          if(strcmp(v->viajes[iFindV].Id_mat,ve->vehi[l_viajes[k]].Id_mat)==0)
+          {
+              modificarViaje(v,ve,id_edit);
+          }
+      }
+      free(l_viajes);
+    }
+  }
+}
+
+void incorporarseViaje(vViajes* v,char* poblacion)
 {
 
 }
@@ -474,7 +502,7 @@ void actualizarViajes(vViajes* v)
   for(int i = 0; i < v->tam_v;++i )
   {
     if(v->viajes[i].Estado == 1)
-    { //1 = abierto
+    {
       sscanf(v->viajes[i].H_fin,"%d:%d",&t1.tm_hour,&t1.tm_min);
       sscanf(v->viajes[i].F_inic,"%d/%d/%d",&t2.tm_mday,&t2.tm_mon,&t2.tm_year);
       t1.tm_hour+=1;

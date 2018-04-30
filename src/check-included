@@ -1,0 +1,180 @@
+#!/bin/bash
+PROGNAME=check-included
+VERSION="$Date: 2017/03/21 00:07:13 $"
+
+function help()
+{
+	echo "
+$PROGNAME - Checks C program modularization and useless #include lines.
+
+SYNOPSIS
+
+	$PROGNAME [-h|--help] [file.h] [file.c]
+
+If no argument given, checks every *.h and *.c in the current directory.
+
+This is code-cleaner utility safe to use because it checks only, does not modify
+anything. For each source file passed as an argument (either .h or .c) checks if
+it follows the modularization best practices suggested here. In more detail,
+if M is the name of the module:
+
+1. The header file M.h must define and undefine the EXTERN macro properly:
+
+#ifdef M_IMPORT
+    #define EXTERN
+#else
+    #define EXTERN extern
+#endif
+
+...definitions here...
+
+#undef EXTERN
+
+2. The implementation file M.c must import its header properly:
+
+#define M_IMPORT
+#include \"M.h\"
+
+3. Detects unused included modules.
+An included module \"M.h\" is assumed to be used iff any identifier whose name
+begins with \"M_\" is found in the source. Then this script works in the
+assumption that every public item exported by a module be protected by the name
+of the module itself. This name scheme holds for macros, struct names, types,
+variables and functions.
+
+Diagnostic messages are sent to stdout, program errors are sent to stderr.
+Exits with status code 0 if all ok, 1 if not.
+
+Rationale and more info: http://www.icosaedro.it/c-modules.html
+
+Author: Umberto Salsi <salsi@icosaedro.it>
+Version: $VERSION"
+}
+
+# Checks if the module header .h defines and destroys the EXTERN macro.
+# $1: header file.
+function check_modularization_h()
+{
+	local h m result SP NL
+	h=$1
+	m=$(basename $h .h)
+	result=0
+	# Linear white spaces (new)regex:
+	SP="[ "$'\t'"]*"
+	# New line with white spaces (new)regex:
+	NL="$SP"$'\r'"?.$SP"
+
+	if ! grep -q -E -z "#ifdef${SP}${m}_IMPORT${NL}#define${SP}EXTERN${NL}#else${NL}#define${SP}EXTERN${SP}extern${NL}#endif${NL}" $h; then
+		result=1
+		echo "$h: missing EXTERN macro definition, expected:"
+		echo "	#ifdef ${m}_IMPORT"
+		echo "		#define EXTERN"
+		echo "	#else"
+		echo "		#define EXTERN extern"
+		echo "	#endif"
+	fi
+
+	if ! grep -q -E -z "#undef${SP}EXTERN${NL}" $h; then
+		result=1
+		echo "$h: missing EXTERN macro undef, expected:"
+		echo "	#undef EXTERN"
+	fi
+	return $result
+}
+
+
+# Checks if the implementation module .c includes properly its header.
+# Does nothing if the file is a program (that is, no .h file available).
+# $1: implementation module.
+function check_modularization_c()
+{
+	local c m result SP NL
+	c=$1
+	if [ ! -f ${c%%.c}.h ]; then
+		# No .h available -- its a program.
+		return 0
+	fi
+	m=$(basename $c .c)
+	result=0
+	# Linear white spaces (new)regex:
+	SP="[ "$'\t'"]*"
+	# New line with white spaces (new)regex:
+	NL="$SP"$'\r'"?.$SP"
+
+	if ! grep -q -E -z "#define${SP}${m}_IMPORT${NL}#include${SP}\"$m.h\"${NL}" $c; then
+		result=1
+		echo "$c: missing ${m}_IMPORT macro definition or header inclusion, expected:"
+		echo "	#define ${m}_IMPORT"
+		echo "	#include \"$m.h\""
+	fi
+
+	return $result
+}
+
+
+# Returns a list of modules included by the given file, each module with
+# path but without extension.
+# $1: source file.
+# Return: list of modules directly included by this source file, with path
+# but without extension.
+function list_includes()
+{
+	grep "^#include[ \\t]\\+\"" $@ | sed -e "s/^[^\"]*\"//" -e "s/\\.h\".*//g"
+}
+
+
+function check_included()
+{
+	local i b result
+	f=$1
+	result=0
+	for i in $(list_includes $f); do
+		b=$(basename $i)
+		if ! grep -q "\\<${b}_" $f; then
+			echo "$f: module $i included but not used (no ${b}_* symbols found)."
+			result=1
+		fi
+	done
+	return $result
+}
+
+
+function check()
+{
+	local f result
+	f=$1
+	if [ ! -r $f ]; then
+		echo "$1: cannot read" >&2
+		return 1
+	fi
+	result=0
+	case $f in
+	*.h) check_modularization_h $f || result=1 ;;
+	*.c) check_modularization_c $f || result=1 ;;
+	
+	esac
+	check_included $f || result=1
+	return $result
+}
+
+
+check_all=yes
+result=0
+
+while [ $# -gt 0 ]; do
+	case $1 in
+	-h|--help) help; exit ;;
+	-*) echo "$PROGNAME: ERROR: unknown option $1, try --help" >&2 ; exit 1 ;;
+	*.h|*.c) check $1 || result=1 ; check_all=no ;;
+	*) echo "$PROGNAME: ERROR: unexpected argument $1, try --help" >&2 ; exit 1 ;;
+	esac
+	shift
+done
+
+if [ $check_all = yes ]; then
+	for f in $(ls *.h *.c 2>/dev/null); do
+		check $f || result=1
+	done
+fi
+
+exit $result

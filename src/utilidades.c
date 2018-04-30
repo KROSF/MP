@@ -1,15 +1,19 @@
 #include <stdio.h>
 #include <time.h>
+#define utilidades_IMPORT
 #include "utilidades.h"
-void flush_in() {
+#undef utilidades_IMPORT
+
+void flush_in(void) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 }
 
-void system_pause(){
+void system_pause(void){
   printf("\n\nPresione "ANSI_COLOR_RED"'Enter'"ANSI_COLOR_RESET" para continuar: ... ");
   while ( getchar() != '\n');
 }
+
 int validarFecha(char* cadena)
 {
     static const int DiaMes[]={0,31,28,31,30,31,30,31,31,30,31,30,31};

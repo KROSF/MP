@@ -15,6 +15,12 @@
 #define IMPORTE 11
 #define ESTADO_V 11
 #define LOCAL 21
+#ifdef viajes_IMPORT
+  #define EXTERN
+#else
+  #define EXTERN extern
+#endif
+
 #include "vehiculos.h"
 typedef struct{
     /*@{*/
@@ -50,75 +56,77 @@ typedef struct{
 * @return <return_description>
 * @details <details>
 */
-Viajes* initViajes(int* n);//non-static modulo cargar
+EXTERN Viajes* initViajes(int* n);//non-static modulo cargar
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void saveViajes(int n,Viajes* viajes);//non-static cargar
+EXTERN void saveViajes(int n,Viajes* viajes);//non-static cargar
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-Pasos* initPasos(int* n);//non-static cargar
+EXTERN Pasos* initPasos(int* n);//non-static cargar
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void savePasos(int n,Pasos* pasos);//non-static cargar
+EXTERN void savePasos(int n,Pasos* pasos);//non-static cargar
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-int buscarIndexViajes(vViajes* v,int id_viaje);//non-static public
+EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);//non-static public
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
+EXTERN void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
+EXTERN void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void eliminarViajes(vViajes* v,int id_viaje);//non-static admin
+EXTERN void eliminarViajes(vViajes* v,int id_viaje);//non-static admin
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void listarViajesAdmin(vViajes* v);//non-static admin
+EXTERN void listarViajesAdmin(vViajes* v);//non-static admin
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-int* listaViajesAbiertos(vViajes* v,int* t);
+EXTERN int* listaViajesAbiertos(vViajes* v,int* t);
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
 * @return <return_description>
 * @details <details>
 */
-void actualizarViajes(vViajes* v);
+EXTERN void actualizarViajes(vViajes* v);
+void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
+#undef EXTERN
 #endif

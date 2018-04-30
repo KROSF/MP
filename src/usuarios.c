@@ -268,22 +268,6 @@ void listarUsuarios(vUsuarios* u,vIncidencias* vi)
     }
 }
 
-void listarVehiculosUser(vVehiculos* v,vUsuarios* u,int uIndex)
-{
-    int taman = 0;
-    int* i_veh = listarVehiculosViajes(v,u->user[uIndex].Id_usuario, &taman);
-
-    if(taman!=0){
-        printf("Vehiculos disponibles: ");
-        for(int i=0; i < taman; i++){
-            printf("%s, %s\n", v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
-        }
-    }else{
-        printf("No se han encontrado vehiculos disponibles para el user %s\n", u->user[uIndex].Nomb_usuario);
-    }
-    free(i_veh);
-}
-
 void preguntarIdBaja(vUsuarios* v)
 {
     int tmp, tmp2;
@@ -302,34 +286,4 @@ int preguntarIdModificar(){
     scanf("%d", &tmp);
     flush_in();
     return tmp;
-}
-
-
-void editarViajesUsuario(vViajes* v,vUsuarios* u,vVehiculos* ve,int uIndex)
-{
-  char resp = 0;
-  printf("Desea editar algun viaje: ");
-  scanf("%c",&resp);
-  flush_in();
-  if(resp == 's' || resp == 'S')
-  {
-    int id_edit = 0;
-    printf("Ingrese id_viaje a modificar: ");
-    scanf("%d",&id_edit);
-    flush_in();
-    int iFindV = buscarIndexViajes(v,id_edit);
-    if(iFindV > -1)
-    {
-      int l_size = 0;
-      int* l_viajes = listarVehiculosViajes(ve,u->user[uIndex].Id_usuario,&l_size);
-      for(int k = 0; k < l_size;++k)
-      {
-          if(strcmp(v->viajes[iFindV].Id_mat,ve->vehi[l_viajes[k]].Id_mat)==0)
-          {
-              modificarViaje(v,ve,id_edit);
-          }
-      }
-      free(l_viajes);
-    }
-  }
 }

@@ -30,7 +30,6 @@ void altaUsuario(vUsuarios* v);// non-static
 void saveUsuarios(int n ,Usuarios* usuarios);//non-static
 void modificarUsuario(vUsuarios* v,int userId);// non-static
 void perfilUsuario(vUsuarios* v,int userId);//non-static Usuarios no Admin
-void listarVehiculosUser(vVehiculos* v,vUsuarios* u,int uIndex);
 void preguntarIdBaja(vUsuarios* v);
 int preguntarIdModificar();
 

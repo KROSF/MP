@@ -21,39 +21,43 @@
 #elif defined __APPLE__
 #define CLEAN system("clear")
 #endif
+#ifdef utilidades_IMPORT
+      #define EXTERN
+#else
+      #define EXTERN extern
+#endif
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Limpia el flujo de la entra estandar.
 */
-void flush_in();
+EXTERN void flush_in(void);
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Agrega un pausa en la ejecucion.
 */
-void system_pause();
+EXTERN void system_pause(void);
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* valida cadena con el formato dd/mm/aaaa
+* @param cadena Contiene una fecha
+* @return -1 Si el formato es incorrecto.
+* @return 0 Si el formato es correcto.
+* @return 1 Si el formato es correcto y la fecha es igual a la de hoy
 */
-int validarFecha(char* cadena);
+EXTERN int validarFecha(char* cadena);
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* valida una cadena con el formato hh:mm
+* @param cadena contine una hora
+* @param hoy entero que indica si el dia hoy.
+* @return 0 si el formato de la hora no es valido.
+* @return 1 si el formato de la hora es valido.
 */
-int validarHora(char* cadena,int hoy);
+EXTERN int validarHora(char* cadena,int hoy);
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Comprueba si una fecha es menor que la de hoy.
+* @param d dia.
+* @param m mes.
+* @param a año.
+* @return 1 si la fecha es menor.
+* @return 0 si la fecha es mayor o igual.
 */
-int fechaMenor(int d, int m, int a);
+EXTERN int fechaMenor(int d, int m, int a);
+#undef EXTERN
 #endif

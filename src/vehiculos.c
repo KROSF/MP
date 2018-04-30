@@ -80,12 +80,12 @@ void num_plazas(vVehiculos* v,int vIndex)
     flush_in();
 }
 
-void altaVehiculos(vVehiculos* v,int id)
+void altaVehiculos(vVehiculos* v,int userId)//opc2user
 {
     v->vehi = (Vehiculos*) realloc(v->vehi,(v->tam+1)  * sizeof(Vehiculos));
     v->vehi[v->tam].Id_mat   = (char*) malloc( ID_MAT  * sizeof(char));
     v->vehi[v->tam].Desc_veh = (char*) malloc( DES_VEH * sizeof(char));
-    v->vehi[v->tam].Id_usuario = id;
+    v->vehi[v->tam].Id_usuario = userId;
     matricula(v,v->tam);
     descripcion(v,v->tam);
     num_plazas(v,v->tam);
@@ -161,4 +161,64 @@ int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j)
       }
   }
   return tmp;
+}
+
+void listarVehiculosUser(vVehiculos* v,int userId)//opc1 viajes user
+{
+    int taman = 0;
+    int* i_veh = listarVehiculosViajes(v,userId, &taman);
+
+    if(taman!=0){
+        printf("Vehiculos disponibles: ");
+        for(int i=0; i < taman; i++){
+            printf("%s, %s\n", v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
+        }
+    }else{
+        printf("No se han encontrado vehiculos disponibles para el user: %d\n", userId);
+    }
+    free(i_veh);
+}
+
+void modificarVehiculoUser(vVehiculos* v,int userId)
+{
+  int veh_size = 0,resp = 0;
+  int* i_veh = listarVehiculosViajes(v,userId, &veh_size);
+  if(veh_size != 0)
+  {
+    for (int i = 0; i < veh_size; i++) {
+      printf("%s, %s\n", v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
+    }
+    printf("Que vehiculo desea modificar: \n");
+    scanf("%d[^\n]",&resp);
+    flush_in();
+    --resp;
+    if(resp >= 0 && resp < veh_size)
+    {
+        modificarVehiculo(v,v->vehi[i_veh[resp]].Id_mat);
+    }
+  }
+  else printf("No tiene Vehiculos registrados\n");
+  free(i_veh);
+}
+
+void eliminarVehiculoUser(vVehiculos* v,int userId)
+{
+  int veh_size = 0,resp = 0;
+  int* i_veh = listarVehiculosViajes(v,userId, &veh_size);
+  if(veh_size != 0)
+  {
+    for (int i = 0; i < veh_size; i++) {
+      printf("%s, %s\n", v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
+    }
+    printf("Que vehiculo desea eliminar: \n");
+    scanf("%d[^\n]",&resp);
+    flush_in();
+    --resp;
+    if(resp >= 0 && resp < veh_size)
+    {
+        eliminarVehiculo(v,buscarIndexVehiculo(v,v->vehi[i_veh[resp]].Id_mat));
+    }
+  }
+  else printf("No tiene Vehiculos registrados\n");
+  free(i_veh);
 }
