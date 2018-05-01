@@ -127,6 +127,19 @@ EXTERN int* listaViajesAbiertos(vViajes* v,int* t);
 * @details <details>
 */
 EXTERN void actualizarViajes(vViajes* v);
-void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
+EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
+/**
+* @brief <brief>
+* @param [in] <name> <parameter_description>
+* @return <return_description>
+* @details <details>
+*/
+EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
 #undef EXTERN
 #endif

@@ -7,8 +7,7 @@
 
 static void userPerfil(vUsuarios* v,int userIndex) {
 
-    int opc, bucle;
-    bucle = 1;
+    int opc, bucle = 1;
 
     while (bucle == 1) {
         CLEAN;
@@ -23,27 +22,20 @@ static void userPerfil(vUsuarios* v,int userIndex) {
             printf("\n\n  Seleccione una opci%cn: ", 162);
             scanf("%d", &opc);
             flush_in();
-            switch (opc) {
-                case 1:
-                    perfilUsuario(v,userIndex);
-                    break;
-                case 2:
-                    bucle = 0;
-                    break;
-                default:
-                    printf("  Opci%cn incorrecta.", 162);
-                    break;
+            switch (opc)
+            {
+                case 1:perfilUsuario(v,userIndex);break;
+                case 2:bucle = 0;break;
+                default:printf("  Opci%cn incorrecta.", 162);break;
             }
         } while (opc < 1 || opc > 2);
-
     }
 }
 
-void userVehiculos(){
+static void userVehiculos(vVehiculos* v,vUsuarios* u,int uIndex){
 
-    int opc, bucle;
-    bucle = 1;
-    while(bucle==1) {
+    int opc, bucle=1;
+    while(bucle == 1) {
         CLEAN;
         printf("\n  ____________________________\n");
         printf(" |                            |\n");
@@ -58,72 +50,44 @@ void userVehiculos(){
             scanf("%d", &opc);
             flush_in();
             switch (opc) {
-                case 1:
-                    //altaUsuario(v);
-                    break;
-                case 2:
-                    //ppreguntar id a elimar a admin
-                    //aun falta enmascarar
-                    //preguntarIdBaja(v);
-                    break;
-                case 3:
-                    //ppreguntar id admin y pasar index
-                    //modificarUsuario(v, preguntarIdModificar());
-                    break;
-                case 4:
-                    //listarUsuarios(v, i);//funciona perfe
-                    break;
-                case 5:
-                    bucle=0;
-                    break;
-                default:
-                    printf("  Opci%cn incorrecta.",162);
-                    break;
+                case 1:listarVehiculosUser(v,u->user[uIndex].Id_usuario);system_pause();break;
+                case 2:altaVehiculos(v,u->user[uIndex].Id_usuario);break;
+                case 3:eliminarVehiculoUser(v,u->user[uIndex].Id_usuario);break;
+                case 4:modificarVehiculoUser(v,u->user[uIndex].Id_usuario);break;
+                case 5:bucle=0;break;
+                default:printf("  Opci%cn incorrecta.",162);break;
             }
         } while (opc < 1 || opc > 5);
     }
 }
 
-void userViajes(){
+void userViajes(vViajes* v,vVehiculos* ve,int userId){
 
-        int opc, bucle;
-        bucle = 1;
-        while(bucle==1) {
-            CLEAN;
-            printf("\n  _______________________________\n");
-            printf(" |                               |\n");
-            printf(" |    1. PUBLICAR VIAJE          |\n");
-            printf(" |    2. MODIFICAR VIAJE         |\n");
-            printf(" |    3. INCORPORARSE A VIAJE    |\n");
-            printf(" |    4. DETALLES VIAJE          |\n");
-            printf(" |    5. VOLVER                  |\n");
-            printf(" |_______________________________|\n");
-            do {
-                printf("\n\n  Seleccione una opci%cn: ",162);
-                scanf("%d", &opc);
-                flush_in();
-                switch (opc) {
-                    case 1:
-                        //publicarViaje();
-                        break;
-                    case 2:
-                        //modificarViaje();
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
-
-                        break;
-                    case 5:
-                        bucle=0;
-                        break;
-                    default:
-                        printf("  Opci%cn incorrecta.",162);
-                        break;
-                }
-            } while (opc < 1 || opc > 5);
+  int opc, bucle = 1;
+  while(bucle==1) {
+    CLEAN;
+    printf("\n  _______________________________\n");
+    printf(" |                               |\n");
+    printf(" |    1. PUBLICAR VIAJE          |\n");
+    printf(" |    2. MODIFICAR VIAJE         |\n");
+    printf(" |    3. INCORPORARSE A VIAJE    |\n");
+    printf(" |    4. DETALLES VIAJE          |\n");
+    printf(" |    5. VOLVER                  |\n");
+    printf(" |_______________________________|\n");
+    do {
+        printf("\n\n  Seleccione una opci%cn: ",162);
+        scanf("%d", &opc);
+        flush_in();
+        switch (opc) {
+            case 1:publicarViajeUsuario(v,ve,userId);break;
+            case 2:editarViajesUsuario(v,ve,userId);break;
+            case 3:break;
+            case 4:break;
+            case 5:bucle=0;break;
+            default:printf("  Opci%cn incorrecta.",162);break;
         }
+    } while (opc < 1 || opc > 5);
+  }
 }
 
 void userIncidencias(vIncidencias* v){
@@ -210,15 +174,9 @@ void menuUser(vUsuarios* v,vIncidencias* vi,vViajes* vv,vVehiculos* vve,int id) 
             scanf("%d", &opc);
             flush_in();
             switch (opc) {
-                case 1:
-                    userPerfil(v,id);
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    //viajesuser();
-                    printf("Viajes");
-                    break;
+                case 1:userPerfil(v,id);break;
+                case 2:break;
+                case 3:userVehiculos(vve,v,id);break;
                 case 4:
                     //incidenciasuser();
                     printf("Incidencias");
