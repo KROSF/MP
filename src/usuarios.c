@@ -4,7 +4,6 @@
 #include "usuarios.h"
 #include "utilidades.h"
 #include "vehiculos.h"
-
 static const char* Estado_U[] = {"bloqueado","activo"};
 /**
  * Varible global para obtener el perfil de un usuario
@@ -105,18 +104,21 @@ void saveUsuarios(int n ,Usuarios * usuarios)
     fclose(file);
     puts("Usuarios Guardados");
 }
+void printPerfil(vUsuarios* v,int userIndex)
+{
+  printf("%d-%s-%s-%s-%s-%s-%s\n",
+         v->user[userIndex].Id_usuario,
+         v->user[userIndex].Nomb_usuario,
+         v->user[userIndex].Localidad,
+         Perfil[v->user[userIndex].Perfil_usuario],
+         v->user[userIndex].User,
+         v->user[userIndex].Login,
+         Estado_U[v->user[userIndex].Estado]);
+}
 
 void perfilUsuario(vUsuarios* v,int userIndex)
 {
     char resp = 0;int tmp = 0;
-    printf("%d-%s-%s-%s-%s-%s-%s\n",
-               v->user[userIndex].Id_usuario,
-               v->user[userIndex].Nomb_usuario,
-               v->user[userIndex].Localidad,
-               Perfil[v->user[userIndex].Perfil_usuario],
-               v->user[userIndex].User,
-               v->user[userIndex].Login,
-              Estado_U[v->user[userIndex].Estado]);
     printf("Desea modificar algun dato S/N\n");
     scanf("%1c[^\n]",&resp);
     flush_in();

@@ -32,5 +32,6 @@ void modificarUsuario(vUsuarios* v,int userId);// non-static
 void perfilUsuario(vUsuarios* v,int userId);//non-static Usuarios no Admin
 void preguntarIdBaja(vUsuarios* v);
 int preguntarIdModificar();
+void printPerfil(vUsuarios* v,int userIndex);
 
 #endif

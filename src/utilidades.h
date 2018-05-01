@@ -3,7 +3,6 @@
 * @author Carlos Rodrigo Sanabria Flores
 * @date 25 Apr 2018
 * @copyright 2018 Carlos Rodrigo Sanabria Flores
-* @brief <brief>
 */
 #ifndef  UTILIDADES_H
 #define UTILIDADES_H
