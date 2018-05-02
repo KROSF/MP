@@ -50,41 +50,47 @@ typedef struct{
     int tam_p;
     int tam_v;
 }vViajes;
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Inicializa la estructura Viajes.
+* @param n referencia al tamaño de la estructura.
+* @details Incializa una estructura de tipo viaje y
+*  en la variable pasada por referencia devuelve el tamaño.
 */
-EXTERN Viajes* initViajes(int* n);//non-static modulo cargar
+EXTERN Viajes* initViajes(int* n);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Se guarda en fichero la estructura Viajes.
+* @param n tamaño del vector usuarios.
+* @param viajes puntero al vector del tipo Viajes
+* @details Guarda los datos en el fichero y libera la memoria.
 */
-EXTERN void saveViajes(int n,Viajes* viajes);//non-static cargar
+EXTERN void saveViajes(int n,Viajes* viajes);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Inicializa la estructura Pasos
+* @param n referencia al tamaño de la estructura.
+* @details Incializa una estructura de tipo Pasos y
+*  en la variable pasada por referencia devuelve el tamaño.
 */
-EXTERN Pasos* initPasos(int* n);//non-static cargar
+EXTERN Pasos* initPasos(int* n);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Se guarda en fichero la estructura Pasos.
+* @param n tamaño del vector pasos.
+* @details Guarda los datos en el fichero y libera la memoria.
 */
-EXTERN void savePasos(int n,Pasos* pasos);//non-static cargar
+EXTERN void savePasos(int n,Pasos* pasos);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+* Busca un viaje en el vector vViajes.
+* @param v referencia al vector vViajes.
+* @param id_viaje identificador del viaje a buscar en el vector.
+* @return indice en el vector donde se a encontrado el viaje.
+* @return -1 si no encuentra el id_viaje en la estructura.
 */
-EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);//non-static public
+EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
+
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>

@@ -5,12 +5,15 @@
  * @copyright 2018 Carlos Rodrigo Sanabria Flores
  * @brief <brief>
  */
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
 #include "acceso.h"
 #include "cargar.h"
 #include "menu.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 int main() {
+  setlocale(LC_ALL,"es_ES.UTF-8");
   vUsuarios user;
   vIncidencias inci;
   vViajes viaje;

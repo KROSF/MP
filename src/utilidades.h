@@ -25,6 +25,7 @@
 #else
 #define EXTERN extern
 #endif
+#include <wchar.h>
 /**
  * Limpia el flujo de la entra estandar.
  */

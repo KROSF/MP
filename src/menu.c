@@ -19,7 +19,7 @@ static void userPerfil(vUsuarios *v, int userIndex) {
     printf(" |    2. VOLVER              |\n");
     printf(" |___________________________|\n");
     do {
-      printf("\n\n  Seleccione una opci%cn: ", 162);
+      printf("\n\n  Seleccione una opción: ");
       scanf("%d", &opc);
       flush_in();
       switch (opc) {
