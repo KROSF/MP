@@ -186,7 +186,7 @@ void modificarVehiculoUser(vVehiculos* v,int userId)
   if(veh_size != 0)
   {
     for (int i = 0; i < veh_size; i++) {
-      printf("%s, %s\n", v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
+      printf("%d %s, %s\n", i+1,v->vehi[i_veh[i]].Id_mat, v->vehi[i_veh[i]].Desc_veh);
     }
     printf("Que vehiculo desea modificar: \n");
     scanf("%d[^\n]",&resp);
@@ -221,4 +221,31 @@ void eliminarVehiculoUser(vVehiculos* v,int userId)
   }
   else printf("No tiene Vehiculos registrados\n");
   free(i_veh);
+}
+
+void altaVehiculosAdmin(vVehiculos* v)
+{
+  int tmp;
+  printf("Introduzca el id del usuario a que pertenece el vehiculo: ");
+  scanf("%d", &tmp);
+  flush_in();
+  altaVehiculos(v,tmp);
+}
+
+void bajaVehiculosAdmin(vVehiculos* v)
+{
+  char tmp[ID_MAT];
+  printf("Introduzca matricula del coche: ");
+  scanf("%7[^\n]", tmp);
+  flush_in();
+  bajaVehiculos(v,tmp);
+}
+
+void modificarVehiculosAdmin(vVehiculos* v)
+{
+  char tmp[ID_MAT];
+  printf("Introduzca matricula del coche: ");
+  scanf("%7[^\n]", tmp);
+  flush_in();
+  modificarVehiculo(v,tmp);
 }

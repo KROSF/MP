@@ -26,5 +26,9 @@ void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);//non-static 
 void modificarIncidencias(vIncidencias* v,int id_viaje);//non-static admin
 int incidenciasUsuario(vIncidencias* v,int userId);//non-static
 void listarIncidencias(vIncidencias* v);
+void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve);
+void eliminarIncidenciasAdmin(vIncidencias* v,vViajes* vv);
+void modificarIncidenciasAdmin(vIncidencias* v);
+
 
 #endif

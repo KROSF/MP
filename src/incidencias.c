@@ -149,7 +149,7 @@ void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje)
             v->inci[l_inci[i]].Id_us_registra,v->inci[l_inci[i]].Id_us_incidencia);
         }
         printf(" %d. Todas\n",i+1);
-        printf("Que incidencia desea modificar: \n");
+        printf("Que incidencia desea eliminar: \n");
         scanf("%d[^\n]",&resp);
         flush_in();
         --resp;
@@ -212,4 +212,31 @@ void listarIncidencias(vIncidencias* v)
         v->inci[i].Est_incidencia);
     }
     getchar();
+}
+
+void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve)
+{
+  int tmp;
+    printf("Introduzca el id del viaje: ");
+    scanf("%d", &tmp);
+    flush_in();
+    crearIncidencias(v,vv,ve,tmp);
+}
+
+void eliminarIncidenciasAdmin(vIncidencias* v,vViajes* vv)
+{
+  int tmp;
+  printf("Introduzca el id del viaje: ");
+  scanf("%d", &tmp);
+  flush_in();
+  eliminarIncidencias(v,vv,tmp);
+}
+
+void modificarIncidenciasAdmin(vIncidencias* v)
+{
+  int tmp;
+  printf("Introduzca el id del viaje: ");
+  scanf("%d", &tmp);
+  flush_in();
+  modificarIncidencias(v,tmp);
 }

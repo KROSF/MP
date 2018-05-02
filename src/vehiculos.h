@@ -27,4 +27,8 @@ int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j);//Non-static
 void listarVehiculosUser(vVehiculos* v,int userId);
 void eliminarVehiculoUser(vVehiculos* v,int userId);
 void modificarVehiculoUser(vVehiculos* v,int userId);
+void altaVehiculosAdmin(vVehiculos* v);
+void bajaVehiculosAdmin(vVehiculos* v);
+void modificarVehiculosAdmin(vVehiculos* v);
+
 #endif

@@ -119,7 +119,7 @@ EXTERN void listarViajesAdmin(vViajes* v);//non-static admin
 * @return <return_description>
 * @details <details>
 */
-EXTERN int* listaViajesAbiertos(vViajes* v,int* t);
+EXTERN int* listaViajesAbiertos(vViajes* v,int* t);//static
 /**
 * @brief <brief>
 * @param [in] <name> <parameter_description>
@@ -141,5 +141,11 @@ EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
 * @details <details>
 */
 EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
+EXTERN void publicarViajeAdmin(vViajes *v, vVehiculos *ve);
+EXTERN void eliminarViajesAdmin(vViajes* v);
+EXTERN void modificarViajesAdmin(vViajes* v,vVehiculos *vve);
+EXTERN void detalleViaje(vViajes* v);
+EXTERN void listarViajesAbiertos(vViajes *v);
+EXTERN void incorporarseViaje(vViajes *v);
 #undef EXTERN
 #endif
