@@ -52,12 +52,72 @@ typedef struct{
 }vViajes;
 
 /**
-* Inicializa la estructura Viajes.
-* @param n referencia al tamaño de la estructura.
-* @details Incializa una estructura de tipo viaje y
-*  en la variable pasada por referencia devuelve el tamaño.
-*/
+ * Inicializa una estructura del tipo Viajes.
+ * @param  n Referencia al tamaño de la estructura.
+ * @return   Un vector con los datos del fichero Viajes.txt
+ */
 EXTERN Viajes* initViajes(int* n);
+
+/**
+* Inicializa una estructura del tipo Pasos.
+* @param  n Referencia al tamaño de la estructura.
+* @return   Un vector con los datos del fichero Pasos.txt
+ */
+EXTERN Pasos* initPasos(int* n);
+
+/**
+ * [publicarViajeUsuario description]
+ * @param v      [description]
+ * @param ve     [description]
+ * @param userId [description]
+ */
+EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
+
+/**
+ * [editarViajesUsuario description]
+ * @param v      [description]
+ * @param ve     [description]
+ * @param userId [description]
+ */
+EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
+
+/**
+ * [incorporarseViaje description]
+ * @param v [description]
+ */
+EXTERN void incorporarseViaje(vViajes *v);
+
+/**
+ * [detalleViaje description]
+ * @param v [description]
+ */
+EXTERN void detalleViaje(vViajes* v);
+
+/**
+ * [publicarViajeAdmin description]
+ * @param v  [description]
+ * @param ve [description]
+ */
+EXTERN void publicarViajeAdmin(vViajes *v, vVehiculos *ve);
+
+/**
+ * [eliminarViajesAdmin description]
+ * @param v [description]
+ */
+EXTERN void eliminarViajesAdmin(vViajes* v);
+
+/**
+ * [modificarViajesAdmin description]
+ * @param v   [description]
+ * @param vve [description]
+ */
+EXTERN void modificarViajesAdmin(vViajes* v,vVehiculos *vve);
+
+/**
+ * [listarViajesAdmin description]
+ * @param v [description]
+ */
+EXTERN void listarViajesAdmin(vViajes* v);
 
 /**
 * Se guarda en fichero la estructura Viajes.
@@ -68,14 +128,6 @@ EXTERN Viajes* initViajes(int* n);
 EXTERN void saveViajes(int n,Viajes* viajes);
 
 /**
-* Inicializa la estructura Pasos
-* @param n referencia al tamaño de la estructura.
-* @details Incializa una estructura de tipo Pasos y
-*  en la variable pasada por referencia devuelve el tamaño.
-*/
-EXTERN Pasos* initPasos(int* n);
-
-/**
 * Se guarda en fichero la estructura Pasos.
 * @param n tamaño del vector pasos.
 * @details Guarda los datos en el fichero y libera la memoria.
@@ -83,75 +135,23 @@ EXTERN Pasos* initPasos(int* n);
 EXTERN void savePasos(int n,Pasos* pasos);
 
 /**
-* Busca un viaje en el vector vViajes.
-* @param v referencia al vector vViajes.
-* @param id_viaje identificador del viaje a buscar en el vector.
-* @return indice en el vector donde se a encontrado el viaje.
-* @return -1 si no encuentra el id_viaje en la estructura.
-*/
+ * [buscarIndexViajes description]
+ * @param  v        [description]
+ * @param  id_viaje [description]
+ * @return          [description]
+ */
 EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
 
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void publicarViaje(vViajes* v,vVehiculos* vve,char* mat);//non-static admin
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void modificarViaje(vViajes* v, vVehiculos* ve,int id_viaje);//non-static admin
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void eliminarViajes(vViajes* v,int id_viaje);//non-static admin
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void listarViajesAdmin(vViajes* v);//non-static admin
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN int* listaViajesAbiertos(vViajes* v,int* t);//static
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void actualizarViajes(vViajes* v);
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
-/**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
-EXTERN void publicarViajeAdmin(vViajes *v, vVehiculos *ve);
-EXTERN void eliminarViajesAdmin(vViajes* v);
-EXTERN void modificarViajesAdmin(vViajes* v,vVehiculos *vve);
-EXTERN void detalleViaje(vViajes* v);
+ * [listarViajesAbiertos description]
+ * @param v [description]
+ */
 EXTERN void listarViajesAbiertos(vViajes *v);
-EXTERN void incorporarseViaje(vViajes *v);
+
+/**
+ * [actualizarViajes description]
+ * @param v [description]
+ */
+EXTERN void actualizarViajes(vViajes* v);
 #undef EXTERN
 #endif

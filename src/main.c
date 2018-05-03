@@ -7,13 +7,11 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
 #include "acceso.h"
 #include "cargar.h"
 #include "menu.h"
 
 int main() {
-  setlocale(LC_ALL,"es_ES.UTF-8");
   vUsuarios user;
   vIncidencias inci;
   vViajes viaje;
