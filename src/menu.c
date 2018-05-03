@@ -1,9 +1,8 @@
-#include "menu.h"
-#include "usuarios.h"
-#include "viajes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "menu.h"
+#include "utilidades.h"
 
 static void userPerfil(vUsuarios *v, int userIndex) {
 

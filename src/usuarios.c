@@ -1,9 +1,8 @@
-#include "usuarios.h"
-#include "utilidades.h"
-#include "vehiculos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "usuarios.h"
+#include "utilidades.h"
 static const char *Estado_U[] = {"bloqueado", "activo"};
 /**
  * Varible global para obtener el perfil de un usuario

@@ -5,7 +5,6 @@
 #define ESTADO_I 9
 #define ID_USUARIO 5
 #include "viajes.h"
-#include "vehiculos.h"
 typedef struct{
     /*@{*/
     int Id_viaje;/**< Identificador del viaje sobre el cual hay una incidendia*/

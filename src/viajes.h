@@ -3,7 +3,7 @@
 * @author Carlos Rodrigo Sanabria Flores
 * @date 25 Apr 2018
 * @copyright 2018 Carlos Rodrigo Sanabria Flores
-* @brief <brief>
+* @brief Funciones publicas del modulo viajes.
 */
 #ifndef VIAJES_H
 #define VIAJES_H
@@ -16,12 +16,15 @@
 #define ESTADO_V 11
 #define LOCAL 21
 #ifdef viajes_IMPORT
-  #define EXTERN
+    #define EXTERN
 #else
-  #define EXTERN extern
+    #define EXTERN extern
 #endif
 
 #include "vehiculos.h"
+/**
+ * Estructura para representar en memoria el fichero Viajes.txt
+ */
 typedef struct{
     /*@{*/
     int Id_viaje;/**< Identificador unico de viaje */
@@ -36,7 +39,7 @@ typedef struct{
     /*@}*/
 }Viajes;
 /**
- * Estructura para cargar en memoria el fichero Pasos.txt
+ * Estructura para representar en memoria el fichero Pasos.txt
  */
 typedef struct{
     /*@{*/
@@ -44,11 +47,16 @@ typedef struct{
     char* Poblacion;/**< Poblacion en la que se recoge o deja a un usuario */
     /*@}*/
 }Pasos;
+/**
+ * Estructura para contener el tamaño y el vector de pasos y viajes.
+ */
 typedef struct{
-    Pasos* pasos;
-    Viajes* viajes;
-    int tam_p;
-    int tam_v;
+    /*@{*/
+    Pasos* pasos;/**< Vector dinamico con elementos del tipo Pasos.*/
+    Viajes* viajes;/**< Vector dinamico con elementos del tipo Pasos.*/
+    int tam_p;/**< Tamaño del vector pasos.*/
+    int tam_v;/**< Tamaño del vector viajes.*/
+    /*@}*/
 }vViajes;
 
 /**

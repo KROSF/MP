@@ -10,6 +10,7 @@
 #include "acceso.h"
 #include "cargar.h"
 #include "menu.h"
+#include "utilidades.h"
 
 int main() {
   vUsuarios user;
