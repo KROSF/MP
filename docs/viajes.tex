@@ -9,25 +9,25 @@
 \end{itemize}
 \subsection{Funciones}
 \begin{itemize}
-    \item \funrf{Viajes* initViajes(int* n)}{def:initviajes}
-    \item \funrf{Pasos* initPasos(int* n)}{def:initpasos}
-    \item \funrf{void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)}{def:puviuser}
-    \item \funrf{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}{def:editviuser}
-    \item \funrf{void incorporarseViaje(vViajes* v)}{def:inviuser}
-    \item \funrf{void detalleViaje(vViajes* v)}{def:detallavi}
-    \item \funrf{void publicarViajeAdmin(vViajes* v, vVehiculos* ve)}{def:puviadmin}
-    \item \funrf{void eliminarViajesAdmin(vViajes* v)}{def:delviadmin}
-    \item \funrf{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}{def:editviadmin}
-    \item \funrf{void listarViajesAdmin(vViajes* v)}{def:listviadmin}
-    \item \funrf{void saveViajes(int n,Viajes* viajes)}{def:savevi}
-    \item \funrf{void savePasos(int n,Pasos* pasos)}{def:savevipa}
-    \item \funrf{int buscarIndexViajes(vViajes* v,int id_viaje)}{def:findivi}
-    \item \funrf{void listarViajesAbiertos(vViajes* v)}{def:listviopen}
-    \item \funrf{void actualizarViajes(vViajes* v)}{def:updatevi}
+    \item \funrf{Viajes* initViajes(int* n)}{initviajes}
+    \item \funrf{Pasos* initPasos(int* n)}{initpasos}
+    \item \funrf{void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)}{puviuser}
+    \item \funrf{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}{editviuser}
+    \item \funrf{void incorporarseViaje(vViajes* v)}{inviuser}
+    \item \funrf{void detalleViaje(vViajes* v)}{detallavi}
+    \item \funrf{void publicarViajeAdmin(vViajes* v, vVehiculos* ve)}{puviadmin}
+    \item \funrf{void eliminarViajesAdmin(vViajes* v)}{delviadmin}
+    \item \funrf{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}{editviadmin}
+    \item \funrf{void listarViajesAdmin(vViajes* v)}{listviadmin}
+    \item \funrf{void saveViajes(int n,Viajes* viajes)}{savevi}
+    \item \funrf{void savePasos(int n,Pasos* pasos)}{savevipa}
+    \item \funrf{int buscarIndexViajes(vViajes* v,int id_viaje)}{findivi}
+    \item \funrf{void listarViajesAbiertos(vViajes* v)}{listviopen}
+    \item \funrf{void actualizarViajes(vViajes* v)}{updatevi}
 \end{itemize}
 \subsection{Definiciones}
 \begin{itemize}
-    \item \label{def:initviajes}\cc{Viajes* initViajes(int* n)}
+    \item \label{initviajes}\cc{Viajes* initViajes(int* n)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -42,7 +42,7 @@
 			\item Un vector con los datos del fichero Viajes.txt
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:initpasos}\cc{Pasos* initPasos(int* n)}
+    \item \label{initpasos}\cc{Pasos* initPasos(int* n)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -57,7 +57,7 @@
 			\item Un vector con los datos del fichero Pasos.txt
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:puviuser}\cc{void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)}
+    \item \label{puviuser}\cc{void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -70,7 +70,7 @@
             \item \cc{userId} $\rightarrow$ Identificador del usuario que publica el viaje.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:editviuser}\cc{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}
+    \item \label{editviuser}\cc{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -83,7 +83,7 @@
             \item \cc{userId} $\rightarrow$ Identificador del usuario que publico el viaje.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:inviuser}\cc{void incorporarseViaje(vViajes* v)}
+    \item \label{inviuser}\cc{void incorporarseViaje(vViajes* v)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -94,7 +94,7 @@
 			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:detallavi}\cc{void detalleViaje(vViajes* v)}
+    \item \label{detallavi}\cc{void detalleViaje(vViajes* v)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -106,7 +106,7 @@
 		\end{itemize}
 	\end{itemize}
     \newpage
-    \item \label{def:puviadmin}\cc{void publicarViajeAdmin(vViajes* v, vVehiculos* ve)}
+    \item \label{puviadmin}\cc{void publicarViajeAdmin(vViajes* v, vVehiculos* ve)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -118,7 +118,7 @@
             \item \cc{ve} $\rightarrow$ Referencia al vector de vehiculos.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:delviadmin}\cc{void eliminarViajesAdmin(vViajes* v)}
+    \item \label{delviadmin}\cc{void eliminarViajesAdmin(vViajes* v)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -129,7 +129,7 @@
 			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:editviadmin}\cc{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}
+    \item \label{editviadmin}\cc{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -141,7 +141,7 @@
             \item \cc{vve} $\rightarrow$ Referencia al vector de vehiculos.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:listviadmin}\cc{void listarViajesAdmin(vViajes* v)}
+    \item \label{listviadmin}\cc{void listarViajesAdmin(vViajes* v)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -152,7 +152,7 @@
 			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:savevi}\cc{void saveViajes(int n,Viajes* viajes)}
+    \item \label{savevi}\cc{void saveViajes(int n,Viajes* viajes)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -164,7 +164,7 @@
 			\item \cc{v} $\rightarrow$ Referencia al vector de viajes.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:savevipa}\cc{void savePasos(int n,Pasos* pasos)}
+    \item \label{savevipa}\cc{void savePasos(int n,Pasos* pasos)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -177,7 +177,7 @@
 		\end{itemize}
 	\end{itemize}
     \newpage
-    \item \label{def:findivi}\cc{int buscarIndexViajes(vViajes* v,int id_viaje)}
+    \item \label{findivi}\cc{int buscarIndexViajes(vViajes* v,int id_viaje)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -194,7 +194,7 @@
             \item $-1$ si no se encuentra.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:listviopen}\cc{void listarViajesAbiertos(vViajes* v)}
+    \item \label{listviopen}\cc{void listarViajesAbiertos(vViajes* v)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -205,7 +205,7 @@
 			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
 		\end{itemize}
 	\end{itemize}
-    \item \label{def:updatevi}\cc{void actualizarViajes(vViajes* v)}
+    \item \label{updatevi}\cc{void actualizarViajes(vViajes* v)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
