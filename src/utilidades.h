@@ -50,16 +50,29 @@ EXTERN int validarFecha(char *cadena);
  * @return 1 si el formato de la hora es valido.
  */
 EXTERN int validarHora(char *cadena, int hoy);
+
 /**
  * Comprueba si una fecha es menor que la de hoy.
- * @param d dia.
- * @param m mes.
- * @param a año.
- * @return 1 si la fecha es menor.
- * @return 0 si la fecha es mayor o igual.
+ * @param  fecha Estructura tm que contiene la fecha a comprobar.
+ * @return       1 si la fecha es menor.
+ * @return       0 si la fecha es mayor o igual.
  */
 EXTERN int fechaMenor(struct tm* fecha);
+
+/**
+ * Comprueba si una fecha es igual que la de hoy.
+ * @param  fecha Estructura tm que contiene la fecha a comprobar.
+ * @return       1 si la fecha es igual.
+ * @return       0 si la fecha es mayor o menor.
+ */
 EXTERN int fechaIgual(struct tm* fecha);
+
+/**
+ * Comprueba si una hora es menor que la hora actual..
+ * @param  hora Estructura tm que contiene la hora a comprobar.
+ * @return      1 si la hora es menor.
+ * @return      0 si la fecha es mayor o igual.
+ */
 EXTERN int horaMenor(struct tm* hora);
 #undef EXTERN
 #endif
