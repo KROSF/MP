@@ -1,0 +1,104 @@
+\section{Estructura de Datos}
+\begin{multicols}{2}
+\subsection{Incidencias}
+\begin{Table}
+	\raggedright
+	\label{struct:incidencias}
+	\begin{tabular}{rl}
+			\intc & \textbf{Id\_viaje}\\
+			\intc & \textbf{Id\_us\_registra}\\
+			\intc & \textbf{Id\_us\_incidencia}\\
+			\charcp & \textbf{Desc\_indicencia}\\
+			\intc & \textbf{Est\_incidencia}
+		\end{tabular}
+	\end{Table}
+\subsection{Pasos}
+\begin{Table}
+	\raggedright
+	\label{struct:pasos}
+	\begin{tabular}{rl}
+		\intc   & \textbf{Id\_viaje}\\
+		\charcp & \textbf{Poblacion}
+	\end{tabular}
+\end{Table}
+\subsection{Usuarios}
+\begin{Table}
+	\raggedright
+	\label{struct:usuarios}
+	\begin{tabular}{rl}
+		\intc & \textbf{Id\_usuario}\\
+		\charcp & \textbf{Nomb\_usuario}\\
+		\charcp & \textbf{Localidad}\\
+		\intc & \textbf{Perfil\_usuario}\\
+		\charcp & \textbf{User}\\
+		\charcp & \textbf{Login}\\
+		\intc & \textbf{Estado}
+	\end{tabular}
+\end{Table}
+\subsection{Vehiculos}
+\begin{Table}
+	\raggedright
+	\label{struct:vehiculos}
+	\begin{tabular}{rl}
+		\charcp & \textbf{Id\_mat}\\
+		\intc & \textbf{Id\_usuario}\\
+		\intc & \textbf{Num\_plazas}\\
+		\charcp & \textbf{Desc\_veh}
+	\end{tabular}
+\end{Table}
+\subsection{Viajes}
+\begin{Table}
+	\raggedright
+	\label{struct:viajes}
+	\begin{tabular}{rl}
+		\intc & \textbf{Id\_viaje}\\
+		\charcp& \textbf{Id\_mat}\\
+		\charcp& \textbf{F\_inic}\\
+		\charcp& \textbf{H\_inic}\\
+		\charcp& \textbf{H\_fin}\\
+		\intc & \textbf{Plazas\_libre}\\
+		\intc & \textbf{Viaje}\\
+		\lstinline|float| & \textbf{Importe}\\
+		\intc & \textbf{Estado}
+	\end{tabular}
+\end{Table}
+\subsection{vIncidencias}
+\begin{Table}
+	\raggedright
+	\label{struct:vincidencias}
+	\begin{tabular}{rl}
+		\cc{Incidencias*} & \textbf{inci}\\
+        \cc{int} & \textbf{tam}
+	\end{tabular}
+\end{Table}
+\subsection{vUsuarios}
+\begin{Table}
+	\raggedright
+	\label{struct:vusuarios}
+	\begin{tabular}{rl}
+		\cc{Usuarios*} & \textbf{user}\\
+        \cc{int} & \textbf{tam}
+	\end{tabular}
+\end{Table}
+\subsection{vVehiculos}
+\begin{Table}
+	\raggedright
+	\label{struct:vvehiculos}
+	\begin{tabular}{rl}
+        \cc{Vehiculos*} & \textbf{vehi}\\
+        \cc{int} & \textbf{tam}
+	\end{tabular}
+\end{Table}
+\subsection{vViajes}
+\begin{Table}
+	\raggedright
+	\label{struct:viajespasos}
+	\begin{tabular}{rl}
+		\cc{Pasos*} & \textbf{pasos}\\
+        \cc{Viajes*} & \textbf{viajes}\\
+        \cc{int} & \textbf{tam\_p}\\
+        \cc{int} & \textbf{tam\_v}
+	\end{tabular}
+\end{Table}
+\end{multicols}
+\newpage

@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+\usepackage[right=2cm,left=4cm,top=2.5cm,bottom=2.5cm,headsep=0.75cm,footskip=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{multicol,makecell}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,mathrsfs}
+\usepackage{enumitem}
+\usepackage{listings,xcolor}
+\usepackage{hyperref,fancyhdr}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%%%%%%%%%%%%%
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+\definecolor{azul}{rgb}{0.133,0.133,0.6}
+\definecolor{darkmagenta}{rgb}{0.55, 0.0, 0.55}
+\definecolor{goldenrod}{rgb}{0.85, 0.65, 0.13}
+\lstset{
+	language = C,
+	keepspaces=true,
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	tabsize=4,                        % default tabsize: 4 spaces
+	breaklines=true,                % automatic line breaking
+	breakatwhitespace=false,        % automatic breaks should only happen at whitespace
+	basicstyle=\ttfamily,
+	identifierstyle=\color{azul},   % colors in variables and function names, if desired.
+	keywordstyle=\color{darkmagenta},
+	keywordstyle = [2]{\color{teal}},
+	otherkeywords = {*,**},
+	morekeywords = [2]{Usuarios,Vehiculos,Viajes,Pasos,Incidencias,vUsuarios,vVehiculos,vViajes,vIncidencias},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+%%%%%%%%%%%%%
+\hypersetup{
+pdftitle={Documentación},
+pdfsubject={Metologia de la programación},
+pdfauthor={Rodrigo Sanabria},
+pdfkeywords={MP,C}
+}
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+{\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+	{3.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}

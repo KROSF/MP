@@ -1,0 +1,15 @@
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0mm}
+\fancyfoot[LE,RO]{\thepage}
+\newcommand{\intc}{\lstinline|int|}
+\newcommand{\sintc}{\lstinline|static int|}
+\newcommand{\charcp}{\lstinline|char*|}
+\newcommand{\fun}[1]{\lstinline|#1;|}
+\newcommand{\funref}[2]{\hyperref[#2]{\lstinline|#1;|}}
+\newcommand{\funrf}[2]{\hyperref[#2]{\lstinline|#1|}}
+\newcommand{\cc}[1]{\lstinline|#1|}
+\newcommand{\tipos}[4]{\cc{#1} \hyperref[#2]{\cc{#3}}\cc{#4}}
+\newenvironment{Table}
+{\par\bigskip\noindent\minipage{\columnwidth}\centering}
+{\endminipage\par\bigskip}
