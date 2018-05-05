@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <time.h>
 #define utilidades_IMPORT
 #include "utilidades.h"
 #undef utilidades_IMPORT
@@ -52,16 +51,45 @@ int validarHora(char *cadena, int hoy) {
   return 0;
 }
 
-int fechaMenor(int d, int m, int a) {
-  time_t sys = time(NULL);
-  struct tm hoy = *localtime(&sys);
-  if (a < hoy.tm_year + 1900)
-    return 1;
-  else if (a > hoy.tm_year + 1900)
-    return 0;
-  if (m < hoy.tm_mon + 1)
-    return 1;
-  else if (m > hoy.tm_mon + 1)
-    return 0;
-  return d < hoy.tm_mday;
+/*int fechaMenor(int d, int m, int a) {
+    time_t sys = time(NULL);
+    struct tm hoy = *localtime(&sys);
+    if (a < hoy.tm_year + 1900)
+        return 1;
+    else if (a > hoy.tm_year + 1900)
+        return 0;
+    if (m < hoy.tm_mon + 1)
+        return 1;
+    else if (m > hoy.tm_mon + 1)
+        return 0;
+    return d < hoy.tm_mday;
+}*/
+int fechaMenor(struct tm* fecha)
+{
+    time_t sys = time(NULL);
+    struct tm hoy = *localtime(&sys);
+    if (fecha->tm_year < hoy.tm_year + 1900)
+        return 1;
+    else if (fecha->tm_year > hoy.tm_year + 1900)
+        return 0;
+    if (fecha->tm_mon < hoy.tm_mon + 1)
+        return 1;
+    else if (fecha->tm_mon > hoy.tm_mon + 1)
+        return 0;
+    return fecha->tm_mday < hoy.tm_mday;
+}
+
+int fechaIgual(struct tm* fecha){
+    time_t sys = time(NULL);
+    struct tm hoy = *localtime(&sys);
+    return fecha->tm_mday == hoy.tm_mday &&
+           fecha->tm_mon  == hoy.tm_mon+1  &&
+           fecha->tm_year == hoy.tm_year+1900;
+}
+
+int horaMenor(struct tm* hora)
+{
+    time_t sys = time(NULL);
+    struct tm hoy = *localtime(&sys);
+    return ((hora->tm_hour*60)+hora->tm_min) < ((hoy.tm_hour*60)+hoy.tm_min);
 }

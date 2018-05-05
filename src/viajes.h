@@ -35,7 +35,9 @@ typedef struct{
     int Plazas_libre;/**< Numero de plazas que aun quedan sin ocupar */
     int Viaje;/**< Podra ser ida = 1 , vuelta = 0 */
     float Importe;/**< Importe total del viaje */
-    int Estado;/** Estado del viaje pudiendo ser: cerrado = 0, abierto = 1, iniciado = 2, finalizado = 3, anulado = 4 */
+    int Estado;/** Estado del viaje pudiendo ser:
+                                        cerrado = 0, abierto = 1, iniciado = 2,
+                                        finalizado = 3, anulado = 4 */
     /*@}*/
 }Viajes;
 /**
@@ -74,56 +76,56 @@ EXTERN Viajes* initViajes(int* n);
 EXTERN Pasos* initPasos(int* n);
 
 /**
- * [publicarViajeUsuario description]
- * @param v      [description]
- * @param ve     [description]
- * @param userId [description]
+ * Funcion para publicar un viaje en el sistema de esi-share.
+ * @param v      Referencia al vector de viajes.
+ * @param ve     Referencia al vector de vehiculos.
+ * @param userId Identificador del usuario que publica el viaje.
  */
 EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
 
 /**
- * [editarViajesUsuario description]
- * @param v      [description]
- * @param ve     [description]
- * @param userId [description]
+ * Permite la edicion de un viaje es estado abierto.
+ * @param v      Referencia al vector de viajes.
+ * @param ve     Referencia al vector de vehiculos.
+ * @param userId Identificador del usuario que publico el viaje.
  */
 EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
 
 /**
- * [incorporarseViaje description]
- * @param v [description]
+ * Permite a un usuario incorporarse a un viajes publicado en el sistema.
+ * @param v Referencia al vector de viajes.
  */
 EXTERN void incorporarseViaje(vViajes *v);
 
 /**
- * [detalleViaje description]
- * @param v [description]
+ * Permite a un usuario ver los datos de un viaje al detalle.
+ * @param v Referencia al vector de viajes.
  */
 EXTERN void detalleViaje(vViajes* v);
 
 /**
- * [publicarViajeAdmin description]
- * @param v  [description]
- * @param ve [description]
+ * Permite a un administrador publicar un viaje en nombre de un usuario.
+ * @param v  Referencia al vector de viajes.
+ * @param ve Referencia al vector de vehiculos.
  */
 EXTERN void publicarViajeAdmin(vViajes *v, vVehiculos *ve);
 
 /**
- * [eliminarViajesAdmin description]
- * @param v [description]
+ * Permite a un administrador eliminar un viaje.
+ * @param v Referencia al vector de viajes.
  */
 EXTERN void eliminarViajesAdmin(vViajes* v);
 
 /**
- * [modificarViajesAdmin description]
- * @param v   [description]
- * @param vve [description]
+ * Permite a un administrador eliminar un viaje.
+ * @param v   Referencia al vector de viajes.
+ * @param vve Referencia al vector de vehiculos.
  */
 EXTERN void modificarViajesAdmin(vViajes* v,vVehiculos *vve);
 
 /**
- * [listarViajesAdmin description]
- * @param v [description]
+ * Muestra los viajes al detalle.
+ * @param v Referencia al vector de viajes.
  */
 EXTERN void listarViajesAdmin(vViajes* v);
 
@@ -143,22 +145,23 @@ EXTERN void saveViajes(int n,Viajes* viajes);
 EXTERN void savePasos(int n,Pasos* pasos);
 
 /**
- * [buscarIndexViajes description]
- * @param  v        [description]
- * @param  id_viaje [description]
- * @return          [description]
+ * Busca si un viaje exite en el vector.
+ * @param  v        Referencia al vector de viajes.
+ * @param  id_viaje Identificador del viaje a buscar.
+ * @return          -1 Si no se encuentra.
+ * @return          iesima posicion del vector donde se enconstro el viaje.
  */
 EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
 
 /**
- * [listarViajesAbiertos description]
- * @param v [description]
+ * Muestra los viajes en estado abierto.
+ * @param v Referencia al vector de viajes.
  */
 EXTERN void listarViajesAbiertos(vViajes *v);
 
 /**
- * [actualizarViajes description]
- * @param v [description]
+ * Actualiza el estado de los viajes.
+ * @param v Referencia al vector de viajes.
  */
 EXTERN void actualizarViajes(vViajes* v);
 #undef EXTERN

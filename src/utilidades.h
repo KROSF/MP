@@ -25,7 +25,7 @@
 #else
 #define EXTERN extern
 #endif
-#include <wchar.h>
+#include <time.h>
 /**
  * Limpia el flujo de la entra estandar.
  */
@@ -58,6 +58,8 @@ EXTERN int validarHora(char *cadena, int hoy);
  * @return 1 si la fecha es menor.
  * @return 0 si la fecha es mayor o igual.
  */
-EXTERN int fechaMenor(int d, int m, int a);
+EXTERN int fechaMenor(struct tm* fecha);
+EXTERN int fechaIgual(struct tm* fecha);
+EXTERN int horaMenor(struct tm* hora);
 #undef EXTERN
 #endif
