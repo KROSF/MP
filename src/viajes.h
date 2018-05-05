@@ -84,7 +84,7 @@ EXTERN Pasos* initPasos(int* n);
 EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
 
 /**
- * Permite la edicion de un viaje es estado abierto.
+ * Permite la edicion de un viaje en estado abierto.
  * @param v      Referencia al vector de viajes.
  * @param ve     Referencia al vector de vehiculos.
  * @param userId Identificador del usuario que publico el viaje.
@@ -131,7 +131,7 @@ EXTERN void listarViajesAdmin(vViajes* v);
 
 /**
 * Se guarda en fichero la estructura Viajes.
-* @param n tamaño del vector usuarios.
+* @param n tamaño del vector viajes.
 * @param viajes puntero al vector del tipo Viajes
 * @details Guarda los datos en el fichero y libera la memoria.
 */
@@ -149,7 +149,7 @@ EXTERN void savePasos(int n,Pasos* pasos);
  * @param  v        Referencia al vector de viajes.
  * @param  id_viaje Identificador del viaje a buscar.
  * @return          -1 Si no se encuentra.
- * @return          iesima posicion del vector donde se enconstro el viaje.
+ * @return          iesima posicion del vector donde se encuentra el viaje.
  */
 EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
 

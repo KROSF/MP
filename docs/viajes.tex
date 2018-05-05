@@ -12,18 +12,18 @@
     \item \funrf{Viajes* initViajes(int* n)}{def:initviajes}
     \item \funrf{Pasos* initPasos(int* n)}{def:initpasos}
     \item \funrf{void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId)}{def:puviuser}
-    \item \cc{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}
-    \item \cc{void incorporarseViaje(vViajes *v)}
-    \item \cc{void detalleViaje(vViajes* v)}
-    \item \cc{void publicarViajeAdmin(vViajes *v, vVehiculos *ve)}
-    \item \cc{void eliminarViajesAdmin(vViajes* v)}
-    \item \cc{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}
-    \item \cc{void listarViajesAdmin(vViajes* v)}
-    \item \cc{void saveViajes(int n,Viajes* viajes)}
-    \item \cc{void savePasos(int n,Pasos* pasos)}
-    \item \cc{int buscarIndexViajes(vViajes* v,int id_viaje)}
-    \item \cc{void listarViajesAbiertos(vViajes *v)}
-    \item \cc{void actualizarViajes(vViajes* v)}
+    \item \funrf{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}{def:editviuser}
+    \item \funrf{void incorporarseViaje(vViajes* v)}{def:inviuser}
+    \item \funrf{void detalleViaje(vViajes* v)}{def:detallavi}
+    \item \funrf{void publicarViajeAdmin(vViajes* v, vVehiculos* ve)}{def:puviadmin}
+    \item \funrf{void eliminarViajesAdmin(vViajes* v)}{def:delviadmin}
+    \item \funrf{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}{def:editviadmin}
+    \item \funrf{void listarViajesAdmin(vViajes* v)}{def:listviadmin}
+    \item \funrf{void saveViajes(int n,Viajes* viajes)}{def:savevi}
+    \item \funrf{void savePasos(int n,Pasos* pasos)}{def:savevipa}
+    \item \funrf{int buscarIndexViajes(vViajes* v,int id_viaje)}{def:findivi}
+    \item \funrf{void listarViajesAbiertos(vViajes* v)}{def:listviopen}
+    \item \funrf{void actualizarViajes(vViajes* v)}{def:updatevi}
 \end{itemize}
 \subsection{Definiciones}
 \begin{itemize}
@@ -70,6 +70,150 @@
             \item \cc{userId} $\rightarrow$ Identificador del usuario que publica el viaje.
 		\end{itemize}
 	\end{itemize}
-
-
+    \item \label{def:editviuser}\cc{void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Permite la edicion de un viaje en estado abierto.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+            \item \cc{ve} $\rightarrow$ Referencia al vector de vehiculos.
+            \item \cc{userId} $\rightarrow$ Identificador del usuario que publico el viaje.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:inviuser}\cc{void incorporarseViaje(vViajes* v)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Permite a un usuario incorporarse a un viajes publicado en el sistema.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:detallavi}\cc{void detalleViaje(vViajes* v)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Permite a un usuario ver los datos de un viaje al detalle.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
+    \newpage
+    \item \label{def:puviadmin}\cc{void publicarViajeAdmin(vViajes* v, vVehiculos* ve)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item Permite a un administrador publicar un viaje en nombre de un usuario.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+            \item \cc{ve} $\rightarrow$ Referencia al vector de vehiculos.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:delviadmin}\cc{void eliminarViajesAdmin(vViajes* v)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Permite a un administrador eliminar un viaje.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:editviadmin}\cc{void modificarViajesAdmin(vViajes* v,vVehiculos *vve)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item Permite a un administrador eliminar un viaje.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+            \item \cc{vve} $\rightarrow$ Referencia al vector de vehiculos.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:listviadmin}\cc{void listarViajesAdmin(vViajes* v)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Muestra los viajes al detalle.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:savevi}\cc{void saveViajes(int n,Viajes* viajes)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Guarda los datos en el fichero Viajes.txt y libera la memoria.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+            \item \cc{n} $\rightarrow$ Tamaño del vector user en vViajes.
+			\item \cc{v} $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:savevipa}\cc{void savePasos(int n,Pasos* pasos)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Guarda los datos en el fichero Pasos.txt y libera la memoria.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+            \item \cc{n} $\rightarrow$ Tamaño del vector pasos en vViajes.
+			\item \cc{v} $\rightarrow$ Referencia al vector de pasos.
+		\end{itemize}
+	\end{itemize}
+    \newpage
+    \item \label{def:findivi}\cc{int buscarIndexViajes(vViajes* v,int id_viaje)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Busca un viaje el vector vViajes.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v} $\rightarrow$ Referencia al vector de viajes.
+            \item \cc{id_viaje} $\rightarrow$ Identificador del viaje a buscar.
+		\end{itemize}
+        \item \textbf{Devuelve}
+		\begin{itemize}
+			\item iesima posicion del vector donde se encuentra el viaje.
+            \item $-1$ si no se encuentra.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:listviopen}\cc{void listarViajesAbiertos(vViajes* v)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Muestra los viajes en estado abierto.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
+    \item \label{def:updatevi}\cc{void actualizarViajes(vViajes* v)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item  Actualiza el estado de los viajes.
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{v}  $\rightarrow$ Referencia al vector de viajes.
+		\end{itemize}
+	\end{itemize}
 \end{itemize}
