@@ -22,4 +22,4 @@ $(OBJS): $(SRC)
 
 clean:
 	rm -f $(EXE)
-	cd docs/ && rm *.log *.out *.synctex.gz *.toc
+	cd docs/ && rm -f *.log *.out *.synctex.gz *.toc *.aux
