@@ -3,7 +3,7 @@
 * @author Carlos Rodrigo Sanabria Flores
 * @date 25 Apr 2018
 * @copyright 2018 Carlos Rodrigo Sanabria Flores
-* @brief <brief>
+* @brief Funciones publicas del modulo viajes.
 */
 #ifndef VIAJES_H
 #define VIAJES_H
@@ -15,6 +15,16 @@
 #define IMPORTE 11
 #define ESTADO_V 11
 #define LOCAL 21
+#ifdef viajes_IMPORT
+    #define EXTERN
+#else
+    #define EXTERN extern
+#endif
+
+#include "vehiculos.h"
+/**
+ * Estructura para representar en memoria el fichero Viajes.txt
+ */
 typedef struct{
     /*@{*/
     int Id_viaje;/**< Identificador unico de viaje */
@@ -25,11 +35,13 @@ typedef struct{
     int Plazas_libre;/**< Numero de plazas que aun quedan sin ocupar */
     int Viaje;/**< Podra ser ida = 1 , vuelta = 0 */
     float Importe;/**< Importe total del viaje */
-    int Estado;/** Estado del viaje pudiendo ser: cerrado = 0, abierto = 1, iniciado = 2, finalizado = 3, anulado = 4 */
+    int Estado;/** Estado del viaje pudiendo ser:
+                                        cerrado = 0, abierto = 1, iniciado = 2,
+                                        finalizado = 3, anulado = 4 */
     /*@}*/
 }Viajes;
 /**
- * Estructura para cargar en memoria el fichero Pasos.txt
+ * Estructura para representar en memoria el fichero Pasos.txt
  */
 typedef struct{
     /*@{*/
@@ -37,45 +49,120 @@ typedef struct{
     char* Poblacion;/**< Poblacion en la que se recoge o deja a un usuario */
     /*@}*/
 }Pasos;
+/**
+ * Estructura para contener el tamaño y el vector de pasos y viajes.
+ */
 typedef struct{
-    Pasos* pasos;
-    Viajes* viajes;
-    int tam_p;
-    int tam_v;
+    /*@{*/
+    Pasos* pasos;/**< Vector dinamico con elementos del tipo Pasos.*/
+    Viajes* viajes;/**< Vector dinamico con elementos del tipo Pasos.*/
+    int tam_p;/**< Tamaño del vector pasos.*/
+    int tam_v;/**< Tamaño del vector viajes.*/
+    /*@}*/
 }vViajes;
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-Viajes* initViajes(int* n);//non-static modulo cargar
+ * Inicializa una estructura del tipo Viajes.
+ * @param  n Referencia al tamaño de la estructura.
+ * @return   Un vector con los datos del fichero Viajes.txt
+ */
+EXTERN Viajes* initViajes(int* n);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-void saveViajes(int n,Viajes* viajes);//non-static cargar
+* Inicializa una estructura del tipo Pasos.
+* @param  n Referencia al tamaño de la estructura.
+* @return   Un vector con los datos del fichero Pasos.txt
+ */
+EXTERN Pasos* initPasos(int* n);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-Pasos* initPasos(int* n);//non-static cargar
+ * Funcion para publicar un viaje en el sistema de esi-share.
+ * @param v      Referencia al vector de viajes.
+ * @param ve     Referencia al vector de vehiculos.
+ * @param userId Identificador del usuario que publica el viaje.
+ */
+EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
-*/
-void savePasos(int n,Pasos* pasos);//non-static cargar
+ * Permite la edicion de un viaje en estado abierto.
+ * @param v      Referencia al vector de viajes.
+ * @param ve     Referencia al vector de vehiculos.
+ * @param userId Identificador del usuario que publico el viaje.
+ */
+EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
+
 /**
-* @brief <brief>
-* @param [in] <name> <parameter_description>
-* @return <return_description>
-* @details <details>
+ * Permite a un usuario incorporarse a un viajes publicado en el sistema.
+ * @param v Referencia al vector de viajes.
+ */
+EXTERN void incorporarseViaje(vViajes *v);
+
+/**
+ * Permite a un usuario ver los datos de un viaje al detalle.
+ * @param v Referencia al vector de viajes.
+ */
+EXTERN void detalleViaje(vViajes* v);
+
+/**
+ * Permite a un administrador publicar un viaje en nombre de un usuario.
+ * @param v  Referencia al vector de viajes.
+ * @param ve Referencia al vector de vehiculos.
+ */
+EXTERN void publicarViajeAdmin(vViajes *v, vVehiculos *ve);
+
+/**
+ * Permite a un administrador eliminar un viaje.
+ * @param v Referencia al vector de viajes.
+ */
+EXTERN void eliminarViajesAdmin(vViajes* v);
+
+/**
+ * Permite a un administrador eliminar un viaje.
+ * @param v   Referencia al vector de viajes.
+ * @param vve Referencia al vector de vehiculos.
+ */
+EXTERN void modificarViajesAdmin(vViajes* v,vVehiculos *vve);
+
+/**
+ * Muestra los viajes al detalle.
+ * @param v Referencia al vector de viajes.
+ */
+EXTERN void listarViajesAdmin(vViajes* v);
+
+/**
+* Se guarda en fichero la estructura Viajes.
+* @param n tamaño del vector viajes.
+* @param viajes puntero al vector del tipo Viajes
+* @details Guarda los datos en el fichero y libera la memoria.
 */
-void actualizarViajes(vViajes* v);
+EXTERN void saveViajes(int n,Viajes* viajes);
+
+/**
+* Se guarda en fichero la estructura Pasos.
+* @param n tamaño del vector pasos.
+* @details Guarda los datos en el fichero y libera la memoria.
+*/
+EXTERN void savePasos(int n,Pasos* pasos);
+
+/**
+ * Busca si un viaje exite en el vector.
+ * @param  v        Referencia al vector de viajes.
+ * @param  id_viaje Identificador del viaje a buscar.
+ * @return          -1 Si no se encuentra.
+ * @return          iesima posicion del vector donde se encuentra el viaje.
+ */
+EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
+
+/**
+ * Muestra los viajes en estado abierto.
+ * @param v Referencia al vector de viajes.
+ */
+EXTERN void listarViajesAbiertos(vViajes *v);
+
+/**
+ * Actualiza el estado de los viajes.
+ * @param v Referencia al vector de viajes.
+ */
+EXTERN void actualizarViajes(vViajes* v);
+#undef EXTERN
 #endif
