@@ -21,7 +21,6 @@
     #define EXTERN extern
 #endif
 
-#include "vehiculos.h"
 /**
  * Estructura para representar en memoria el fichero Viajes.txt
  */
@@ -60,7 +59,7 @@ typedef struct{
     int tam_v;/**< Tamaño del vector viajes.*/
     /*@}*/
 }vViajes;
-
+EXTERN void generarFicheros(char* file_name,int tam, int n);
 /**
  * Inicializa una estructura del tipo Viajes.
  * @param  n Referencia al tamaño de la estructura.
@@ -69,95 +68,12 @@ typedef struct{
 EXTERN Viajes* initViajes(int* n);
 
 /**
-* Inicializa una estructura del tipo Pasos.
-* @param  n Referencia al tamaño de la estructura.
-* @return   Un vector con los datos del fichero Pasos.txt
- */
-EXTERN Pasos* initPasos(int* n);
-
-/**
- * Funcion para publicar un viaje en el sistema de esi-share.
- * @param v      Referencia al vector de viajes.
- * @param ve     Referencia al vector de vehiculos.
- * @param userId Identificador del usuario que publica el viaje.
- */
-EXTERN void publicarViajeUsuario(vViajes* v,vVehiculos* ve,int userId);
-
-/**
- * Permite la edicion de un viaje en estado abierto.
- * @param v      Referencia al vector de viajes.
- * @param ve     Referencia al vector de vehiculos.
- * @param userId Identificador del usuario que publico el viaje.
- */
-EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
-
-/**
- * Permite a un usuario incorporarse a un viajes publicado en el sistema.
- * @param v Referencia al vector de viajes.
- */
-EXTERN void incorporarseViaje(vViajes *v);
-
-/**
- * Permite a un usuario ver los datos de un viaje al detalle.
- * @param v Referencia al vector de viajes.
- */
-EXTERN void detalleViaje(vViajes* v);
-
-/**
- * Permite a un administrador publicar un viaje en nombre de un usuario.
- * @param v  Referencia al vector de viajes.
- * @param ve Referencia al vector de vehiculos.
- */
-EXTERN void publicarViajeAdmin(vViajes *v, vVehiculos *ve);
-
-/**
- * Permite a un administrador eliminar un viaje.
- * @param v Referencia al vector de viajes.
- */
-EXTERN void eliminarViajesAdmin(vViajes* v);
-
-/**
- * Permite a un administrador eliminar un viaje.
- * @param v   Referencia al vector de viajes.
- * @param vve Referencia al vector de vehiculos.
- */
-EXTERN void modificarViajesAdmin(vViajes* v,vVehiculos *vve);
-
-/**
- * Muestra los viajes al detalle.
- * @param v Referencia al vector de viajes.
- */
-EXTERN void listarViajesAdmin(vViajes* v);
-
-/**
 * Se guarda en fichero la estructura Viajes.
 * @param n tamaño del vector viajes.
 * @param viajes puntero al vector del tipo Viajes
 * @details Guarda los datos en el fichero y libera la memoria.
 */
 EXTERN void saveViajes(int n,Viajes* viajes);
-
-/**
-* Se guarda en fichero la estructura Pasos.
-* @param n tamaño del vector pasos.
-* @details Guarda los datos en el fichero y libera la memoria.
-*/
-EXTERN void savePasos(int n,Pasos* pasos);
-
-/**
- * Busca si un viaje exite en el vector.
- * @param  v        Referencia al vector de viajes.
- * @param  id_viaje Identificador del viaje a buscar.
- * @return          -1 Si no se encuentra.
- * @return          iesima posicion del vector donde se encuentra el viaje.
- */
-EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
-
-/**
- * Muestra los viajes en estado abierto.
- * @param v Referencia al vector de viajes.
- */
-EXTERN void listarViajesAbiertos(vViajes *v);
 
 /**
  * Actualiza el estado de los viajes.
