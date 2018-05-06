@@ -1,0 +1,114 @@
+\documentclass[x11names]{article}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,chains}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5mm}%
+%%%>
+\begin{document}
+% =================================================
+% Set up a few colours
+\colorlet{lcfree}{Green3}
+\colorlet{lcnorm}{Blue3}
+\colorlet{lccong}{Red3}
+% -------------------------------------------------
+% Set up a new layer for the debugging marks, and make sure it is on
+% top
+\pgfdeclarelayer{marx}
+\pgfsetlayers{main,marx}
+% A macro for marking coordinates (specific to the coordinate naming
+% scheme used here). Swap the following 2 definitions to deactivate
+% marks.
+\providecommand{\cmark}[2][]{%
+  \begin{pgfonlayer}{marx}
+    \node [nmark] at (c#2#1) {#2};
+  \end{pgfonlayer}{marx}
+  } 
+\providecommand{\cmark}[2][]{\relax} 
+% -------------------------------------------------
+% Start the picture
+\begin{tikzpicture}[%
+    >=triangle 60,              % Nice arrows; your taste may be different
+    start chain=going below,    % General flow is top-to-bottom
+    node distance=6mm and 60mm, % Global setup of box spacing
+    every join/.style={norm},   % Default linetype for connecting boxes
+    ]
+% ------------------------------------------------- 
+% A few box styles 
+% <on chain> *and* <on grid> reduce the need for manual relative
+% positioning of nodes
+\tikzset{
+  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+  proc/.style={base, rectangle, text width=7em},
+  test/.style={base, diamond, aspect=2, text width=7em},
+  term/.style={proc, rounded corners},
+  % coord node style is used for placing corners of connecting lines
+  coord/.style={coordinate, on chain, on grid, node distance=6mm and 25mm},
+  % nmark node style is used for coordinate debugging marks
+  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+  % -------------------------------------------------
+  % Connector line styles for different parts of the diagram
+  norm/.style={->, draw, lcnorm},
+  free/.style={->, draw, lcfree},
+  cong/.style={->, draw, lccong},
+  it/.style={font={\small\itshape}}
+}
+\node [term,join](main){inicio};
+\node [proc,join](d1){Declaracion e inicializacion de variables.};
+\node [proc,join](frlp){i = 0};
+\node [test,join](con){i $<$ v$\rightarrow$tam\_v};
+\node [term,left=of con](fin){fin};
+\node [test,below of=con,yshift= -1.5cm](con2){Estado es igual a 1 o 0};
+\node [proc,join](ss){Conversion de fechas a estructuras tm.};
+\node [test,join](con3){fechaInicioMenor};
+\node [proc,left=of con3,xshift=2cm](est6){Estado = 3};
+\node [test,below of= con3,yshift= -1.5cm](con4){fechaInicioIgual};
+\node [test,join](con5){HoraInicioMenor};
+\node [proc,left=of con5,xshift=2cm](est2){Estado = 2};
+\node [test,below of=con5,yshift= -1.5cm](con6){HoraFinMenor};
+\node [proc,join](est1){Estado = 3};
+\node [proc,join](cont){++i};
+
+
+\node [coord, left=of est6] (c1)  {};
+\node [coord, left=of est2] (c2)  {};
+\node [coord, right=of con,xshift=3em]  (c3) {};
+\node [coord, right=of cont,xshift=3em] (c6)  {};
+
+
+
+
+\path (con.west) to node [near start,yshift=3em] {$no$} (c1);
+\draw [->,lccong] (con.west) -- (fin);
+\path (con.south) to node [near start, xshift=1em] {$si$} (con2);
+\draw [->,lcnorm] (con.south) -- (con2);
+\path (con2.west) to node [near start,yshift=2em] {$no$} (c1);  
+\path (con2.south) to node [near start, xshift=1em] {$si$} (ss);
+\path (con3.west) to node [near start, yshift=1em] {$si$} (est6);
+  \draw [->,lcnorm] (con3.west) -- (est6);
+\path (con3.south) to node [near start, xshift=1em] {$no$} (con4);
+  \draw [->,lcnorm] (con3.south) -- (con4);
+\path (con4.west) to node [near start, xshift=1em,yshift=1em] {$no$} (c2);  
+\path (con4.south) to node [near start, xshift=1em] {$si$} (con5);
+ \path (con5.west) to node [near start, yshift=1em] {$si$} (est2);
+  \draw [->,lcnorm] (con5.west) -- (est2);
+\path (con5.south) to node [near start, yshift=-2em,xshift=1em] {$no$} (con4);
+  \draw [->,lcnorm] (con5.south) -- (con6);
+\path (con6.west) to node [near start,xshift=1em,yshift=-3em] {$no$} (c2);  
+\path (con6.south) to node [near start, xshift=1em] {$si$} (est1);  
+ 
+ \draw [o-,lcfree] (con2.west) -| (c1);
+ \draw [o->,lcfree] (est6.west) -- (c1) -- (c2) |- (cont);
+ \draw [o-,lcfree] (est2.west) -- (c2);
+ \draw [o-,lcfree] (con4.west) -| (c2);
+ \draw [o-,lcfree] (con6.west) -| (c2);
+ \draw [o->,lcfree](cont.east) -- (c6) -- (c3)--(con);
+ 
+ 
+ 
+ 
+\end{tikzpicture}
+% =================================================
+\end{document}
