@@ -59,7 +59,7 @@ typedef struct{
     int tam_v;/**< Tamaño del vector viajes.*/
     /*@}*/
 }vViajes;
-EXTERN void generarFicheros(char* file_name,int tam, int n);
+EXTERN void generarFicheros(char* file_name,int tam, int dias,int estado,int hi,int hf);
 /**
  * Inicializa una estructura del tipo Viajes.
  * @param  n Referencia al tamaño de la estructura.

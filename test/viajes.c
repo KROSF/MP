@@ -44,7 +44,7 @@ static int estadoViaje(char *c) {
  */
 static int idaVuelta(char *c) { return (strcmp(c, "ida") == 0) ? 1 : 0; }
 
-void generarFicheros(char* file_name,int tam, int n)
+void generarFicheros(char* file_name,int tam, int dias,int estado,int hi,int hf)
 {
     FILE* file=fopen(file_name,"w+");
     if (file == NULL) exit(EXIT_FAILURE);
@@ -54,14 +54,12 @@ void generarFicheros(char* file_name,int tam, int n)
     {
         struct tm hoy = *localtime(&t);
         char f_inic[FECHA],h_inic[HORA],h_fin[HORA];
-        hoy.tm_hour+=rand()%23;
-        hoy.tm_min+=rand()%59;
-        hoy.tm_mday+=n;
+        hoy.tm_hour+=hi;
+        hoy.tm_mday+=dias;
         mktime(&hoy);
         strftime(f_inic,FECHA,"%d/%m/%Y",&hoy);
         strftime(h_inic,HORA,"%H:%M",&hoy);
-        hoy.tm_hour+=rand()%4;
-        hoy.tm_min+=rand()%29;
+        hoy.tm_hour+=hf;
         strftime(h_fin,HORA,"%H:%M",&hoy);
         fprintf(file, "%06d-%s-%s-%s-%s-%d-%s-%.2f€-%s\n",i+1,
                 Matriculas[rand()%11],
@@ -71,7 +69,7 @@ void generarFicheros(char* file_name,int tam, int n)
                 (rand()%5)+2,
                 Viaje[i%2],
                 rand()%50+1.0,
-                Estado_Vi[rand()%4]);
+                Estado_Vi[estado]);
     }
     fclose(file);
 }
@@ -150,7 +148,7 @@ void actualizarViajes(vViajes *v) {
     memset(&h_inic, 0, sizeof(struct tm));
     memset(&f_inic, 0, sizeof(struct tm));
     for (int i = 0; i < v->tam_v; ++i) {
-        if (v->viajes[i].Estado == 1 || v->viajes[i].Estado == 0 )
+        if (v->viajes[i].Estado != 4)
         {   //convesion de fecha y hora a formato mas manejable
             sscanf(v->viajes[i].H_inic,"%d:%d",&h_inic.tm_hour, &h_inic.tm_min);
             sscanf(v->viajes[i].H_fin, "%d:%d", &h_fin.tm_hour, &h_fin.tm_min);
