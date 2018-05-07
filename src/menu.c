@@ -120,7 +120,7 @@ void userViajes(vViajes *v, vVehiculos *ve, int userId) {
         editarViajesUsuario(v, ve, userId);
         break;
       case 3:
-        incorporarseViaje(v);
+        incorporarseViaje(v,userId);
         break;
       case 4:
         detalleViaje(v);
@@ -175,7 +175,7 @@ void userIncidencias(vIncidencias *v,int userId) {
   }
 }
 
-menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
+void menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
               int indexusuario) {
 
   int i = strlen(v->user[indexusuario].Nomb_usuario), j, espacio, opc, bucle;
