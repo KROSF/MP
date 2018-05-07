@@ -202,6 +202,7 @@ void modificarIncidencias(vIncidencias* v,int id_viaje)
 
 void listarIncidencias(vIncidencias* v)
 {
+    CLEAN;
     for(int i = 0;i<v->tam;++i)
     {
         printf("%d-%d-%d-%s-%d\n",
@@ -211,7 +212,7 @@ void listarIncidencias(vIncidencias* v)
         v->inci[i].Desc_incidencia,
         v->inci[i].Est_incidencia);
     }
-    getchar();
+    system_pause();
 }
 
 void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve)

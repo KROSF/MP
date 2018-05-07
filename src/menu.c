@@ -15,15 +15,14 @@ static void userPerfil(vUsuarios *v, int userIndex) {
 
   while (bucle == 1) {
     CLEAN;
-    printf("Datos: ");
     printPerfil(v, userIndex);
-    printf("\n  ___________________________\n");
+    printf("  ___________________________\n");
     printf(" |                           |\n");
     printf(" |    1. MODIFICAR PERFIL    |\n");
     printf(" |    2. VOLVER              |\n");
     printf(" |___________________________|\n");
     do {
-      printf("\n\n  Seleccione una opción: ");
+      printf("\n\n  Seleccione una opci%cn: ",162);
       scanf("%d", &opc);
       flush_in();
       switch (opc) {

@@ -138,6 +138,7 @@ void modificarVehiculo(vVehiculos* v,char* mat)
 
 void listarVehiculos(vVehiculos* v)
 {
+    CLEAN;
     for(int i = 0; i < v->tam;++i)
     {
         printf("%s-%d-%d-%s\n",
@@ -146,6 +147,7 @@ void listarVehiculos(vVehiculos* v)
             v->vehi[i].Num_plazas,
             v->vehi[i].Desc_veh);
     }
+    system_pause();
 }
 
 int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j)
