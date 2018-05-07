@@ -97,6 +97,12 @@ static void addPaso(vViajes *v, int id_viaje) {
     ++v->tam_p;
 }
 
+/**
+ * Agrega un pasajero al vector pasaj
+ * @param v          Referencia al vector vViajes.
+ * @param id_viaje   Indentificador del viaje.
+ * @param id_viajero Indentificador del usuario en el viaje.
+ */
 static void addPasajero(vViajes *v, int id_viaje,int id_viajero)
 {
     //Reasignamos memoria para un elemeto mas.
@@ -106,6 +112,40 @@ static void addPasajero(vViajes *v, int id_viaje,int id_viajero)
     v->pasaj[v->tam_pj].Id_viaje = id_viaje;
     v->pasaj[v->tam_pj].Id_viajero = id_viajero;
     ++v->tam_pj;
+}
+
+
+/**
+ * [listPasajeros description]
+ * @param  v                     [description]
+ * @param  id_viaje              [description]
+ * @param  pasajeros_encontrados [description]
+ * @return                       [description]
+ */
+static int *listPasajeros(vViajes *v, int id_viaje, int * pasajeros_encontrados) {
+    int *vector_tmp = NULL;
+    *pasajeros_encontrados = 0;
+    for (int i = 0; i < v->tam_pj; ++i) {
+        if (id_viaje == v->pasaj[i].Id_viaje) {
+            vector_tmp = (int *)realloc(vector_tmp, ((*pasajeros_encontrados) + 1) * sizeof(int));
+            if (vector_tmp == NULL)
+                exit(1);//Error con la reserva de memoria o reasignacion.
+            vector_tmp[(*pasajeros_encontrados)++] = i;//Se guarda el indice.
+        }
+    }
+    return vector_tmp;
+}
+
+/**
+ * Elimina un pasajero del vector pasaj
+ * @param v      Referencia al vector vViajes.
+ * @param vIndex Indice a eliminar.
+ */
+static void quitarPasajero(vViajes *v,int vIndex)
+{
+    memmove(&v->pasaj[vIndex], &v->pasaj[vIndex + 1],
+            (v->tam_pj - vIndex - 1) * sizeof(Pasajeros));
+    --v->tam_pj;
 }
 
 /**
@@ -392,7 +432,12 @@ static void eliminarViajes(vViajes *v, int id_viaje) {
         int *pasos = pasosViajes(v, id_viaje, &size_p);
         for (int i = 0; i < size_p; ++i)
             eliminarPaso(v, pasos[i] - i);
-        free(pasos);
+        if(pasos != NULL) free(pasos);
+        int size_l_pj = 0;
+        int *pasajeros = listPasajeros(v,id_viaje,&size_l_pj);
+        for(int i = 0;i < size_l_pj;++i)
+            quitarPasajero(v,pasajeros[i]-i);
+        if(pasajeros != NULL) free(pasajeros);
     } else
         printf("No existe el viaje: %d\n", id_viaje);
 }
@@ -541,7 +586,7 @@ void editarViajesUsuario(vViajes *v, vVehiculos *ve, int userId) {
     }
 }
 
-void incorporarseViaje(vViajes *v,int id_viajero){
+void incorporarseViaje(vViajes *v,int id_viajero,int* viaje){
     char tmp[LOCAL];
     printf("Introduzca una poblacion: ");
     scanf("%20[^\n]", tmp);
@@ -573,6 +618,7 @@ void incorporarseViaje(vViajes *v,int id_viajero){
             --opc;
         } while (opc < 0 && opc > slct - 1);
         --v->viajes[opciones[opc]].Plazas_libre;//Resta una plaza libre
+        *viaje = v->viajes[opciones[opc]].Id_viaje;
         addPasajero(v,v->viajes[opciones[opc]].Id_viaje,id_viajero);
         if(v->viajes[opciones[opc]].Plazas_libre == 0) v->viajes[opciones[opc]].Estado = 0;
         //Si es la ultima plaza se cambia el estado a cerrado.
@@ -597,6 +643,18 @@ void detalleViaje(vViajes* v){
         free(pasos);
     }
     else printf("No existe el viaje: %d\n",tmp);
+}
+
+void cancelarViaje(vViajes *v ,int Id_usuario,int id_viaje)
+{
+    int size_l_pj = 0;
+    int *pasajeros = listPasajeros(v,id_viaje,&size_l_pj);
+    for(int i = 0;i < size_l_pj;++i)
+    {
+        if(v->pasaj[pasajeros[i]].Id_viajero == Id_usuario)
+            quitarPasajero(v,pasajeros[i]);
+    }
+    if(pasajeros != NULL) free(pasajeros);
 }
 
 void publicarViajeAdmin(vViajes *v, vVehiculos *ve){

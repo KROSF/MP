@@ -96,7 +96,7 @@ static void userVehiculos(vVehiculos *v, int userId) {
  */
 void userViajes(vViajes *v, vVehiculos *ve, int userId) {
 
-  int opc, bucle = 1;
+  int opc, bucle = 1,viaje = -1;
   while (bucle == 1) {
     CLEAN;
     listarViajesAbiertos(v);
@@ -106,7 +106,8 @@ void userViajes(vViajes *v, vVehiculos *ve, int userId) {
     printf(" |    2. MODIFICAR VIAJE         |\n");
     printf(" |    3. INCORPORARSE A VIAJE    |\n");
     printf(" |    4. DETALLES VIAJE          |\n");
-    printf(" |    5. VOLVER                  |\n");
+    printf(" |    5. CANCELAR VIAJE          |\n");
+    printf(" |    6. VOLVER                  |\n");
     printf(" |_______________________________|\n");
     do {
       printf("\n\n  Seleccione una opci%cn: ", 162);
@@ -120,19 +121,22 @@ void userViajes(vViajes *v, vVehiculos *ve, int userId) {
         editarViajesUsuario(v, ve, userId);
         break;
       case 3:
-        incorporarseViaje(v,userId);
+        incorporarseViaje(v,userId,&viaje);
         break;
       case 4:
         detalleViaje(v);
         break;
       case 5:
+        cancelarViaje(v,userId,viaje);
+        break;
+      case 6:
         bucle = 0;
         break;
       default:
         printf("  Opci%cn incorrecta.", 162);
         break;
       }
-    } while (opc < 1 || opc > 5);
+  } while (opc < 1 || opc > 6);
   }
 }
 

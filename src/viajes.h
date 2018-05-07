@@ -110,14 +110,22 @@ EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
  * Permite a un usuario incorporarse a un viajes publicado en el sistema.
  * @param v Referencia al vector de viajes.
  * @param id_viajero Identificador del usuario que se une al viaje.
+ * @param viaje Indentificador al viaje que se incorpora.
  */
-EXTERN void incorporarseViaje(vViajes *v,int id_viajero);
+EXTERN void incorporarseViaje(vViajes *v,int id_viajero,int* viaje);
 
 /**
  * Permite a un usuario ver los datos de un viaje al detalle.
  * @param v Referencia al vector de viajes.
  */
 EXTERN void detalleViaje(vViajes* v);
+
+/**
+ * Cancelar la incorporacion a un viaje.
+ * @param v          Referencia vViajes.
+ * @param Id_usuario Identificador del que se da de baja;
+ */
+EXTERN void cancelarViaje(vViajes *v ,int Id_usuario,int id_viaje);
 
 /**
  * Permite a un administrador publicar un viaje en nombre de un usuario.
