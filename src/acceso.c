@@ -3,6 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+/**
+ * comrpueba que usuario introducido esté registrado
+ * @param  v referencia al vector user
+ * @return posición iésima del usuario / -1 si nº de intentos se ha superado
+ */
 static int check_user(vUsuarios *v) {
   int logincount = 0, i;
   char user[6];
@@ -13,7 +18,7 @@ static int check_user(vUsuarios *v) {
     scanf("%5s", user);
     flush_in();
 
-    printf("Contraseña: ");
+    printf("Contrase%ca: ",164);
     scanf("%8s", pass);
     flush_in();
     for (i = 0; i < v->tam; ++i) {
@@ -23,7 +28,7 @@ static int check_user(vUsuarios *v) {
     }
     CLEAN;
     logincount++;
-    printf("Usuario y/o Contraseña Incorrectos\n");
+    printf("Usuario y/o Contrase%ca Incorrectos\n",164);
     printf("Vuelta a intentarlo\n");
   }
   return -1;

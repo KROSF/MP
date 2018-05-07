@@ -4,6 +4,11 @@
 #include "menu.h"
 #include "utilidades.h"
 
+/**
+ * muestra menú del perfil para usuarios
+ * @param v         referencia al vector user
+ * @param userIndex id del usuario
+ */
 static void userPerfil(vUsuarios *v, int userIndex) {
 
   int opc, bucle = 1;
@@ -36,6 +41,11 @@ static void userPerfil(vUsuarios *v, int userIndex) {
   }
 }
 
+/**
+ * muestra menú de vehiculos para usuarios
+ * @param v         referencia al vector vehi
+ * @param userId id del usuario
+ */
 static void userVehiculos(vVehiculos *v, int userId) {
 
   int opc, bucle = 1;
@@ -78,6 +88,12 @@ static void userVehiculos(vVehiculos *v, int userId) {
   }
 }
 
+/**
+ * muestar menú de viajes para usuarios
+ * @param v      referencia al vector viajes
+ * @param ve     referencia al vector vehi
+ * @param userId id del usuario
+ */
 void userViajes(vViajes *v, vVehiculos *ve, int userId) {
 
   int opc, bucle = 1;
@@ -120,6 +136,11 @@ void userViajes(vViajes *v, vVehiculos *ve, int userId) {
   }
 }
 
+/**
+ * muestra menú de incidencias para usuarios
+ * @param v      referencia al vector inci
+ * @param userId id del usuario
+ */
 void userIncidencias(vIncidencias *v,int userId) {
 
   int opc, bucle;
@@ -154,10 +175,10 @@ void userIncidencias(vIncidencias *v,int userId) {
   }
 }
 
-void menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
-              int id) {
+menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
+              int indexusuario) {
 
-  int i = strlen(v->user[id].Nomb_usuario), j, espacio, opc, bucle;
+  int i = strlen(v->user[indexusuario].Nomb_usuario), j, espacio, opc, bucle;
   bucle = 1;
   while (bucle == 1) {
     CLEAN;
@@ -174,7 +195,7 @@ void menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
     for (j = 0; j < espacio; j++) {
       printf(" ");
     }
-    printf("%s", v->user[id].Nomb_usuario);
+    printf("%s", v->user[indexusuario].Nomb_usuario);
     for (j = 0; j < espacio; j++) {
       printf(" ");
     }
@@ -206,16 +227,16 @@ void menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
       flush_in();
       switch (opc) {
       case 1:
-        userPerfil(v, id);
+        userPerfil(v, indexusuario);
         break;
       case 2:
-        userVehiculos(vve,v->user[id].Id_usuario);
+        userVehiculos(vve,v->user[indexusuario].Id_usuario);
         break;
       case 3:
-        userViajes(vv,vve,v->user[id].Id_usuario);
+        userViajes(vv,vve,v->user[indexusuario].Id_usuario);
         break;
       case 4:
-        userIncidencias(vi,v->user[id].Id_usuario);
+        userIncidencias(vi,v->user[indexusuario].Id_usuario);
         break;
       case 5:
         bucle = 0;
@@ -228,6 +249,11 @@ void menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
   }
 }
 
+/**
+ * muestra menú de usuarios para administradores
+ * @param v referencia al vector user
+ * @param i referencia al vector inci
+ */
 static void adminUsuarios(vUsuarios *v, vIncidencias *i) {
 
   int opc, bucle;
@@ -270,7 +296,10 @@ static void adminUsuarios(vUsuarios *v, vIncidencias *i) {
     } while (opc < 1 || opc > 5);
   }
 }
-
+/**
+ * muestra el menú de vehículos para administradores
+ * @param v referencia al vector vehi
+ */
 static void adminVehiculos(vVehiculos *v) {
 
   int opc, bucle;
@@ -314,6 +343,11 @@ static void adminVehiculos(vVehiculos *v) {
   }
 }
 
+/**
+ * muestra el menú de viajes para administradores
+ * @param v   referencia al vector viajes
+ * @param vve referencia al vector vehi
+ */
 static void adminViajes(vViajes *v, vVehiculos *vve) {
 
   int opc, bucle;
@@ -357,6 +391,13 @@ static void adminViajes(vViajes *v, vVehiculos *vve) {
     } while (opc < 1 || opc > 5);
   }
 }
+
+/**
+ * muestra el menú de incidencias para administradores
+ * @param v  referencia al vector inci
+ * @param vv referencia al vector viajes
+ * @param ve referencia al vector vehi
+ */
 static void adminIncidencias(vIncidencias *v, vViajes *vv, vVehiculos *ve) {
 
   int opc, bucle;
@@ -403,9 +444,9 @@ static void adminIncidencias(vIncidencias *v, vViajes *vv, vVehiculos *ve) {
 }
 
 void menuAdmin(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
-               int id) {
+               int indexadmin) {
   CLEAN;
-  int i = strlen(v->user[id].Nomb_usuario), j, espacio, opc,
+  int i = strlen(v->user[indexadmin].Nomb_usuario), j, espacio, opc,
       bucle; // TAMAÑO TEXTO
   bucle = 1;
   while (bucle == 1) {
@@ -423,7 +464,7 @@ void menuAdmin(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
     for (j = 0; j < espacio; j++) {
       printf(" ");
     }
-    printf("%s", v->user[id].Nomb_usuario);
+    printf("%s", v->user[indexadmin].Nomb_usuario);
     for (j = 0; j < espacio; j++) {
       printf(" ");
     }
@@ -452,7 +493,7 @@ void menuAdmin(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
     }
 
     do {
-      printf("  Seleccione una opci%cn: ", 162);
+      printf("  \n\n  Seleccione una opci%cn: ", 162);
       scanf("%d", &opc);
       flush_in();
       switch (opc) {
