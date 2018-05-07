@@ -49,13 +49,21 @@ typedef struct{
     char* Poblacion;/**< Poblacion en la que se recoge o deja a un usuario */
     /*@}*/
 }Pasos;
+typedef struct{
+    /*@{*/
+    int Id_viaje;/**< Indentificador del viaje*/
+    int Id_viajero;/**< Indentificador del pasajero que esta en el viaje*/
+    /*@}*/
+}Pasajeros;
 /**
  * Estructura para contener el tamaño y el vector de pasos y viajes.
  */
 typedef struct{
     /*@{*/
+    Pasajeros* pasaj;/**< Vector dinamico con elementos del tipo Pasajeros*/
     Pasos* pasos;/**< Vector dinamico con elementos del tipo Pasos.*/
     Viajes* viajes;/**< Vector dinamico con elementos del tipo Pasos.*/
+    int tam_pj;/**< Tamaño del vector pasaj.*/
     int tam_p;/**< Tamaño del vector pasos.*/
     int tam_v;/**< Tamaño del vector viajes.*/
     /*@}*/
@@ -76,6 +84,13 @@ EXTERN Viajes* initViajes(int* n);
 EXTERN Pasos* initPasos(int* n);
 
 /**
+ * Inicializa una estructura del tipo Pasejeros;
+ * @param  n Referencia al tamaño de la estructura.
+ * @return   Un vector con los datos del fichero Pasajeros.txt
+ */
+EXTERN Pasajeros* initPasajeros(int* n);
+
+/**
  * Funcion para publicar un viaje en el sistema de esi-share.
  * @param v      Referencia al vector de viajes.
  * @param ve     Referencia al vector de vehiculos.
@@ -94,8 +109,9 @@ EXTERN void editarViajesUsuario(vViajes* v,vVehiculos* ve,int userId);
 /**
  * Permite a un usuario incorporarse a un viajes publicado en el sistema.
  * @param v Referencia al vector de viajes.
+ * @param id_viajero Identificador del usuario que se une al viaje.
  */
-EXTERN void incorporarseViaje(vViajes *v);
+EXTERN void incorporarseViaje(vViajes *v,int id_viajero);
 
 /**
  * Permite a un usuario ver los datos de un viaje al detalle.
@@ -132,7 +148,7 @@ EXTERN void listarViajesAdmin(vViajes* v);
 /**
 * Se guarda en fichero la estructura Viajes.
 * @param n tamaño del vector viajes.
-* @param viajes puntero al vector del tipo Viajes
+* @param viajes puntero al vector del tipo Viajes.
 * @details Guarda los datos en el fichero y libera la memoria.
 */
 EXTERN void saveViajes(int n,Viajes* viajes);
@@ -140,9 +156,17 @@ EXTERN void saveViajes(int n,Viajes* viajes);
 /**
 * Se guarda en fichero la estructura Pasos.
 * @param n tamaño del vector pasos.
+* @param viajes puntero al vector del tipo Pasos.
 * @details Guarda los datos en el fichero y libera la memoria.
 */
 EXTERN void savePasos(int n,Pasos* pasos);
+
+/**
+ * Se guarda en fichero la estructura Pasajeros.
+ * @param n     Tamaño del vector pasaj.
+ * @param pasaj puntero al vector de tipo Pasajeros.
+ */
+EXTERN void savePasajeros(int n,Pasajeros *pasaj);
 
 /**
  * Busca si un viaje exite en el vector.

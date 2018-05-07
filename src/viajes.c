@@ -97,6 +97,17 @@ static void addPaso(vViajes *v, int id_viaje) {
     ++v->tam_p;
 }
 
+static void addPasajero(vViajes *v, int id_viaje,int id_viajero)
+{
+    //Reasignamos memoria para un elemeto mas.
+    v->pasaj = (Pasajeros *)realloc(v->pasaj, (v->tam_pj + 1) * sizeof(Pasajeros));
+    if (v->pasaj == NULL)
+        exit(1);//Cierra el programa si existe algun error con la reasignacion.
+    v->pasaj[v->tam_pj].Id_viaje = id_viaje;
+    v->pasaj[v->tam_pj].Id_viajero = id_viajero;
+    ++v->tam_pj;
+}
+
 /**
  * Pregunta y recoge por la entrada estandar el importe del viaje.
  * @param v      Referencia al vector de viajes.
@@ -146,7 +157,7 @@ static void publicarViaje(vViajes *v, vVehiculos *vve, char *mat) {
     if (index > -1) {
         v->viajes = (Viajes *)realloc(v->viajes, (v->tam_v + 1) * sizeof(Viajes));
         if (v->viajes == NULL)
-            exit(1);//Cierra el programa si existe algun error con la reasignacion.
+            exit(EXIT_FAILURE);//Cierra el programa si existe algun error con la reasignacion.
         v->viajes[v->tam_v].Id_mat = (char *)malloc(ID_MAT * sizeof(char));
         v->viajes[v->tam_v].F_inic = (char *)malloc(FECHA  * sizeof(char));
         v->viajes[v->tam_v].H_inic = (char *)malloc(HORA   * sizeof(char));
@@ -155,7 +166,7 @@ static void publicarViaje(vViajes *v, vVehiculos *vve, char *mat) {
             v->viajes[v->tam_v].F_inic == NULL ||
             v->viajes[v->tam_v].H_inic == NULL ||
             v->viajes[v->tam_v].H_fin  == NULL)
-                exit(1);
+                exit(EXIT_FAILURE);
         //Nuevo id_viaje.
         v->viajes[v->tam_v].Id_viaje = generarIdViaje(v);
         //Coche que el viaje.
@@ -358,7 +369,7 @@ static void eliminarViaje(vViajes *v, int vIndex) {
  * @param v      Referencia al vector de viajes.
  * @param vIndex Indice del elemeto a eliminar del vector.
  */
-void eliminarPaso(vViajes *v, int vIndex) {
+static void eliminarPaso(vViajes *v, int vIndex) {
     //Liberar la memoria de las varibles dinamicas en la estructura.
     free(v->pasos[vIndex].Poblacion);
     //Desplaza los elementos del vector un posicion  desde el indice indicado.
@@ -392,7 +403,8 @@ static void eliminarViajes(vViajes *v, int id_viaje) {
  *
  */
 
-Viajes *initViajes(int *n) {
+Viajes *initViajes(int *n)
+{
     FILE *file = fopen("ficheros/Viajes.txt", "r");
     if (file == NULL) exit(1);
     (*n) = 0;
@@ -442,7 +454,8 @@ Viajes *initViajes(int *n) {
     return tmp;
 }
 
-Pasos *initPasos(int *n) {
+Pasos *initPasos(int *n)
+{
     FILE *file = fopen("ficheros/Pasos.txt", "r");
     if (file == NULL)   exit(1);
     (*n) = 0;
@@ -461,6 +474,25 @@ Pasos *initPasos(int *n) {
         (*n)++;
     }
     free(id_viaje);
+    fclose(file);
+    return tmp;
+}
+
+Pasajeros* initPasajeros(int* n)
+{
+    FILE *file = fopen("ficheros/Pasajeros.txt","r");
+    if (file == NULL)   exit(1);
+    (*n) = 0;
+    Pasajeros* tmp =NULL;
+    char id_viaje[ID_VIAJE],id_viajero[5];
+    while(!feof(file))
+    {
+        fscanf(file, "%[^-]-%[^\n]\n", id_viaje, id_viajero);
+        tmp = (Pasajeros *)realloc(tmp, ((*n) + 1) * sizeof(Pasajeros));
+        tmp[*n].Id_viaje = atoi(id_viaje);
+        tmp[*n].Id_viajero = atoi(id_viajero);
+        (*n)++;
+    }
     fclose(file);
     return tmp;
 }
@@ -509,7 +541,7 @@ void editarViajesUsuario(vViajes *v, vVehiculos *ve, int userId) {
     }
 }
 
-void incorporarseViaje(vViajes *v){
+void incorporarseViaje(vViajes *v,int id_viajero){
     char tmp[LOCAL];
     printf("Introduzca una poblacion: ");
     scanf("%20[^\n]", tmp);
@@ -517,12 +549,15 @@ void incorporarseViaje(vViajes *v){
     printf("Viajes que pasan por %s: \n",tmp);
     int l_size = 0,slct = 0,i,j;
     int *l_viajes = listaViajesAbiertos(v, &l_size);
+    int *opciones = NULL;
     for (i = 0; i < l_size; ++i) {
         int size_p = 0;
         int *pasos = pasosViajes(v, v->viajes[i].Id_viaje, &size_p);
         for (j = 0; j < size_p; ++j) {
             if(strcmp(v->pasos[pasos[j]].Poblacion, tmp)==0)
             {
+                opciones = (int*) realloc(opciones,(slct+1)*sizeof(int));
+                opciones[slct] = i;
                 printf("%d) Id viaje: %d Plazas: %d\n",++slct,v->viajes[i].Id_viaje,
                 v->viajes[i].Plazas_libre);
             }
@@ -537,9 +572,11 @@ void incorporarseViaje(vViajes *v){
             scanf("%d", &opc);
             --opc;
         } while (opc < 0 && opc > slct - 1);
-        --v->viajes[i].Plazas_libre;//Resta una plaza libre
-        if(v->viajes[i].Plazas_libre == 0) v->viajes[i].Estado = 0;
+        --v->viajes[opciones[opc]].Plazas_libre;//Resta una plaza libre
+        addPasajero(v,v->viajes[opciones[opc]].Id_viaje,id_viajero);
+        if(v->viajes[opciones[opc]].Plazas_libre == 0) v->viajes[opciones[opc]].Estado = 0;
         //Si es la ultima plaza se cambia el estado a cerrado.
+        free(opciones);
     }
     else printf("no hay viajes con destino a esa poblacion.\n");
 }
@@ -622,7 +659,8 @@ void saveViajes(int n, Viajes *viajes) {
     puts("Viajes Guardados");
 }
 
-void savePasos(int n, Pasos *pasos) {
+void savePasos(int n, Pasos *pasos)
+{
     FILE *file = fopen("ficheros/Pasos.txt", "w+");
     if (file == NULL)
         exit(1);
@@ -632,6 +670,17 @@ void savePasos(int n, Pasos *pasos) {
     }
     fclose(file);
     puts("Pasos Guardados");
+}
+
+void savePasajeros(int n,Pasajeros *pasaj)
+{
+    FILE *file = fopen("ficheros/Pasajeros.txt", "w+");
+    if (file == NULL)
+        exit(1);
+    for (int i = 0; i < n; ++i)
+        fprintf(file, "%06d-%04d\n", pasaj[i].Id_viaje, pasaj[i].Id_viajero);
+    fclose(file);
+    puts("Pasajeros Guardados");
 }
 
 int buscarIndexViajes(vViajes *v, int id_viaje) {
