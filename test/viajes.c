@@ -74,8 +74,8 @@ void generarFicheros(char* file_name,int tam, int dias,int estado,int hi,int hf)
     fclose(file);
 }
 
-Viajes *initViajes(int *n) {
-    FILE *file = fopen("ficheros/Viajes.txt", "r");
+Viajes *initViajes(int *n,char* fichero) {
+    FILE *file = fopen(fichero, "r");
     if (file == NULL) exit(EXIT_FAILURE);
     (*n) = 0;
     Viajes *tmp = NULL;
@@ -124,8 +124,8 @@ Viajes *initViajes(int *n) {
     return tmp;
 }
 
-void saveViajes(int n, Viajes *viajes) {
-    FILE *file = fopen("ficheros/Viajes.txt", "w+");
+void saveViajes(int n, Viajes *viajes,char * fichero) {
+    FILE *file = fopen(fichero, "w+");
     if (file == NULL)   exit(EXIT_FAILURE);
     for (int i = 0; i < n; ++i) {
         fprintf(file, "%06d-%s-%s-%s-%s-%d-%s-%.2f€-%s\n", viajes[i].Id_viaje,
@@ -138,7 +138,6 @@ void saveViajes(int n, Viajes *viajes) {
         free(viajes[i].H_fin);
     }
     fclose(file);
-    puts("Viajes Guardados");
 }
 
 void actualizarViajes(vViajes *v) {
@@ -162,7 +161,7 @@ void actualizarViajes(vViajes *v) {
                 v->viajes[i].Estado = 3;
             else if (fechaIgual(&f_inic))
             {
-                if(horaMenor(&h_inic))
+                if(horaMenor(&h_inic) && !horaMenor(&h_fin))
                     v->viajes[i].Estado = 2;
                 else if (horaMenor(&h_fin))
                     v->viajes[i].Estado = 3;

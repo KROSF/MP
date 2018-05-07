@@ -784,7 +784,7 @@ void actualizarViajes(vViajes *v) {
                 v->viajes[i].Estado = 3;
             else if (fechaIgual(&f_inic))
             {
-                if(horaMenor(&h_inic))
+                if(horaMenor(&h_inic) && !horaMenor(&h_fin))
                     v->viajes[i].Estado = 2;
                 else if (horaMenor(&h_fin))
                     v->viajes[i].Estado = 3;

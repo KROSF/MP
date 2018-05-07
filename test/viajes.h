@@ -65,7 +65,7 @@ EXTERN void generarFicheros(char* file_name,int tam, int dias,int estado,int hi,
  * @param  n Referencia al tamaño de la estructura.
  * @return   Un vector con los datos del fichero Viajes.txt
  */
-EXTERN Viajes* initViajes(int* n);
+EXTERN Viajes* initViajes(int* n,char* fichero);
 
 /**
 * Se guarda en fichero la estructura Viajes.
@@ -73,7 +73,7 @@ EXTERN Viajes* initViajes(int* n);
 * @param viajes puntero al vector del tipo Viajes
 * @details Guarda los datos en el fichero y libera la memoria.
 */
-EXTERN void saveViajes(int n,Viajes* viajes);
+EXTERN void saveViajes(int n, Viajes *viajes,char * fichero);
 
 /**
  * Actualiza el estado de los viajes.
