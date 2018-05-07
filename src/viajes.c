@@ -770,7 +770,7 @@ void actualizarViajes(vViajes *v) {
     memset(&h_inic, 0, sizeof(struct tm));
     memset(&f_inic, 0, sizeof(struct tm));
     for (int i = 0; i < v->tam_v; ++i) {
-        if (v->viajes[i].Estado == 1 || v->viajes[i].Estado == 0 )
+        if (v->viajes[i].Estado != 4 )
         {   //convesion de fecha y hora a formato mas manejable
             sscanf(v->viajes[i].H_inic,"%d:%d",&h_inic.tm_hour, &h_inic.tm_min);
             sscanf(v->viajes[i].H_fin, "%d:%d", &h_fin.tm_hour, &h_fin.tm_min);

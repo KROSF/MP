@@ -15,6 +15,13 @@ FCT_BGN()
             fct_chk(1==1);
         }
         FCT_TEST_END();
+        FCT_TEST_BGN(Test_Estructura_Vacia: no se cumpla la condicion del bucle)
+        {
+            generarFicheros("ficheros/prueba.txt",22,-2);
+            fct_chk(1==1);
+        }
+        FCT_TEST_END();
+
     }
     FCT_SUITE_END();
 }
