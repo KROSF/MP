@@ -96,7 +96,7 @@ static void userVehiculos(vVehiculos *v, int userId) {
  */
 void userViajes(vViajes *v, vVehiculos *ve, int userId) {
 
-  int opc, bucle = 1,viaje = -1;
+  int opc, bucle = 1;v->last = -1;
   while (bucle == 1) {
     CLEAN;
     listarViajesAbiertos(v);
@@ -121,13 +121,13 @@ void userViajes(vViajes *v, vVehiculos *ve, int userId) {
         editarViajesUsuario(v, ve, userId);
         break;
       case 3:
-        incorporarseViaje(v,userId,&viaje);
+        incorporarseViaje(v,userId,&v->last);
         break;
       case 4:
         detalleViaje(v);
         break;
       case 5:
-        cancelarViaje(v,userId,viaje);
+        cancelarViaje(v,userId);
         break;
       case 6:
         bucle = 0;

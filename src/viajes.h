@@ -66,6 +66,7 @@ typedef struct{
     int tam_pj;/**< Tamaño del vector pasaj.*/
     int tam_p;/**< Tamaño del vector pasos.*/
     int tam_v;/**< Tamaño del vector viajes.*/
+    int last;/**< Ultimo viaje al que se incorpora un usuario.*/
     /*@}*/
 }vViajes;
 
@@ -125,7 +126,7 @@ EXTERN void detalleViaje(vViajes* v);
  * @param v          Referencia vViajes.
  * @param Id_usuario Identificador del que se da de baja;
  */
-EXTERN void cancelarViaje(vViajes *v ,int Id_usuario,int id_viaje);
+EXTERN void cancelarViaje(vViajes *v ,int Id_usuario);
 
 /**
  * Permite a un administrador publicar un viaje en nombre de un usuario.

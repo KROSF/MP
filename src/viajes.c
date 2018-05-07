@@ -645,10 +645,10 @@ void detalleViaje(vViajes* v){
     else printf("No existe el viaje: %d\n",tmp);
 }
 
-void cancelarViaje(vViajes *v ,int Id_usuario,int id_viaje)
+void cancelarViaje(vViajes *v ,int Id_usuario)
 {
     int size_l_pj = 0;
-    int *pasajeros = listPasajeros(v,id_viaje,&size_l_pj);
+    int *pasajeros = listPasajeros(v,v->last,&size_l_pj);
     for(int i = 0;i < size_l_pj;++i)
     {
         if(v->pasaj[pasajeros[i]].Id_viajero == Id_usuario)
