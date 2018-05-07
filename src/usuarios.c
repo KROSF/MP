@@ -99,9 +99,10 @@ void saveUsuarios(int n, Usuarios *usuarios) {
   puts("Usuarios Guardados");
 }
 void printPerfil(vUsuarios *v, int userIndex) {
-  printf("%d-%s-%s-%s-%s-%s-%s\n", v->user[userIndex].Id_usuario,
+  printf("  Id: %d\n  Nombre: %s\n  Localidad: %s\n  Perfil: %s\n  Usuario: %s\n  Contrase%ca: %s\n  Estado: %s\n",
+         v->user[userIndex].Id_usuario,
          v->user[userIndex].Nomb_usuario, v->user[userIndex].Localidad,
-         Perfil[v->user[userIndex].Perfil_usuario], v->user[userIndex].User,
+         Perfil[v->user[userIndex].Perfil_usuario], v->user[userIndex].User,164,
          v->user[userIndex].Login, Estado_U[v->user[userIndex].Estado]);
 }
 
@@ -250,14 +251,16 @@ void modificarUsuario(vUsuarios *v, int userId) {
 }
 
 void listarUsuarios(vUsuarios *u, vIncidencias *vi) {
+    CLEAN;
   for (int i = 0; i < u->tam; ++i) {
-    printf("%d-%s-%s-%s-%s-%s-%s ", u->user[i].Id_usuario,
+    printf("\n%d - %s - %s - %s - %s - %s - %s ", u->user[i].Id_usuario,
            u->user[i].Nomb_usuario, u->user[i].Localidad,
            Perfil[u->user[i].Perfil_usuario], u->user[i].User, u->user[i].Login,
            Estado_U[u->user[i].Estado]);
-    printf("Nº incidencias: %d\n",
+    printf("- n%c incidencias: %d\n",167,
            incidenciasUsuario(vi, u->user[i].Id_usuario));
   }
+  system_pause();
 }
 
 void preguntarIdBaja(vUsuarios *v) {
