@@ -1,0 +1,27 @@
+\section{ACCEDER}
+
+\subsection{Funciones}
+\begin{itemize}
+    \item \funrf{int *acceder(vUsuarios *usuarios)}{acceder}
+   
+\end{itemize}
+\subsection{Definiciones}
+\begin{itemize}
+    \item \label{initviajes}\cc{int *acceder(vUsuarios *usuarios)}
+    \begin{itemize}
+        \item \textbf{Descripcion}
+        \begin{itemize}
+			\item Comprueba el tipo de usuario (usuario/administrador).
+		\end{itemize}
+		\item \textbf{Parametros}
+		\begin{itemize}
+			\item \cc{usuarios} $\rightarrow$ Referencia al vector user.
+		\end{itemize}
+		\item \textbf{Devuelve}
+		\begin{itemize}
+			\item Iésima posición del usuario / -1 si no lo ha encontrado posición 0.
+			\item Tipo usuario (0 (admin) / 1 (usuario)) en posición 1.
+		\end{itemize}
+	\end{itemize}
+
+\end{itemize}
