@@ -4,6 +4,9 @@
 #define ID_USUARIO 5
 #define NPLAZS 2
 #define DES_VEH 51
+/**
+ * Estructura para representar en memoria el fichero Vehiculos.txt
+ */
 typedef struct{
     /*@{*/
     char * Id_mat;/**< Matricula del vehiculo */
@@ -12,25 +15,97 @@ typedef struct{
     char * Desc_veh;/**< Breve descripcion del vehiculo */
     /*@}*/
 }Vehiculos;
+/**
+ * Estructura para contener el tamaño y el vector vehi.
+ */
 typedef struct{
-    Vehiculos* vehi;
-    int tam;
+    /*@{*/
+    Vehiculos* vehi;/**< Vector dinamico con elementos del tipo Vehiculos*/
+    int tam;/**< Tamaño del vector vehi.*/
+    /*@}*/
 }vVehiculos;
 
+/**
+ * [initVehiculos description]
+ * @param  n [description]
+ * @return   [description]
+ */
 Vehiculos* initVehiculos(int* n);
+
+/**
+ * [saveVehiculos description]
+ * @param n         [description]
+ * @param vehiculos [description]
+ */
 void saveVehiculos(int n ,Vehiculos* vehiculos);
 
+/**
+ * [buscarIndexVehiculo description]
+ * @param  v   [description]
+ * @param  mat [description]
+ * @return     [description]
+ */
 int buscarIndexVehiculo(vVehiculos* v,char* mat);
-void altaVehiculos(vVehiculos* v,int userId);//non-static admin
-void bajaVehiculos(vVehiculos* v,char* mat);//non-static admin
-void modificarVehiculo(vVehiculos* v,char* mat);//non-static admin
-void listarVehiculos(vVehiculos* v);//non-static admin
-int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j);//Non-static
-void listarVehiculosUser(vVehiculos* v,int userId);
-void eliminarVehiculoUser(vVehiculos* v,int userId);
-void modificarVehiculoUser(vVehiculos* v,int userId);
-void altaVehiculosAdmin(vVehiculos* v);
-void bajaVehiculosAdmin(vVehiculos* v);
-void modificarVehiculosAdmin(vVehiculos* v);
 
+/**
+ * [altaVehiculos description]
+ * @param v      [description]
+ * @param userId [description]
+ */
+void altaVehiculos(vVehiculos* v,int userId);
+
+/**
+ * [listarVehiculos description]
+ * @param v [description]
+ */
+void listarVehiculos(vVehiculos* v);
+
+
+/**
+ * [listarVehiculosViajes description]
+ * @param  v       [description]
+ * @param  id_user [description]
+ * @param  j       [description]
+ * @return         [description]
+ */
+int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j);
+
+/**
+ * [listarVehiculosUser description]
+ * @param v      [description]
+ * @param userId [description]
+ */
+void listarVehiculosUser(vVehiculos* v,int userId);
+
+/**
+ * [eliminarVehiculoUser description]
+ * @param v      [description]
+ * @param userId [description]
+ */
+void eliminarVehiculoUser(vVehiculos* v,int userId);
+
+/**
+ * [modificarVehiculoUser description]
+ * @param v      [description]
+ * @param userId [description]
+ */
+void modificarVehiculoUser(vVehiculos* v,int userId);
+
+/**
+ * [altaVehiculosAdmin description]
+ * @param v [description]
+ */
+void altaVehiculosAdmin(vVehiculos* v);
+
+/**
+ * [bajaVehiculosAdmin description]
+ * @param v [description]
+ */
+void bajaVehiculosAdmin(vVehiculos* v);
+
+/**
+ * [modificarVehiculosAdmin description]
+ * @param v [description]
+ */
+void modificarVehiculosAdmin(vVehiculos* v);
 #endif

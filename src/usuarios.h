@@ -26,8 +26,10 @@ typedef struct{
  * Estructura para contener el tamaño y el vector user.
  */
 typedef struct{
-  Usuarios* user;/**< Vector dinamico con elementos del tipo Usuarios*/
-  int tam;/**< Tamaño del vector user.*/
+    /*@{*/
+    Usuarios* user;/**< Vector dinamico con elementos del tipo Usuarios*/
+    int tam;/**< Tamaño del vector user.*/
+    /*@}*/
 }vUsuarios;
 /**
  * Inicializador de la estructura USUARIOS

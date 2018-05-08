@@ -3,13 +3,110 @@
 #include <string.h>
 #include "vehiculos.h"
 #include "utilidades.h"
-static void eliminarVehiculo(vVehiculos* v,int vIndex);
-static void matricula(vVehiculos* v,int vIndex);
-static void descripcion(vVehiculos* v,int vIndex);
-static void num_plazas(vVehiculos* v,int vIndex);
+
+/**
+ * [eliminarVehiculo description]
+ * @param v      [description]
+ * @param vIndex [description]
+ */
+static void eliminarVehiculo(vVehiculos* v,int vIndex)
+{
+    free(v->vehi[vIndex].Id_mat);
+    free(v->vehi[vIndex].Desc_veh);
+    memmove(&v->vehi[vIndex],&v->vehi[vIndex+1],(v->tam-vIndex-1)*sizeof(Vehiculos));
+    --v->tam;
+}
+
+/**
+ * [bajaVehiculos description]
+ * @param v   [description]
+ * @param mat [description]
+ */
+static void bajaVehiculos(vVehiculos* v, char* mat)
+{
+    int index = buscarIndexVehiculo(v,mat);
+    if(index > -1)
+    {
+        eliminarVehiculo(v,index);
+    }else printf("No existe un vehiculo con dicha matricula\n");
+}
+
+/**
+ * [matricula description]
+ * @param v      [description]
+ * @param vIndex [description]
+ */
+static void matricula(vVehiculos* v,int vIndex)
+{
+    int tmp = 0;
+    char tmpc[3];
+    do{
+        printf("Ingrese matricula: ");
+        scanf("%7[^\n]",v->vehi[vIndex].Id_mat);
+        flush_in();
+    }while( sscanf(v->vehi[vIndex].Id_mat,"%4d%3s",&tmp,tmpc) != 2);
+}
+
+/**
+ * [descripcion description]
+ * @param v      [description]
+ * @param vIndex [description]
+ */
+static void descripcion(vVehiculos* v,int vIndex)
+{
+    printf("Ingrese descripcion: ");
+    scanf("%50[^\n]",v->vehi[vIndex].Desc_veh);
+    flush_in();
+}
+
+/**
+ * [num_plazas description]
+ * @param v      [description]
+ * @param vIndex [description]
+ */
+static void num_plazas(vVehiculos* v,int vIndex)
+{
+    printf("Ingrese numero de plazas: ");
+    scanf("%1d[^\n]",&v->vehi[vIndex].Num_plazas);
+    flush_in();
+}
+
+/**
+ * [modificarVehiculo description]
+ * @param v   [description]
+ * @param mat [description]
+ */
+static void modificarVehiculo(vVehiculos* v,char* mat)
+{
+    int tmp = 0, index = buscarIndexVehiculo(v,mat);
+    if(index > - 1)
+    {
+        printf(" 1. Matricula\n 2. Descripcion\n 3. Numero de Plazas\n");
+        printf("Seleccione una opcion: ");
+        scanf("%1d[^\n]",&tmp);
+        flush_in();
+        switch (tmp) {
+            case 1:matricula(v,index);break;
+            case 2:descripcion(v,index);break;
+            case 3:num_plazas(v,index);break;
+            default:printf("Opcion no valida no se hace nada.\n");break;
+        }
+    }
+}
 
 
-/* Funciones Publicas */
+
+/***
+*      ____ __ __ __  __   ___ __   ___   __  __  ____  __
+*     ||    || || ||\ ||  //   ||  // \\  ||\ || ||    (( \
+*     ||==  || || ||\\|| ((    || ((   )) ||\\|| ||==   \\
+*     ||    \\_// || \||  \\__ ||  \\_//  || \|| ||___ \_))
+*
+*               ____  __ __ ____  __    __   ___  ___   __
+*               || \\ || || || )) ||    ||  //   // \\ (( \
+*               ||_// || || ||=)  ||    || ((    ||=||  \\
+*               ||    \\_// ||_)) ||__| ||  \\__ || || \_))
+*/
 
 Vehiculos* initVehiculos(int * n)
 {
@@ -59,31 +156,6 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
     puts("Vehiculos Guardados");
 }
 
-void matricula(vVehiculos* v,int vIndex)
-{
-    int tmp = 0;
-    char tmpc[3];
-    do{
-        printf("Ingrese matricula: ");
-        scanf("%7[^\n]",v->vehi[vIndex].Id_mat);
-        flush_in();
-    }while( sscanf(v->vehi[vIndex].Id_mat,"%4d%3s",&tmp,tmpc) != 2);
-}
-
-void descripcion(vVehiculos* v,int vIndex)
-{
-    printf("Ingrese descripcion: ");
-    scanf("%50[^\n]",v->vehi[vIndex].Desc_veh);
-    flush_in();
-}
-
-void num_plazas(vVehiculos* v,int vIndex)
-{
-    printf("Ingrese numero de plazas: ");
-    scanf("%1d[^\n]",&v->vehi[vIndex].Num_plazas);
-    flush_in();
-}
-
 void altaVehiculos(vVehiculos* v,int userId)//opc2user
 {
     v->vehi = (Vehiculos*) realloc(v->vehi,(v->tam+1)  * sizeof(Vehiculos));
@@ -103,41 +175,6 @@ int buscarIndexVehiculo(vVehiculos* v,char* mat)
       if(strcmp(mat,v->vehi[i].Id_mat) == 0) return i;
     }
     return -1;
-}
-
-void bajaVehiculos(vVehiculos* v, char* mat)
-{
-    int index = buscarIndexVehiculo(v,mat);
-    if(index > -1)
-    {
-        eliminarVehiculo(v,index);
-    }else printf("No existe un vehiculo con dicha matricula\n");
-}
-
-void eliminarVehiculo(vVehiculos* v,int vIndex)
-{
-    free(v->vehi[vIndex].Id_mat);
-    free(v->vehi[vIndex].Desc_veh);
-    memmove(&v->vehi[vIndex],&v->vehi[vIndex+1],(v->tam-vIndex-1)*sizeof(Vehiculos));
-    --v->tam;
-}
-
-void modificarVehiculo(vVehiculos* v,char* mat)
-{
-    int tmp = 0, index = buscarIndexVehiculo(v,mat);
-    if(index > - 1)
-    {
-        printf(" 1. Matricula\n 2. Descripcion\n 3. Numero de Plazas\n");
-        printf("Seleccione una opcion: ");
-        scanf("%1d[^\n]",&tmp);
-        flush_in();
-        switch (tmp) {
-            case 1:matricula(v,index);break;
-            case 2:descripcion(v,index);break;
-            case 3:num_plazas(v,index);break;
-            default:printf("Opcion no valida no se hace nada.\n");break;
-        }
-    }
 }
 
 void listarVehiculos(vVehiculos* v)
