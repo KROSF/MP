@@ -235,7 +235,7 @@ void crearIncidenciasUser(vIncidencias*v,vViajes* vv ,vVehiculos* ve,int userId 
     int indexViaje = buscarIndexViajes(vv,tmp);
     if(indexPasajero > -1 && indexViaje > -1)
     {
-        crearIncidencias(v,vv,ve,indexViaje,0);
+        crearIncidencias(v,vv,ve,indexViaje,userId);
     }
     else printf("No existe el viaje o no ha viajado en dicho viaje\n");
 }
