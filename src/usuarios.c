@@ -3,79 +3,183 @@
 #include <string.h>
 #include "usuarios.h"
 #include "utilidades.h"
-static const char *Estado_U[] = {"bloqueado", "activo"};
 /**
- * Varible global para obtener el perfil de un usuario
+ * Variable global para obtener el estado de un usuario.
+ */
+static const char *Estado_U[] = {"bloqueado", "activo"};
+
+/**
+ * Variable global para obtener el perfil de un usuario.
  */
 static const char *Perfil[] = {"administrador", "usuario"};
+
 /**
  * Estado Usuario a entero
- * @param c referencia a la cadena
- * @return 1 si el estado es activo 0 bloqueado
+ * @param recibe c referencia a la cadena
+ * @return devuelve 1 si estado activo, 0 si estado bloqueado
  */
-static int estadoUsuario(char **c);
-
-static void modificarPerfilUsuario(vUsuarios *v, int userId);
-static void modificarEstadoUsuario(vUsuarios *v, int userId);
-static void localidadUsuario(vUsuarios *v, int uIndex);
-static void loginUsuario(vUsuarios *v, int uIndex);
-static void nombreUsuario(vUsuarios *v, int uIndex);
-static void passUsuario(vUsuarios *v, int uIndex);
-static int generarIdUsuario(vUsuarios *v);
-static void bajaUsuario(vUsuarios *v, int uIndex);
-
-int estadoUsuario(char **c) { return (strcmp(*c, "activo") == 0) ? 1 : 0; }
+static int estadoUsuario(char *c) { return (strcmp(c, "activo") == 0) ? 1 : 0; }
 
 /**
  * Perfil usuario a entero
- * @param c referencia a la cadena
- * @return 1 si el perfil es usuario 0 administrador
+ * @param recibe c referencia a la cadena
+ * @return devuelve 1 si el perfil es usuario 0 administrador
  */
-static int perfilUsuarioAint(char **c);
+static int perfilUsuarioAint(char *c) { return (strcmp(c, "usuario") == 0) ? 1 : 0; }
 
-int perfilUsuarioAint(char **c) { return (strcmp(*c, "usuario") == 0) ? 1 : 0; }
+/**
+ * Modificación nombre usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe uIndex con el indice del usuario seleccionado
+ */
+static void nombreUsuario(vUsuarios *v, int uIndex) {
+  printf("Ingrese nombre: ");
+  scanf("%20[^\n]", v->user[uIndex].Nomb_usuario);
+  flush_in();
+}
+
+/**
+ * Modificación localidad usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe uIndex con el indice del usuario seleccionado
+ */
+static void localidadUsuario(vUsuarios *v, int uIndex) {
+  printf("Ingrese localidad: ");
+  scanf("%20[^\n]", v->user[uIndex].Localidad);
+  flush_in();
+}
+
+/**
+ * Modificación contraseña usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe uIndex con el indice del usuario seleccionado
+ */
+static void passUsuario(vUsuarios *v, int uIndex) {
+  printf("Ingrese contraseña: ");
+  scanf("%8[^\n]", v->user[uIndex].Login);
+  flush_in();
+}
+
+/**
+ * Modificación user usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe uIndex con el indice del usuario seleccionado
+ */
+static void loginUsuario(vUsuarios *v, int uIndex) {
+  printf("Ingrese nombre de usuario: ");
+  scanf("%5[^\n]", v->user[uIndex].User);
+  flush_in();
+}
+
+/**
+ * Genera Id Usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @return devuelve nuevo usuario a partir del último en el vector
+ */
+static int generarIdUsuario(vUsuarios *v) {
+  return v->user[v->tam - 1].Id_usuario + 1;
+}
+
+/**
+ * modificar Tipo Perfil de un Usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe userId con el id de usuario seleccionado
+ */
+static void modificarPerfilUsuario(vUsuarios *v, int userId) {
+  int tmp = 0;
+  do {
+    puts("Seleccione el perfil: ");
+    puts("0) Administrador");
+    puts("1) Usuario");
+    scanf("%1d[^\n]", &tmp);
+    flush_in();
+  } while (tmp < 0 || tmp > 1);
+  v->user[userId].Perfil_usuario = tmp;
+}
+
+/**
+ * Modificar el Estado de un Usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe userId con el id de usuario seleccionado
+ */
+static void modificarEstadoUsuario(vUsuarios *v, int userId) {
+  int tmp = 0;
+  do {
+    puts("Seleccione estado: ");
+    puts("0) Bloqueado");
+    puts("1) Activo");
+    scanf("%1d[^\n]", &tmp);
+    flush_in();
+  } while (tmp < 0 || tmp > 1);
+  v->user[userId].Perfil_usuario = tmp;
+}
+
+/**
+ * Eliminar un usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe uIndex con el indice del usuario seleccionado
+ */
+static void bajaUsuario(vUsuarios *v, int uIndex) {
+  free(v->user[uIndex].Nomb_usuario);
+  free(v->user[uIndex].Localidad);
+  free(v->user[uIndex].User);
+  free(v->user[uIndex].Login);
+  memmove(&v->user[uIndex], &v->user[uIndex + 1],
+          (v->tam - uIndex - 1) * sizeof(Usuarios));
+  --v->tam;
+}
+
+/**
+ * Busqueda del indice de un usuario
+ * @param recibe v referencia al vector de Usuarios
+ * @param recibe userId con el indice del  usuario seleccionado
+ * @return devuelve i con un entero, si coincide con el id buscado; sino devuelve -1
+ */
+static int buscarIndexUsuario(vUsuarios *v, int userId) {
+  for (int i = 0; i < v->tam; ++i) {
+    if (userId == v->user[i].Id_usuario)
+      return i;
+  }
+  return -1;
+}
+
+/* Funciones Publicas */
 
 /* ficheros a estrucuturas */
 
-Usuarios *initUsuarios(int *n) {
-  FILE *file = fopen("ficheros/Usuarios.txt", "r");
-  if (file == NULL)
-    exit(1);
-  Usuarios *tmp = NULL;
-  (*n) = 0;
-  char *id, *nomb, *locld, *usr, *log, *perfil, *estado;
+Usuarios *initUsuarios(int * n){
+    FILE *file = fopen("ficheros/Usuarios.txt", "r");
+    if( file == NULL ) exit(1);
+    Usuarios *tmp=NULL;
+    (*n) = 0;
+    char *nomb,*locld,*usr,*logg;
+    char id[ID_USUARIO],perfil[PERFIL],estado[ESTADO_U];
 
-  while (!feof(file)) {
-    id = (char *)malloc(ID_USUARIO * sizeof(char));
-    nomb = (char *)malloc(NOMB * sizeof(char));
-    locld = (char *)malloc(LOCAL * sizeof(char));
-    usr = (char *)malloc(USR * sizeof(char));
-    log = (char *)malloc(LOGINPASS * sizeof(char));
-    perfil = (char *)malloc(PERFIL * sizeof(char));
-    estado = (char *)malloc(ESTADO_U * sizeof(char));
+    while(!feof(file))
+    {
+        nomb   = (char*) malloc(NOMB       * sizeof(char));
+        locld  = (char*) malloc(LOCAL      * sizeof(char));
+        usr    = (char*) malloc(USR        * sizeof(char));
+        logg    = (char*) malloc(LOGINPASS  * sizeof(char));
 
-    if (id == NULL || nomb == NULL || locld == NULL || usr == NULL ||
-        log == NULL || perfil == NULL || estado == NULL)
-      exit(1);
+        if( nomb == NULL || locld == NULL || usr == NULL ||logg == NULL)
+            exit(1);
 
-    fscanf(file, "%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^\n]\n", id, nomb,
-           locld, perfil, usr, log, estado);
-    tmp = (Usuarios *)realloc(tmp, (*n + 1) * sizeof(Usuarios));
+        fscanf(file, "%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^-]-%[^\n]\n",
+                id, nomb, locld, perfil ,usr,logg,estado);
+        tmp = (Usuarios*) realloc(tmp,(*n+1) * sizeof(Usuarios));
 
-    tmp[*n].Id_usuario = atoi(id);
-    tmp[*n].Nomb_usuario = nomb;
-    tmp[*n].Localidad = locld;
-    tmp[*n].Perfil_usuario = perfilUsuarioAint(&perfil);
-    tmp[*n].User = usr;
-    tmp[*n].Login = log;
-    tmp[*n].Estado = estadoUsuario(&estado);
-    (*n)++;
-    free(id);
-    free(perfil);
-    free(estado);
-  }
-  fclose(file);
-  return tmp;
+        tmp[*n].Id_usuario     = atoi(id);
+        tmp[*n].Nomb_usuario   = nomb;
+        tmp[*n].Localidad      = locld;
+        tmp[*n].Perfil_usuario = perfilUsuarioAint(perfil);
+        tmp[*n].User           = usr;
+        tmp[*n].Login          = logg;
+        tmp[*n].Estado         = estadoUsuario(estado);
+        (*n)++;
+    }
+    fclose(file);
+    return tmp;
 }
 
 void saveUsuarios(int n, Usuarios *usuarios) {
@@ -129,74 +233,6 @@ void perfilUsuario(vUsuarios *v, int userIndex) {
     printf("Opcion no valida no se hace nada.\n");
     break;
   }
-}
-
-void nombreUsuario(vUsuarios *v, int uIndex) {
-  printf("Ingrese nombre: ");
-  scanf("%20[^\n]", v->user[uIndex].Nomb_usuario);
-  flush_in();
-}
-
-void localidadUsuario(vUsuarios *v, int uIndex) {
-  printf("Ingrese localidad: ");
-  scanf("%20[^\n]", v->user[uIndex].Localidad);
-  flush_in();
-}
-void passUsuario(vUsuarios *v, int uIndex) {
-  printf("Ingrese contraseña: ");
-  scanf("%8[^\n]", v->user[uIndex].Login);
-  flush_in();
-}
-void loginUsuario(vUsuarios *v, int uIndex) {
-  printf("Ingrese nombre de usuario: ");
-  scanf("%5[^\n]", v->user[uIndex].User);
-  flush_in();
-}
-// mal implimentada antes preguntar id
-void bajaUsuario(vUsuarios *v, int uIndex) {
-  free(v->user[uIndex].Nomb_usuario);
-  free(v->user[uIndex].Localidad);
-  free(v->user[uIndex].User);
-  free(v->user[uIndex].Login);
-  memmove(&v->user[uIndex], &v->user[uIndex + 1],
-          (v->tam - uIndex - 1) * sizeof(Usuarios));
-  --v->tam;
-}
-
-int buscarIndexUsuario(vUsuarios *v, int userId) {
-  for (int i = 0; i < v->tam; ++i) {
-    if (userId == v->user[i].Id_usuario)
-      return i;
-  }
-  return -1;
-}
-
-int generarIdUsuario(vUsuarios *v) {
-  return v->user[v->tam - 1].Id_usuario + 1;
-}
-
-void modificarPerfilUsuario(vUsuarios *v, int userId) {
-  int tmp = 0;
-  do {
-    puts("Seleccione el perfil: ");
-    puts("0) Administrador");
-    puts("1) Usuario");
-    scanf("%1d[^\n]", &tmp);
-    flush_in();
-  } while (tmp < 0 || tmp > 1);
-  v->user[userId].Perfil_usuario = tmp;
-}
-
-void modificarEstadoUsuario(vUsuarios *v, int userId) {
-  int tmp = 0;
-  do {
-    puts("Seleccione estado: ");
-    puts("0) Bloqueado");
-    puts("1) Activo");
-    scanf("%1d[^\n]", &tmp);
-    flush_in();
-  } while (tmp < 0 || tmp > 1);
-  v->user[userId].Perfil_usuario = tmp;
 }
 
 void altaUsuario(vUsuarios *v) {
@@ -275,11 +311,10 @@ void preguntarIdBaja(vUsuarios *v) {
     printf("No existe el usuario introducido\n");
 }
 
-int preguntarIdModificar() {
-
-  int tmp;
-  printf("Introduzca el id del usuario a modificar: ");
-  scanf("%d", &tmp);
-  flush_in();
-  return tmp;
+int preguntarIdModificar(void) {
+    int tmp;
+    printf("Introduzca el id del usuario a modificar: ");
+    scanf("%d", &tmp);
+    flush_in();
+    return tmp;
 }

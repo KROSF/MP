@@ -56,7 +56,7 @@ typedef struct{
     /*@}*/
 }Pasajeros;
 /**
- * Estructura para contener el tamaño y el vector de pasos y viajes.
+ * Estructura para contener el tamaño y el vector de pasos, viajes y pasajeros.
  */
 typedef struct{
     /*@{*/
@@ -187,11 +187,12 @@ EXTERN void savePasajeros(int n,Pasajeros *pasaj);
 EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
 
 /**
- * [buscarIndexPasejeros description]
- * @param  v       [description]
- * @param  viaje   [description]
- * @param  viajero [description]
- * @return         [description]
+ * Comprueba si un usuario esta en un viaje.
+ * @param  v       Referencia al vector de viajes.
+ * @param  viaje   Viaje a buscar.
+ * @param  viajero Identificador del usuario.
+ * @return          -1 Si no se encuentra.
+ * @return          iesima posicion del vector donde se cumple la condicion.
  */
 EXTERN int buscarIndexPasejeros(vViajes *v, int viaje,int viajero);
 

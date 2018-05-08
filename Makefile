@@ -10,7 +10,7 @@ run: $(EXE)
 	./$<
 
 run_v: $(EXE)
-	valgrind ./$<
+	valgrind -v ./$<
 
 $(EXE): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@

@@ -7,6 +7,10 @@ static void eliminarVehiculo(vVehiculos* v,int vIndex);
 static void matricula(vVehiculos* v,int vIndex);
 static void descripcion(vVehiculos* v,int vIndex);
 static void num_plazas(vVehiculos* v,int vIndex);
+
+
+/* Funciones Publicas */
+
 Vehiculos* initVehiculos(int * n)
 {
     FILE* file = fopen("ficheros/Vehiculos.txt", "r");

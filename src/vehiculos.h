@@ -16,9 +16,11 @@ typedef struct{
     Vehiculos* vehi;
     int tam;
 }vVehiculos;
-Vehiculos* initVehiculos(int* n);//non-static
-void saveVehiculos(int n ,Vehiculos* vehiculos);//non-static
-int buscarIndexVehiculo(vVehiculos* v,char* mat);//non-static
+
+Vehiculos* initVehiculos(int* n);
+void saveVehiculos(int n ,Vehiculos* vehiculos);
+
+int buscarIndexVehiculo(vVehiculos* v,char* mat);
 void altaVehiculos(vVehiculos* v,int userId);//non-static admin
 void bajaVehiculos(vVehiculos* v,char* mat);//non-static admin
 void modificarVehiculo(vVehiculos* v,char* mat);//non-static admin
