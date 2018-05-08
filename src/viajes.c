@@ -749,6 +749,14 @@ int buscarIndexViajes(vViajes *v, int id_viaje) {
     return -1;
 }
 
+int buscarIndexPasejeros(vViajes *v, int viaje,int viajero) {
+    for (int i = 0; i < v->tam_pj; ++i) {
+        if (viajero == v->pasaj[i].Id_viajero && viaje == v->pasaj[i].Id_viaje)
+            return i;
+    }
+    return -1;
+}
+
 void listarViajesAbiertos(vViajes *v) {
     printf("Viajes Abiertos: \n");
     int l_size = 0;

@@ -44,6 +44,10 @@ static int estadoViaje(char *c) {
  */
 static int idaVuelta(char *c) { return (strcmp(c, "ida") == 0) ? 1 : 0; }
 
+static int aleatorio(int min, int max){
+   return min + rand() / (RAND_MAX / (max - min + 1) + 1);
+}
+
 void generarFicheros(char* file_name,int tam, int dias,int estado,int hi,int hf)
 {
     FILE* file=fopen(file_name,"w+");

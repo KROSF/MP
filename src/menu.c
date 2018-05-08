@@ -93,7 +93,7 @@ static void userVehiculos(vVehiculos *v, int userId) {
  * @param ve     referencia al vector vehi
  * @param userId id del usuario
  */
-void userViajes(vViajes *v, vVehiculos *ve, int userId) {
+static void userViajes(vViajes *v, vVehiculos *ve, int userId) {
 
   int opc, bucle = 1;v->last = -1;
   while (bucle == 1) {
@@ -141,10 +141,12 @@ void userViajes(vViajes *v, vVehiculos *ve, int userId) {
 
 /**
  * muestra menú de incidencias para usuarios
- * @param v      referencia al vector inci
+ * @param v      referencia al vector inci.
+ * @param vv     referencia al vector viajes.
+ * @param vve    referencia al vector vehi.
  * @param userId id del usuario
  */
-void userIncidencias(vIncidencias *v,int userId) {
+static void userIncidencias(vIncidencias *v,vViajes* vv,vVehiculos* ve,int userId) {
 
   int opc, bucle;
   bucle = 1;
@@ -162,7 +164,7 @@ void userIncidencias(vIncidencias *v,int userId) {
       flush_in();
       switch (opc) {
       case 1:
-        // c();
+        crearIncidenciasUser(v,vv ,ve,userId);
         break;
       case 2:
         listarIncidencias(v);
@@ -239,7 +241,7 @@ void menuUser(vUsuarios *v, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
         userViajes(vv,vve,v->user[indexusuario].Id_usuario);
         break;
       case 4:
-        userIncidencias(vi,v->user[indexusuario].Id_usuario);
+        userIncidencias(vi,vv,vve,v->user[indexusuario].Id_usuario);
         break;
       case 5:
         bucle = 0;

@@ -20,12 +20,13 @@ typedef struct{
 }vIncidencias;
 Incidencias* initIncidencias(int *n);//non-static
 void saveIncidencias(int n,Incidencias* incidencias);//non-static
-void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje);//non-static admin
+void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje,int usuario);
 void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje);//non-static admin
 void modificarIncidencias(vIncidencias* v,int id_viaje);//non-static admin
 int incidenciasUsuario(vIncidencias* v,int userId);//non-static
 void listarIncidencias(vIncidencias* v);
 void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve);
+void crearIncidenciasUser(vIncidencias*v,vViajes* vv ,vVehiculos* ve,int userId );
 void eliminarIncidenciasAdmin(vIncidencias* v,vViajes* vv);
 void modificarIncidenciasAdmin(vIncidencias* v);
 

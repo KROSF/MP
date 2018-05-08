@@ -187,6 +187,15 @@ EXTERN void savePasajeros(int n,Pasajeros *pasaj);
 EXTERN int buscarIndexViajes(vViajes* v,int id_viaje);
 
 /**
+ * [buscarIndexPasejeros description]
+ * @param  v       [description]
+ * @param  viaje   [description]
+ * @param  viajero [description]
+ * @return         [description]
+ */
+EXTERN int buscarIndexPasejeros(vViajes *v, int viaje,int viajero);
+
+/**
  * Muestra los viajes en estado abierto.
  * @param v Referencia al vector de viajes.
  */

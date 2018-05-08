@@ -98,21 +98,17 @@ void descripcionIncidencia(vIncidencias* v,int iIndex)
     flush_in();
 }
 
-void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int id_viaje)
+void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int index,int usuario)
 {
-    int index = buscarIndexViajes(vv,id_viaje);
-    if(index > -1)
-    {
-        v->inci = (Incidencias*)realloc(v->inci,(v->tam+1) * sizeof(Incidencias));
-        v->inci[v->tam].Desc_incidencia = (char *)malloc(DES_INCI * sizeof(char));
-        v->inci[v->tam].Est_incidencia = 1;
-        v->inci[v->tam].Id_viaje = id_viaje;
-        v->inci[v->tam].Id_us_incidencia = ve->vehi[buscarIndexVehiculo(ve,vv->viajes[index].Id_mat)].Id_usuario;
-        idRegistar(v,v->tam);
-        descripcionIncidencia(v,v->tam);
-        ++v->tam;
-    }
-    else printf("No existe el viaje %d\n", id_viaje);
+    v->inci = (Incidencias*)realloc(v->inci,(v->tam+1) * sizeof(Incidencias));
+    v->inci[v->tam].Desc_incidencia = (char *)malloc(DES_INCI * sizeof(char));
+    v->inci[v->tam].Est_incidencia = 1;
+    v->inci[v->tam].Id_viaje = vv->viajes[index].Id_viaje;
+    v->inci[v->tam].Id_us_incidencia = ve->vehi[buscarIndexVehiculo(ve,vv->viajes[index].Id_mat)].Id_usuario;
+    if(usuario != 0) idRegistar(v,v->tam);
+    else v->inci[v->tam].Id_us_registra = usuario;
+    descripcionIncidencia(v,v->tam);
+    ++v->tam;
 }
 
 int* listaIncidencias(vIncidencias* v,int id_viaje,int* j)
@@ -217,11 +213,31 @@ void listarIncidencias(vIncidencias* v)
 
 void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve)
 {
-  int tmp;
+    int tmp;
     printf("Introduzca el id del viaje: ");
     scanf("%d", &tmp);
     flush_in();
-    crearIncidencias(v,vv,ve,tmp);
+    int indexViaje = buscarIndexViajes(vv,tmp);
+    if(indexViaje > -1)
+    {
+        crearIncidencias(v,vv,ve,indexViaje,0);
+    }
+    else printf("No existe el viaje\n");
+}
+
+void crearIncidenciasUser(vIncidencias*v,vViajes* vv ,vVehiculos* ve,int userId )
+{
+    int tmp;
+    printf("Introduzca el id del viaje: ");
+    scanf("%d", &tmp);
+    flush_in();
+    int indexPasajero = buscarIndexPasejeros(vv,tmp,userId);
+    int indexViaje = buscarIndexViajes(vv,tmp);
+    if(indexPasajero > -1 && indexViaje > -1)
+    {
+        crearIncidencias(v,vv,ve,indexViaje,0);
+    }
+    else printf("No existe el viaje o no ha viajado en dicho viaje\n");
 }
 
 void eliminarIncidenciasAdmin(vIncidencias* v,vViajes* vv)
