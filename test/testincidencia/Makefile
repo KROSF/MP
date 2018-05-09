@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS  = -std=c11 -g -Wall
-SRC = test-viajes.c utilidades.c viajes.c
+SRC = main.c incidencia.c
 OBJS := $(SRC:.c=.o)
-EXE = test-viajes
+EXE = test-incidencia
 
 all: $(EXE)
 

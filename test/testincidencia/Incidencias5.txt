@@ -1,0 +1,9 @@
+789789-0004-0001-No ha pasado a recogerme-abierta
+789789-0002-0005-Se niega a pagar el trayecto-cerrada
+789789-0002-0005-Fuma mientras conduce-abierta
+789789-0004-0001-No ha pasado a recogerme-abierta
+456456-0002-0005-Se niega a pagar el trayecto-cerrada
+456456-0002-0005-Fuma mientras conduce-abierta
+456456-0004-0001-No ha pasado a recogerme-abierta
+456456-0002-0005-Se niega a pagar el trayecto-cerrada
+000009-0002-0005-Fuma mientras conduce-abierta

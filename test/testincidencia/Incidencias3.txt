@@ -1,0 +1,9 @@
+123123-0004-0001-No ha pasado a recogerme-abierta
+123123-0002-0005-Se niega a pagar el trayecto-cerrada
+123123-0002-0005-Fuma mientras conduce-abierta
+123123-0004-0001-No ha pasado a recogerme-abierta
+123123-0002-0005-Se niega a pagar el trayecto-cerrada
+123123-0002-0005-Fuma mientras conduce-abierta
+123123-0004-0001-No ha pasado a recogerme-abierta
+123123-0002-0005-Se niega a pagar el trayecto-cerrada
+123123-0002-0005-Fuma mientras conduce-abierta
