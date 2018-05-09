@@ -6,4 +6,4 @@ compiler:
   - gcc
   - clang
 script:
-    - ./run.sh
+    - make
