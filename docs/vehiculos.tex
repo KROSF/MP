@@ -27,95 +27,95 @@
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Inicializa los vehículos.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{n} $\rightarrow$ descripcion
+			\item \cc{n} $\rightarrow$ Índice.
 		\end{itemize}
 		\item \textbf{Devuelve}
 		\begin{itemize}
-			\item algo
+			\item Vehículos inicializados
 		\end{itemize}
 	\end{itemize}
 	\item\cc{void saveVehiculos(int n ,Vehiculos* vehiculos)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Guarda los vehículos.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{n} $\rightarrow$ descripcion
-            \item \cc{vehiculos} $\rightarrow$ descripcion
+			\item \cc{n} $\rightarrow$ Índice.
+            \item \cc{vehiculos} $\rightarrow$ Estructura.
 		\end{itemize}
 	\end{itemize}
     \item\cc{int buscarIndexVehiculo(vVehiculos* v,char* mat)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Busca el índice o identificador del vehículo en cuestión en el vector vehículos.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
-            \item \cc{mat} $\rightarrow$ descripcion
+			\item \cc{v} $\rightarrow$ Vector vehículos.
+            \item \cc{mat} $\rightarrow$ Matrícula del vehículo con el que se está trabajando.
 		\end{itemize}
         \item \textbf{Devuelve}
 		\begin{itemize}
-			\item \cc{nose} $\rightarrow$ algo
+			\item \cc{nose} $\rightarrow$ Índice en el vector vehiculos del vehículo buscado.
 		\end{itemize}
 	\end{itemize}
     \item\cc{void altaVehiculos(vVehiculos* v,int userId)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Da de alta el vehículo deseado.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
-            \item \cc{userId} $\rightarrow$ descripcion
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
+            \item \cc{userId} $\rightarrow$ Identificador del usuario logueado.
 		\end{itemize}
 	\end{itemize}
 	\item\cc{void listarVehiculos(vVehiculos* v)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Lista los vehículos cuando se le llama.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
 		\end{itemize}
 	\end{itemize}
     \item\cc{int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Devuelve los índices de los vehículos que cumplen la condición.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
-            \item \cc{id_user} $\rightarrow$ descripcion
-            \item \cc{j} $\rightarrow$ descripcion
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
+            \item \cc{id_user} $\rightarrow$ Identificador del usuario logueado.
+            \item \cc{j} $\rightarrow$ Índice viajes.
 		\end{itemize}
         \item \textbf{Devuelve}
 		\begin{itemize}
-			\item \cc{nose} $\rightarrow$ algo
+			\item \cc{nose} $\rightarrow$ Índice del vehículo que cumple la condición.
 		\end{itemize}
 	\end{itemize}
     \item\cc{void listarVehiculosUser(vVehiculos* v,int userId)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Función de usuario para el listado de los vehículos que posee.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
-            \item \cc{userId} $\rightarrow$ descripcion.
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
+            \item \cc{userId} $\rightarrow$ Identificador del usuario logueado.
 		\end{itemize}
 	\end{itemize}
     \newpage
@@ -123,57 +123,57 @@
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Función de usuario para el borrado de los vehiculos que posee.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
-            \item \cc{userId} $\rightarrow$ descripcion.
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
+            \item \cc{userId} $\rightarrow$ Identificador del usuario logueado.
 		\end{itemize}
 	\end{itemize}
    \item\cc{void modificarVehiculoUser(vVehiculos* v,int userId)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Función de usuario para la modificación de los vehículos que posee.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descripcion
-            \item \cc{userId} $\rightarrow$ descripcion.
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
+            \item \cc{userId} $\rightarrow$ Identificador del usuario logueado.
 		\end{itemize}
 	\end{itemize}
     \item\cc{void altaVehiculosAdmin(vVehiculos* v)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Función de administrador para el alta de vehículos en la base de datos.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descrip
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
          	\end{itemize}
 	\end{itemize}
     \item\cc{void bajaVehiculosAdmin(vVehiculos* v)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Función de administrador para la eliminación de vehículos de la base de datos.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descrip
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
          	\end{itemize}
 	\end{itemize}
     \item\cc{void modificarVehiculosAdmin(vVehiculos* v)}
 	\begin{itemize}
 		\item \textbf{Descripcion}
         \begin{itemize}
-			\item descripcion
+			\item Función de administrador para la edición de los vehículos de la base de datos.
 		\end{itemize}
         \item \textbf{Parametros}
 		\begin{itemize}
-			\item \cc{v} $\rightarrow$ descr
+			\item \cc{v} $\rightarrow$ Vector vehiculos.
          	\end{itemize}
 	\end{itemize}
 
