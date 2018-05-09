@@ -27,7 +27,7 @@
 #endif
 #include <time.h>
 /**
- * Limpia el flujo de la entra estandar.
+ * Limpia el flujo de la entrada estandar.
  */
 EXTERN void flush_in(void);
 /**

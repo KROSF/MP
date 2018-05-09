@@ -1,15 +1,15 @@
 \section{MENU}
-
+\subsection{Gráfico de dependencias}
+\includegraphics[width=\textwidth, angle=0, scale=0.7]{dep/menu_include.pdf}
 \subsection{Funciones}
 \begin{itemize}
-    \item \funrf{void menuUser(vUsuarios *vu, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
-              int indexusuario)}{menuUser}
-    \item \funrf{void save(vUsuarios* vu,vIncidencias* vi,vViajes* vv,vVehiculos* vve)}{menuAdmin}
-   
+    \item \cc{void menuUser(vUsuarios *vu, vIncidencias *vi, vViajes *vv, vVehiculos *vve,
+              int indexusuario)}
+    \item \cc{void save(vUsuarios* vu,vIncidencias* vi,vViajes* vv,vVehiculos* vve)}
 \end{itemize}
 \subsection{Definiciones}
 \begin{itemize}
-     \item \label{menuUser}\cc{void init(vUsuarios* vu,vIncidencias* vi,vViajes* vv,vVehiculos* vve)}
+     \item \cc{void init(vUsuarios* vu,vIncidencias* vi,vViajes* vv,vVehiculos* vve)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -23,9 +23,8 @@
 			\item \cc{vve} $\rightarrow$ Referencia al vector vehi.
 			\item \cc{indexusuario} $\rightarrow$ Index del usuario.
 		\end{itemize}
-		
 	\end{itemize}
-    \item \label{menuAdmin}\cc{void save(vUsuarios* vu,vIncidencias* vi,vViajes* vv,vVehiculos* vve)}
+    \item \cc{void save(vUsuarios* vu,vIncidencias* vi,vViajes* vv,vVehiculos* vve)}
     \begin{itemize}
         \item \textbf{Descripcion}
         \begin{itemize}
@@ -39,7 +38,6 @@
 			\item \cc{vve} $\rightarrow$ Referencia al vector vehi.
 			\item \cc{indexadmin} $\rightarrow$ Index del admin.
 		\end{itemize}
-		
 	\end{itemize}
-
 \end{itemize}
+\newpage

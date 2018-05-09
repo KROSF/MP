@@ -597,13 +597,18 @@ void incorporarseViaje(vViajes *v,int id_viajero,int* viaje){
     printf("Introduzca una poblacion: ");
     scanf("%20[^\n]", tmp);
     flush_in();
-    printf("Viajes que pasan por %s: \n",tmp);
+
     int l_size = 0,slct = 0,i,j;
+    //buscarViajesAbiertos.
     int *l_viajes = listaViajesAbiertos(v, &l_size);
     int *opciones = NULL;
+
+    if( l_size == 0) printf("No hay viajes Disponibles\n");
+
     for (i = 0; i < l_size; ++i) {
         int size_p = 0;
         int *pasos = pasosViajes(v, v->viajes[i].Id_viaje, &size_p);
+        //Viajes abiertos que pasen por una poblacion especifica.
         for (j = 0; j < size_p; ++j) {
             if(strcmp(v->pasos[pasos[j]].Poblacion, tmp)==0)
             {
@@ -630,7 +635,7 @@ void incorporarseViaje(vViajes *v,int id_viajero,int* viaje){
         //Si es la ultima plaza se cambia el estado a cerrado.
         free(opciones);
     }
-    else printf("no hay viajes con destino a esa poblacion.\n");
+    else printf("no hay viajes con destino a esa %s.\n",tmp);
 }
 
 void detalleViaje(vViajes* v){

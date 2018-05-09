@@ -15,6 +15,15 @@
 \subsection{Pasos}
 \begin{Table}
 	\raggedright
+	\label{struct:pasajeros}
+	\begin{tabular}{rl}
+		\intc   & \textbf{Id\_viaje}\\
+		\intc & \textbf{Id\_viajero}
+	\end{tabular}
+\end{Table}
+\subsection{Pasos}
+\begin{Table}
+	\raggedright
 	\label{struct:pasos}
 	\begin{tabular}{rl}
 		\intc   & \textbf{Id\_viaje}\\
@@ -94,10 +103,13 @@
 	\raggedright
 	\label{struct:viajespasos}
 	\begin{tabular}{rl}
+		\cc{Pasajeros*} &\textbf{pasaj}\\
 		\cc{Pasos*} & \textbf{pasos}\\
         \cc{Viajes*} & \textbf{viajes}\\
+		\cc{int} & \textbf{tam\_pj}\\
         \cc{int} & \textbf{tam\_p}\\
-        \cc{int} & \textbf{tam\_v}
+        \cc{int} & \textbf{tam\_v}\\
+		\cc{int} & \textbf{last}
 	\end{tabular}
 \end{Table}
 \end{multicols}
