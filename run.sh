@@ -1,6 +1,6 @@
 #!/bin/sh
 make
 cd test/test-viajes && make run
-cd ../testacceso && make run
-cd ../testincidencia && make run
-cd ../testusuario && make run
+cd ../test-acceso && make run
+cd ../test-incidencia && make run
+cd ../test-usuario && make run
