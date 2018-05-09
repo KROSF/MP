@@ -5,9 +5,9 @@
 #include "utilidades.h"
 
 /**
- * [eliminarVehiculo description]
- * @param v      [description]
- * @param vIndex [description]
+ * Se le llama desde bajaVehiculos, libera el espacio en memoria.
+ * @param VECTOR VEHÍCULO
+ * @param vIndex ÍNDICE EN EL VECTOR VEHÍCULOS
  */
 static void eliminarVehiculo(vVehiculos* v,int vIndex)
 {
@@ -18,9 +18,9 @@ static void eliminarVehiculo(vVehiculos* v,int vIndex)
 }
 
 /**
- * [bajaVehiculos description]
- * @param v   [description]
- * @param mat [description]
+ * Elimina el vehículo según sea la matrícula referenciada
+ * @param VECTOR VEHÍCULO
+ * @param mat MATRÍCULA DEL VEHÍCULO CON EL QUE SE ESTÁ TRABAJANDO.
  */
 static void bajaVehiculos(vVehiculos* v, char* mat)
 {
@@ -32,9 +32,9 @@ static void bajaVehiculos(vVehiculos* v, char* mat)
 }
 
 /**
- * [matricula description]
- * @param v      [description]
- * @param vIndex [description]
+ * Se introduce la matricula. Es una funcion a la que se le llama desde otra. (modificarVehiculo)
+ * @param v      VECTOR VEHÍCULO
+ * @param vIndex ÍNDICE EN EL VECTOR VEHÍCULOS
  */
 static void matricula(vVehiculos* v,int vIndex)
 {
@@ -48,9 +48,9 @@ static void matricula(vVehiculos* v,int vIndex)
 }
 
 /**
- * [descripcion description]
- * @param v      [description]
- * @param vIndex [description]
+ * Se introduce la descripción del vehículo. Es una función a la que se le llama desde otra. (modificarVehiculo)
+ * @param v      VECTOR VEHÍCULO
+ * @param vIndex ÍNDICE EN EL VECTOR VEHÍCULOS
  */
 static void descripcion(vVehiculos* v,int vIndex)
 {
@@ -60,9 +60,9 @@ static void descripcion(vVehiculos* v,int vIndex)
 }
 
 /**
- * [num_plazas description]
- * @param v      [description]
- * @param vIndex [description]
+ * Se introduce el numero de plazas del vehículo. Es una función a la que se le llama desde otra. (modificarVehiculo)
+ * @param v      VECTOR VEHÍCULO
+ * @param vIndex ÍNDICE EN EL VECTOR VEHÍCULOS
  */
 static void num_plazas(vVehiculos* v,int vIndex)
 {
@@ -72,9 +72,9 @@ static void num_plazas(vVehiculos* v,int vIndex)
 }
 
 /**
- * [modificarVehiculo description]
- * @param v   [description]
- * @param mat [description]
+ * Cambia el parámetro identificativo deseado del coche especificado. Llama a otras funciones.
+ * @param v   VECTOR VEHÍCULO
+ * @param mat MATRÍCULA DEL VEHÍCULO CON EL QUE SE ESTÁ TRABAJANDO.
  */
 static void modificarVehiculo(vVehiculos* v,char* mat)
 {
@@ -108,6 +108,9 @@ static void modificarVehiculo(vVehiculos* v,char* mat)
 *               ||    \\_// ||_)) ||__| ||  \\__ || || \_))
 */
 
+/*
+ * Inicializa los vehículos.
+ */
 Vehiculos* initVehiculos(int * n)
 {
     FILE* file = fopen("ficheros/Vehiculos.txt", "r");
@@ -138,7 +141,9 @@ Vehiculos* initVehiculos(int * n)
     fclose(file);
     return tmp;
 }
-
+/*
+ * Guarda los vehículos.
+ */
 void saveVehiculos(int n ,Vehiculos* vehiculos)
 {
     FILE* file = fopen("ficheros/Vehiculos.txt","w+");
@@ -155,7 +160,11 @@ void saveVehiculos(int n ,Vehiculos* vehiculos)
     fclose(file);
     puts("Vehiculos Guardados");
 }
-
+/*
+ * Función de usuario para dar de alta un vehiculo que posee.
+ * @param v VECTOR VEHÍCULO
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
+ */
 void altaVehiculos(vVehiculos* v,int userId)//opc2user
 {
     v->vehi = (Vehiculos*) realloc(v->vehi,(v->tam+1)  * sizeof(Vehiculos));
@@ -167,7 +176,11 @@ void altaVehiculos(vVehiculos* v,int userId)//opc2user
     num_plazas(v,v->tam);
     ++v->tam;
 }
-
+/*
+ * Busca un vehículo por su matrícula y devuelve su posición en el vector vehículos.
+ * @param v VECTOR VEHÍCULO
+ * @param mat MATRÍCULA DEL VEHÍCULO CON EL QUE SE ESTÁ TRABAJANDO.
+ */
 int buscarIndexVehiculo(vVehiculos* v,char* mat)
 {
     for(int i = 0; i < v->tam ; ++i)
@@ -176,7 +189,10 @@ int buscarIndexVehiculo(vVehiculos* v,char* mat)
     }
     return -1;
 }
-
+/*
+ * Lista todos los vehículos de la base de datos, es una función exclusiva para el administrador.
+ * @param v VECTOR VEHÍCULO
+ */
 void listarVehiculos(vVehiculos* v)
 {
     CLEAN;
@@ -190,7 +206,9 @@ void listarVehiculos(vVehiculos* v)
     }
     system_pause();
 }
-
+/*
+ *ESTA NO SE LO QUE HACE XD
+ */
 int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j)
 {
   int* tmp = NULL;
@@ -205,7 +223,11 @@ int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j)
   }
   return tmp;
 }
-
+/*
+ * Lista los vehículos que el usuario logueado posee.
+ * @param v VECTOR VEHÍCULO
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
+ */
 void listarVehiculosUser(vVehiculos* v,int userId)//opc1 viajes user
 {
     int taman = 0;
@@ -221,7 +243,11 @@ void listarVehiculosUser(vVehiculos* v,int userId)//opc1 viajes user
     }
     free(i_veh);
 }
-
+/*
+ * El usuario puede modificar cualidades del/los vehículo/s que posee.
+ * @param v VECTOR VEHÍCULO
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
+ */
 void modificarVehiculoUser(vVehiculos* v,int userId)
 {
   int veh_size = 0,resp = 0;
@@ -243,7 +269,11 @@ void modificarVehiculoUser(vVehiculos* v,int userId)
   else printf("No tiene Vehiculos registrados\n");
   free(i_veh);
 }
-
+/*
+ * El usuario puede eliminar uno de sus vehículos.
+ * @param v VECTOR VEHÍCULO
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
+ */
 void eliminarVehiculoUser(vVehiculos* v,int userId)
 {
   int veh_size = 0,resp = 0;
@@ -265,7 +295,10 @@ void eliminarVehiculoUser(vVehiculos* v,int userId)
   else printf("No tiene Vehiculos registrados\n");
   free(i_veh);
 }
-
+/*
+ * El admin da de alta un vehículo en la base de datos.
+ * @param v VECTOR VEHÍCULO
+ */
 void altaVehiculosAdmin(vVehiculos* v)
 {
   int tmp;
@@ -274,7 +307,10 @@ void altaVehiculosAdmin(vVehiculos* v)
   flush_in();
   altaVehiculos(v,tmp);
 }
-
+/*
+ * El admin elimina un vehículo de la base de datos.
+ * @PARAM V VECTOR VEHÍCULO
+ */
 void bajaVehiculosAdmin(vVehiculos* v)
 {
   char tmp[ID_MAT];
@@ -283,7 +319,10 @@ void bajaVehiculosAdmin(vVehiculos* v)
   flush_in();
   bajaVehiculos(v,tmp);
 }
-
+/*
+ * El admin modifica un vehíuculo de la base de datos.
+ * @param v VECTOR VEHÍCULO
+ */
 void modificarVehiculosAdmin(vVehiculos* v)
 {
   char tmp[ID_MAT];
