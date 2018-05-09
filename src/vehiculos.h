@@ -16,7 +16,7 @@ typedef struct{
     /*@}*/
 }Vehiculos;
 /**
- * Estructura para contener el tamaño y el vector vehi.
+ * Estructura para contener el tamaño y el vector vehiculos.
  */
 typedef struct{
     /*@{*/
@@ -26,86 +26,86 @@ typedef struct{
 }vVehiculos;
 
 /**
- * [initVehiculos description]
- * @param  n [description]
- * @return   [description]
+ * inicializa los vehículos.
+ * @param  n ÍNDICE
+ * @return   VEHICULOS INICIALIZADOS
  */
 Vehiculos* initVehiculos(int* n);
 
 /**
- * [saveVehiculos description]
- * @param n         [description]
- * @param vehiculos [description]
+ * Guarda los vehículos.
+ * @param n         ÍNDICE
+ * @param vehiculos ESTRUCTURA
  */
 void saveVehiculos(int n ,Vehiculos* vehiculos);
 
 /**
- * [buscarIndexVehiculo description]
- * @param  v   [description]
- * @param  mat [description]
- * @return     [description]
+ * Busca el índice o identificador del vehículo en cuestión en el vector vehículos.
+ * @param  v   VECTOR VEHÍCULOS.
+ * @param  mat MATRÍCULA DEL VEHÍCULO CON EL QUE SE ESTÁ TRABAJANDO.
+ * @return     ÍNDICE EN EL VECTOR VEHÍCULOS DEL VEHÍCULO BUSCADO.
  */
 int buscarIndexVehiculo(vVehiculos* v,char* mat);
 
 /**
- * [altaVehiculos description]
- * @param v      [description]
- * @param userId [description]
+ * Da de alta el vehículo deseado
+ * @param v      VECTOR VEHÍCULOS
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
  */
 void altaVehiculos(vVehiculos* v,int userId);
 
 /**
- * [listarVehiculos description]
- * @param v [description]
+ * Lista los vehículos cuando se le llama.
+ * @param v VECTOR VEHÍCULOS
  */
 void listarVehiculos(vVehiculos* v);
 
 
 /**
- * [listarVehiculosViajes description]
- * @param  v       [description]
- * @param  id_user [description]
- * @param  j       [description]
- * @return         [description]
+ * DEVUELVE LOS ÍNDICES DE LOS VEHÍCULOS QUE CUMPLEN LA CONDICIÓN
+ * @param  v       VECTOR VEHÍCULOS
+ * @param  id_user IDENTIFICADOR DEL USUARIO LOGUEADO
+ * @param  j       ÍNDICE VIAJES
+ * @return         ÍNDICE VEHÍCULO QUE CUMPLE LA CONDICIÓN.
  */
 int* listarVehiculosViajes(vVehiculos* v,int id_user,int *j);
 
 /**
- * [listarVehiculosUser description]
- * @param v      [description]
- * @param userId [description]
+ * Función de usuario para el listado de los vehiculos que posee.
+ * @param v      VECTOR VEHÍCULOS
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
  */
 void listarVehiculosUser(vVehiculos* v,int userId);
 
 /**
- * [eliminarVehiculoUser description]
- * @param v      [description]
- * @param userId [description]
+ * Función de usuario para el borrado de los vehiculos que posee.
+ * @param v      VECTOR VEHÍCULOS
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
  */
 void eliminarVehiculoUser(vVehiculos* v,int userId);
 
 /**
- * [modificarVehiculoUser description]
- * @param v      [description]
- * @param userId [description]
+ * Función de usuario para la modificación de los vehículos que posee.
+ * @param v      VECTOR VEHÍCULOS
+ * @param userId IDENTIFICADOR DEL USUARIO LOGUEADO
  */
 void modificarVehiculoUser(vVehiculos* v,int userId);
 
 /**
- * [altaVehiculosAdmin description]
- * @param v [description]
+ * Función de administrador para el alta de vehículos en la base de datos.
+ * @param v VECTOR VEHÍCULOS
  */
 void altaVehiculosAdmin(vVehiculos* v);
 
 /**
- * [bajaVehiculosAdmin description]
- * @param v [description]
+ * Función de administrador para la eliminación de vehículos de la base de datos.
+ * @param v VECTOR VEHÍCULOS
  */
 void bajaVehiculosAdmin(vVehiculos* v);
 
 /**
- * [modificarVehiculosAdmin description]
- * @param v [description]
+ * Función de administrador para la edición de los vehículos de la base de datos.
+ * @param v VECTOR VEHÍCULOS
  */
 void modificarVehiculosAdmin(vVehiculos* v);
 #endif
