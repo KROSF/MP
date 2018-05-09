@@ -178,5 +178,204 @@ FCT_BGN()
 
     }
     FCT_SUITE_END();
+    printf("\n------------------------------ ESTADO = 2 ------------------------------\n\n");
+    FCT_SUITE_BGN(ESTADO_1)
+    {
+        FCT_TEST_BGN(FechaIgualHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.0.txt";
+            generarFicheros(directorio,22,0,2,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,3);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+        FCT_TEST_BGN(FechaMenorHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.1.txt";
+            generarFicheros(directorio,22,-1,2,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,3);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+        FCT_TEST_BGN(FechaMayorHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.2.txt";
+            generarFicheros(directorio,22,1,2,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,2);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+
+    }
+    FCT_SUITE_END();
+    printf("\n------------------------------ ESTADO = 3 ------------------------------\n\n");
+    FCT_SUITE_BGN(ESTADO_1)
+    {
+        FCT_TEST_BGN(FechaIgualHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.0.txt";
+            generarFicheros(directorio,22,0,3,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,3);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+        FCT_TEST_BGN(FechaMenorHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.1.txt";
+            generarFicheros(directorio,22,-1,3,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,3);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+        FCT_TEST_BGN(FechaMayorHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.2.txt";
+            generarFicheros(directorio,22,1,3,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,3);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+
+    }
+    FCT_SUITE_END();
+    printf("\n------------------------------ ESTADO = 4 ------------------------------\n\n");
+    FCT_SUITE_BGN(ESTADO_1)
+    {
+        FCT_TEST_BGN(FechaIgualHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.0.txt";
+            generarFicheros(directorio,22,0,4,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,4);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+        FCT_TEST_BGN(FechaMenorHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.1.txt";
+            generarFicheros(directorio,22,-1,4,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,4);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+        FCT_TEST_BGN(FechaMayorHoraInicioYHoraFinMenoresQueHoraActual)
+        {
+            vViajes viaje;
+            viaje.pasos = NULL;
+            viaje.tam_p = 0;
+            char directorio[]="ficheros/estado_1.2.txt";
+            generarFicheros(directorio,22,1,4,-4,2);
+            viaje.viajes=initViajes(&viaje.tam_v,directorio);
+            fct_chk_eq_int(viaje.tam_v,22);
+            actualizarViajes(&viaje);
+            for(int i = 0; i <viaje.tam_v;++i)
+            {
+                fct_chk_eq_int(viaje.viajes[i].Estado,4);
+            }
+            saveViajes(viaje.tam_v,viaje.viajes,directorio);
+            viaje.tam_v = 0;
+            free(viaje.viajes);
+            fct_chk_eq_int(viaje.tam_v,0);
+        }
+        FCT_TEST_END();
+
+    }
+    FCT_SUITE_END();
+
 }
 FCT_END();
