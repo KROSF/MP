@@ -4,7 +4,7 @@
 
 FCT_BGN()
 {
-    printf("\n------------------------------ TEST ACCESO ------------------------------\n\n");
+    printf("\n-------------------------- TEST INCIDENCIA --------------------------\n\n");
     FCT_SUITE_BGN(TestAcceso)
     {
         FCT_TEST_BGN(NoSeCumpleLaCondicionDelBucle)

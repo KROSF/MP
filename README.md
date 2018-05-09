@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/KROSF/MP.svg?branch=master)](https://travis-ci.org/KROSF/MP)
+[![Build Status](https://travis-ci.com/KROSF/MP.svg?branch=master)](https://travis-ci.com/KROSF/MP)
 <h2 id="Estructuras">Estructuras</h2>
 <ul>
   <li><a

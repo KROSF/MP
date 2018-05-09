@@ -6,12 +6,6 @@ EXE = esi-share
 
 all: $(EXE)
 
-run: $(EXE)
-	./$<
-
-run_v: $(EXE)
-	valgrind -v ./$<
-
 $(EXE): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 	@rm -f $(OBJS)
