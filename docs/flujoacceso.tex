@@ -1,0 +1,88 @@
+\documentclass[x11names]{article}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,chains}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5mm}%
+%%%>
+\begin{document}
+% =================================================
+% Set up a few colours
+\colorlet{lcfree}{Green3}
+\colorlet{lcnorm}{Blue3}
+\colorlet{lccong}{Red3}
+% -------------------------------------------------
+% Set up a new layer for the debugging marks, and make sure it is on
+% top
+\pgfdeclarelayer{marx}
+\pgfsetlayers{main,marx}
+% A macro for marking coordinates (specific to the coordinate naming
+% scheme used here). Swap the following 2 definitions to deactivate
+% marks.
+\providecommand{\cmark}[2][]{%
+  \begin{pgfonlayer}{marx}
+    \node [nmark] at (c#2#1) {#2};
+  \end{pgfonlayer}{marx}
+  }
+\providecommand{\cmark}[2][]{\relax}
+% -------------------------------------------------
+% Start the picture
+\begin{tikzpicture}[%
+    >=triangle 60,              % Nice arrows; your taste may be different
+    start chain=going below,    % General flow is top-to-bottom
+    node distance=6mm and 60mm, % Global setup of box spacing
+    every join/.style={norm},   % Default linetype for connecting boxes
+    ]
+% -------------------------------------------------
+% A few box styles
+% <on chain> *and* <on grid> reduce the need for manual relative
+% positioning of nodes
+\tikzset{
+  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+  proc/.style={base, rectangle, text width=7em},
+  test/.style={base, diamond, aspect=2, text width=7em},
+  term/.style={proc, rounded corners},
+  % coord node style is used for placing corners of connecting lines
+  coord/.style={coordinate, on chain, on grid, node distance=6mm and 25mm},
+  % nmark node style is used for coordinate debugging marks
+  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+  % -------------------------------------------------
+  % Connector line styles for different parts of the diagram
+  norm/.style={->, draw, lcnorm},
+  free/.style={->, draw, lcfree},
+  cong/.style={->, draw, lccong},
+  it/.style={font={\small\itshape}}
+}
+\node [term,join](main){inicio};
+\node [test,join](ccc){logincount $<$ 3};
+\node [proc,join](frlp){i = 0};
+\node [proc,left= of frlp](frlp2){logincount++};
+\node [test,below of=frlp,yshift= -1.5cm](con){i $<$ v$\rightarrow$tam\_v};
+\node [test,join](con2){Usuario y Password correctos.};
+\node [proc,right= of con2](cont){++i;};
+\node [proc,right= of cont](rt1){return -1;};
+\node [proc,below of=con2,yshift= -1.5cm](rt){return i;};
+\node [term,join=by cong](fin2){fin};
+
+\node [coord, left=of con] (c1)  {};
+
+ \draw [->,lcnorm] (frlp.south) -- (con);
+ \path (ccc.south) to node [near start,xshift=1em] {$si$} (frlp);
+\path (con.west) to node [near start,yshift=1em] {$no$} (c1);
+\draw [->,lcnorm] (con.west) -| (frlp2) |-(ccc);
+\draw [->,lccong] (ccc.east) -| (rt1) |-(fin2);
+\path (con.south) to node [near start, xshift=1em] {$si$} (con2);
+\path (con2.south) to node [near start,xshift=1em] {$si$} (rt);
+  \draw [->,lcnorm] (con2.south) -- (rt);
+\path (con2.east) to node [near start,yshift=1em] {$no$} (cont);
+  \draw [->,lcnorm] (con2.east) -- (cont);
+   \draw [->,lcnorm] (cont.north) |- (con);
+
+
+
+
+\end{tikzpicture}
+% =================================================
+\end{document}
