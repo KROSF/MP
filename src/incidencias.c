@@ -4,14 +4,14 @@
 #include "incidencias.h"
 #include "utilidades.h"
 /**
- * Constante para obtener el estado de una incidencia
+ * Constante para obtener el estado de una incidencia.
  */
 static const char * Estado_I[] = {"cerrada","abierta","validada"};
 
 /**
- * [estadoIncidencia description]
- * @param  c [description]
- * @return   [description]
+ * Devuelve el estado de la incidencia en cuestión a la función que la llama.
+ * @param  c ESTADO
+ * @return
  */
 static int estadoIncidencia(char **c)
 {
@@ -21,9 +21,9 @@ static int estadoIncidencia(char **c)
 }
 
 /**
- * [idRegistar description]
- * @param v      [description]
- * @param iIndex [description]
+ * Recoge el ID del usuario denunciante.
+ * @param v      VECTOR INCIDENCIAS
+ * @param iIndex ÍNDICE INCIDENCIAS
  */
 static void idRegistar(vIncidencias* v,int iIndex)
 {
@@ -33,11 +33,10 @@ static void idRegistar(vIncidencias* v,int iIndex)
 }
 
 /**
- * [listaIncidencias description]
- * @param  v        [description]
- * @param  id_viaje [description]
- * @param  j        [description]
- * @return          [description]
+ * Lista todas las incidencias de la base de datos.
+ * @param  v VECTOR INCIDENCIAS
+ * @param  id_viaje IDENTIFICADOR VIAJE
+ * @param  j INDICE VIAJE
  */
 static int* listaIncidencias(vIncidencias* v,int id_viaje,int* j)
 {
@@ -54,9 +53,9 @@ static int* listaIncidencias(vIncidencias* v,int id_viaje,int* j)
 }
 
 /**
- * [descripcionIncidencia description]
- * @param v      [description]
- * @param iIndex [description]
+ * Aquí se introduce una breve descripción de la incidencia en cuestión.
+ * @param v      VECTOR INCIDENCIAS
+ * @param iIndex ÍNDICE INCIDENCIA
  */
 static void descripcionIncidencia(vIncidencias* v,int iIndex)
 {
@@ -66,12 +65,12 @@ static void descripcionIncidencia(vIncidencias* v,int iIndex)
 }
 
 /**
- * [crearIncidencias description]
- * @param v       [description]
- * @param vv      [description]
- * @param ve      [description]
- * @param index   [description]
- * @param usuario [description]
+ * Esta función crea desde cero una incidencia que no existe.
+ * @param v VECTOR INCIDENCIAS
+ * @param vv VECTOR VIAJES
+ * @param ve VECTOR VEHICULOS
+ * @param index IDENTIFICADOR (INDICE) DE LA INCIDENCIA EN EL VECTOR INCIDENCIAS.
+ * @param usuario IDENTIFICADOR DEL USUARIO LOGUEADO O DENUNCIANTE
  */
 static void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int index,int usuario)
 {
@@ -87,9 +86,9 @@ static void crearIncidencias(vIncidencias* v,vViajes* vv,vVehiculos* ve,int inde
 }
 
 /**
- * [eliminarIncidencia description]
- * @param v      [description]
- * @param iIndex [description]
+ * Esta función libera la memoria ocupada por la incidencia eliminada en cuestión.
+ * @param v      VECTOR INCIDENCIAS
+ * @param iIndex ÍNDICE DE LA INCIDENCIA
  */
 static void eliminarIncidencia(vIncidencias* v, int iIndex)
 {
@@ -99,10 +98,10 @@ static void eliminarIncidencia(vIncidencias* v, int iIndex)
 }
 
 /**
- * [eliminarIncidencias description]
- * @param v        [description]
- * @param vi       [description]
- * @param id_viaje [description]
+ * Esta función lista las incidencias y da la opción de eliminar la incidencia desada.
+ * @param v VECTOR INCIDENCIAS
+ * @param vi VECTOR VIAJE
+ * @param id_viaje IDENTIFICADOR VIAJE
  */
 static void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje)
 {
@@ -134,9 +133,9 @@ static void eliminarIncidencias(vIncidencias* v,vViajes* vi,int id_viaje)
 }
 
 /**
- * [modificarEstadoIncidencia description]
- * @param v      [description]
- * @param iIndex [description]
+ * Modifica el estado de una incidencia que se pasa como parámetro.
+ * @param v      VECTOR INCIDENCIAS
+ * @param iIndex ÍNDICE DE LA INCIDENCIA EN CUESTIÓN
  */
 static void modificarEstadoIncidencia(vIncidencias* v, int iIndex)
 {
@@ -153,9 +152,9 @@ static void modificarEstadoIncidencia(vIncidencias* v, int iIndex)
 }
 
 /**
- * [modificarIncidencias description]
- * @param v        [description]
- * @param id_viaje [description]
+ * En esta función se muestra un menú que permite editar cómodamente el contenido informativo de las incidencias.
+ * @param v        VECTOR INCIDENCIAS
+ * @param id_viaje NUMERO IDENTIFICATIVO DEL VIAJE EN CUESTIÍON.
  */
 static void modificarIncidencias(vIncidencias* v,int id_viaje)
 {
@@ -246,7 +245,11 @@ void saveIncidencias(int n,Incidencias* incidencias)
     fclose(file);
     puts("Incidencias Guardadas");
 }
-
+/*
+ * Lista las incidencias del usuario logueado.
+ * @param v VECTOR INCIDENCIAS.
+ * @param userId IDENTIFICADOR USUARIO LOGUEADO.
+ */
 int incidenciasUsuario(vIncidencias* v,int userId)
 {
     int tmp = 0;
@@ -257,7 +260,10 @@ int incidenciasUsuario(vIncidencias* v,int userId)
     }
     return tmp;
 }
-
+/*
+ * Lista todas las incidencias de la base de datos.
+ * @param v VECTOR INCIDENCIAS
+ */
 void listarIncidencias(vIncidencias* v)
 {
     CLEAN;
@@ -272,7 +278,12 @@ void listarIncidencias(vIncidencias* v)
     }
     system_pause();
 }
-
+/*
+ * Función exclusiva de administrador, que le permite añadir una incidencia a la base de datos.
+ * @param v VECTOR INCIDENCIAS
+ * @param vv VECTOR VIAJES
+ * @param ve VECTOR VEHÍUCULOS
+ */
 void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve)
 {
     int tmp;
@@ -286,7 +297,12 @@ void crearIncidenciasAdmin(vIncidencias* v,vViajes* vv,vVehiculos* ve)
     }
     else printf("No existe el viaje\n");
 }
-
+/*
+ * El usuario puede crear una incidencia, para ello, el viaje debe estar activo.
+ * @param v VECTOR INCIDENCIAS
+ * @param ve VECTOR VEHÍUCULOS
+ * @param vv VECTOR VIAJES
+ */
 void crearIncidenciasUser(vIncidencias*v,vViajes* vv ,vVehiculos* ve,int userId )
 {
     int tmp;
@@ -301,7 +317,11 @@ void crearIncidenciasUser(vIncidencias*v,vViajes* vv ,vVehiculos* ve,int userId 
     }
     else printf("No existe el viaje o no ha viajado en dicho viaje\n");
 }
-
+/*
+ * Función exclusiva de administrador para elminar la incidencia deseada.
+ * @param v VECTOR INCIDENCIAS
+ * @param vv VECTOR VIAJES
+ */
 void eliminarIncidenciasAdmin(vIncidencias* v,vViajes* vv)
 {
   int tmp;
@@ -310,7 +330,10 @@ void eliminarIncidenciasAdmin(vIncidencias* v,vViajes* vv)
   flush_in();
   eliminarIncidencias(v,vv,tmp);
 }
-
+/*
+ * Permite al administrador modificar la incidencia deseada.
+ * @param VECTOR INCIDENCIAS
+ */
 void modificarIncidenciasAdmin(vIncidencias* v)
 {
   int tmp;
