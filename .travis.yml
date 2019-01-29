@@ -1,9 +1,0 @@
-os:
-    - linux
-    - osx
-language: c
-compiler:
-  - gcc
-  - clang
-script:
-    - ./run.sh

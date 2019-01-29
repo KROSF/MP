@@ -1,0 +1,13 @@
+jobs:
+- job: Linux
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - script: ./run.sh
+    displayName: 'make run'
+- job: macOS
+  pool:
+    vmImage: 'xcode9-macos10.13'
+  steps:
+  - script: ./run.sh
+    displayName: 'macos make run'
